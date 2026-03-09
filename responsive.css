@@ -1,0 +1,307 @@
+/* Global responsive overrides
+   - Intentionally limited to small screens so desktop stays unchanged.
+   - Loaded after each page's inline <style> so it can safely override.
+*/
+
+/* Shared header/sidebar tweaks (all viewports)
+   - Keep the same logo URL in HTML, but improve placement.
+*/
+
+.sidebar .brand {
+	justify-content: center;
+	align-items: center;
+}
+
+.sidebar .brand a {
+	display: inline-flex;
+	justify-content: center;
+}
+
+/* Mobile-only UI (hidden on desktop by default) */
+.mobile-topbar,
+.mobile-overlay {
+	display: none;
+}
+
+@media (max-width: 980px) {
+	/* Prevent tiny transform overflow from being cut */
+	body {
+		overflow-x: hidden;
+	}
+
+	/* Mobile top bar (logo + menu button) */
+	.mobile-topbar {
+		position: sticky;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 72px;
+		z-index: 10000;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 14px;
+		padding: 14px 16px;
+		background: rgba(7, 10, 15, 0.72);
+		backdrop-filter: blur(14px);
+		-webkit-backdrop-filter: blur(14px);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+	}
+
+	.mobile-brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		min-width: 0;
+		justify-content: center;
+	}
+
+	.mobile-topbar .menu-btn {
+		position: absolute;
+		right: 16px;
+		top: calc(50% - 24px);
+	}
+
+	.mobile-brand img {
+		width: 132px;
+		height: auto;
+		display: block;
+		max-width: 100%;
+	}
+
+	/* Animated hamburger button */
+	.menu-btn {
+		appearance: none;
+		-webkit-appearance: none;
+		border: 1px solid rgba(224, 0, 0, 0.25);
+		background: rgba(224, 0, 0, 0.12);
+		border-radius: 14px;
+		width: 48px;
+		height: 48px;
+		display: grid;
+		place-items: center;
+		padding: 0;
+		cursor: pointer;
+		box-shadow: 0 14px 34px rgba(224, 0, 0, 0.10);
+		transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+	}
+
+	.menu-btn:hover {
+		background: rgba(224, 0, 0, 0.16);
+		border-color: rgba(224, 0, 0, 0.34);
+		box-shadow: 0 18px 44px rgba(224, 0, 0, 0.14);
+	}
+
+	.menu-btn:active {
+		transform: scale(0.98);
+	}
+
+	.menu-icon {
+		position: relative;
+		width: 22px;
+		height: 16px;
+	}
+
+	.menu-icon span {
+		position: absolute;
+		left: 0;
+		right: 0;
+		height: 2px;
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.92);
+		transform-origin: center;
+		transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), top 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease;
+	}
+
+	.menu-icon span:nth-child(1) {
+		top: 0;
+	}
+	.menu-icon span:nth-child(2) {
+		top: 7px;
+	}
+	.menu-icon span:nth-child(3) {
+		top: 14px;
+	}
+
+	body.menu-open .menu-icon span:nth-child(1) {
+		top: 7px;
+		transform: rotate(45deg);
+	}
+	body.menu-open .menu-icon span:nth-child(2) {
+		opacity: 0;
+	}
+	body.menu-open .menu-icon span:nth-child(3) {
+		top: 7px;
+		transform: rotate(-45deg);
+	}
+
+	/* Overlay behind the drawer */
+	.mobile-overlay {
+		position: fixed;
+		inset: 0;
+		z-index: 9998;
+		display: none;
+		background: rgba(0, 0, 0, 0.58);
+	}
+
+	body.menu-open .mobile-overlay {
+		display: block;
+	}
+
+	body.menu-open {
+		overflow: hidden;
+	}
+
+	/* Media elements should never overflow the viewport */
+	img,
+	video,
+	canvas,
+	svg,
+	iframe {
+		max-width: 100%;
+		height: auto;
+	}
+
+	/* Keep long strings from forcing horizontal scrolling */
+	pre,
+	code {
+		max-width: 100%;
+		overflow: auto;
+	}
+
+	/* Always collapse the desktop two-column layout */
+	.page {
+		grid-template-columns: 1fr !important;
+	}
+
+	/* Safety net: if any section forgets its mobile override, keep it full-width */
+	.page > * {
+		grid-column: 1 / -1 !important;
+	}
+
+	/* Sidebar becomes an off-canvas drawer */
+	.sidebar {
+		position: fixed !important;
+		top: 72px !important;
+		left: 0 !important;
+		bottom: 0 !important;
+		width: min(88vw, 340px) !important;
+		height: auto !important;
+		overflow: auto !important;
+		padding: 24px 20px 28px !important;
+		background: rgba(7, 10, 15, 0.92) !important;
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		border-right: 1px solid rgba(255, 255, 255, 0.10) !important;
+		box-shadow: 18px 0 60px rgba(0, 0, 0, 0.40);
+		transform: translate3d(-110%, 0, 0);
+		transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+		z-index: 9999;
+	}
+
+	body.menu-open .sidebar {
+		transform: translate3d(0, 0, 0);
+	}
+
+	/* Mobile navigation: keep it readable and allow the services links */
+	.nav {
+		margin-top: 18px !important;
+		padding-left: 0 !important;
+		display: grid !important;
+		grid-auto-flow: row !important;
+		grid-auto-columns: initial !important;
+		overflow: visible !important;
+		gap: 16px !important;
+	}
+
+	/* On touch screens, hover dropdowns don't work — show the service links */
+	.nav-dropdown {
+		max-height: none !important;
+		opacity: 1 !important;
+		overflow: visible !important;
+		transform: none !important;
+		visibility: visible !important;
+		pointer-events: auto !important;
+	}
+
+	/* Forms should fit the viewport */
+	input,
+	select,
+	textarea,
+	button {
+		max-width: 100%;
+	}
+
+	/* Home hero: fit to screen and prevent horizontal clipping */
+	.hero {
+		min-height: calc(100svh - 72px) !important;
+		overflow: visible !important;
+		padding-left: calc(20px + env(safe-area-inset-left, 0px)) !important;
+		padding-right: calc(20px + env(safe-area-inset-right, 0px)) !important;
+	}
+
+	/* Hide Global Reach section on mobile (Home only) */
+	#reach {
+		display: none !important;
+	}
+
+	.hero-content {
+		max-width: 100% !important;
+		min-width: 0 !important;
+		padding-right: calc(16px + env(safe-area-inset-right, 0px)) !important;
+	}
+
+	/* Avoid sub-pixel right-edge clipping after reveal finishes */
+	.hero-content.reveal.is-revealed {
+		transform: none !important;
+	}
+
+	.hero .reveal {
+		transform-origin: left top;
+	}
+
+	.hero .sub {
+		max-width: 42ch !important;
+		min-width: 0 !important;
+		width: 100% !important;
+		display: block !important;
+		padding-right: calc(16px + env(safe-area-inset-right, 0px)) !important;
+		white-space: normal !important;
+		overflow-wrap: break-word !important;
+		word-break: break-word !important;
+		overflow: visible !important;
+	}
+
+	.hero .pill {
+		max-width: 100%;
+		flex-wrap: wrap;
+		white-space: normal;
+	}
+
+	/* Word reveal headings: allow wrapping on small screens */
+	.reveal-words {
+		white-space: normal;
+		overflow-wrap: anywhere;
+		word-break: normal;
+	}
+
+	.reveal-words .w {
+		white-space: normal;
+		max-width: 100%;
+	}
+}
+
+@media (max-width: 520px) {
+	.hero h1 {
+		font-size: clamp(36px, 10.2vw, 54px) !important;
+		letter-spacing: -0.02em;
+		word-spacing: 0.02em;
+	}
+}
+
+@media (max-width: 420px) {
+	.hero h1 {
+		font-size: clamp(34px, 10.8vw, 48px) !important;
+		letter-spacing: -0.02em;
+	}
+}

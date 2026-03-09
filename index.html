@@ -1,0 +1,2863 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="Raizing Group - Your trusted partner for visas, immigration, insurance, company formation, manpower recruitment, and educational services. Global solutions for your business and personal needs." />
+		<meta name="keywords" content="raizing group, visas, immigration, insurance, company formation, manpower recruitment, raizing verify, raizing sim, education services" />
+		<meta name="author" content="Raizing Group" />
+		<meta name="theme-color" content="#b40000" />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Raizing Group - Global Business Solutions" />
+		<meta property="og:description" content="Your trusted partner for visas, immigration, insurance, company formation, and manpower recruitment services worldwide." />
+		<meta property="og:image" content="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png" />
+		
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Raizing Group - Global Business Solutions" />
+		<meta name="twitter:description" content="Your trusted partner for visas, immigration, insurance, company formation, and manpower recruitment services worldwide." />
+		<meta name="twitter:image" content="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png" />
+		
+		<title>Raizing Group - Global Business Solutions</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			:root {
+				--brand-red: #b40000;
+				--brand-red-2: #e00000;
+				--bg: #070a0f;
+				--text: #ffffff;
+				--muted: rgba(255, 255, 255, 0.78);
+				--muted-2: rgba(255, 255, 255, 0.62);
+				--sidebar-w: 280px;
+				--border: rgba(255, 255, 255, 0.16);
+				--focus: rgba(224, 0, 0, 0.35);
+				--font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			html,
+			body {
+				height: 100%;
+			}
+
+			body {
+				margin: 0;
+				font-family: var(--font-sans);
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				text-rendering: geometricPrecision;
+				background-color: var(--bg);
+				background-image:
+					radial-gradient(1000px 560px at 22% 34%, rgba(224, 0, 0, 0.24), transparent 60%),
+					radial-gradient(800px 520px at 86% 70%, rgba(255, 255, 255, 0.08), transparent 55%),
+					linear-gradient(110deg, rgba(10, 14, 22, 0.86), rgba(10, 14, 22, 0.62)),
+					repeating-linear-gradient(105deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 240px),
+					repeating-linear-gradient(160deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 320px);
+				background-size: cover;
+				background-position: center;
+				color: var(--text);
+				overflow-x: hidden;
+				cursor: none;
+			}
+
+			/* Themed scrollbar (best-effort across browsers)
+			   Note: on many browsers the main scrollbar is on `html`, not `body`. */
+			html,
+			body,
+			.sidebar,
+			* {
+				scrollbar-width: thin;
+				scrollbar-color: rgba(224, 0, 0, 0.78) rgba(255, 255, 255, 0.08);
+			}
+
+			html::-webkit-scrollbar,
+			body::-webkit-scrollbar,
+			.sidebar::-webkit-scrollbar,
+			*::-webkit-scrollbar {
+				width: 12px;
+				height: 12px;
+			}
+
+			html::-webkit-scrollbar-track,
+			body::-webkit-scrollbar-track,
+			.sidebar::-webkit-scrollbar-track,
+			*::-webkit-scrollbar-track {
+				background: rgba(0, 0, 0, 0.28);
+			}
+
+			html::-webkit-scrollbar-thumb,
+			body::-webkit-scrollbar-thumb,
+			.sidebar::-webkit-scrollbar-thumb,
+			*::-webkit-scrollbar-thumb {
+				background: linear-gradient(180deg, var(--brand-red-2), var(--brand-red));
+				border-radius: 999px;
+				border: 3px solid rgba(0, 0, 0, 0.36);
+				min-height: 44px;
+			}
+
+			html::-webkit-scrollbar-thumb:hover,
+			body::-webkit-scrollbar-thumb:hover,
+			.sidebar::-webkit-scrollbar-thumb:hover,
+			*::-webkit-scrollbar-thumb:hover {
+				filter: brightness(1.10);
+			}
+
+			/* Custom cursor (desktop only) */
+			.cursor {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 54px;
+				height: 54px;
+				border-radius: 999px;
+				border: 1.6px solid rgba(224, 0, 0, 0.62);
+				background: rgba(224, 0, 0, 0.08);
+				transform: translate3d(-50%, -50%, 0);
+				pointer-events: none;
+				z-index: 9999;
+				backdrop-filter: blur(6px);
+				-webkit-backdrop-filter: blur(6px);
+				opacity: 0;
+				transition: opacity 180ms ease, width 180ms ease, height 180ms ease, background 180ms ease, border-color 180ms ease;
+				will-change: transform;
+			}
+
+			.cursor.is-visible {
+				opacity: 1;
+			}
+
+			.cursor.is-hover {
+				width: 64px;
+				height: 64px;
+				background: rgba(224, 0, 0, 0.14);
+				border-color: rgba(224, 0, 0, 0.92);
+			}
+
+			.cursor.is-down {
+				width: 48px;
+				height: 48px;
+			}
+
+			@media (hover: none), (pointer: coarse) {
+				body {
+					cursor: auto;
+				}
+				.cursor {
+					display: none;
+				}
+			}
+
+			a {
+				color: inherit;
+				text-decoration: none;
+			}
+
+			a:focus-visible,
+			button:focus-visible {
+				outline: 3px solid var(--focus);
+				outline-offset: 3px;
+			}
+
+			.page {
+				min-height: 100vh;
+				display: grid;
+				grid-template-columns: var(--sidebar-w) 1fr;
+				grid-auto-rows: min-content;
+			}
+
+			/* Sidebar */
+			.sidebar {
+				position: sticky;
+				top: 0;
+				padding: 36px 28px 28px;
+				border-right: 0;
+				background: transparent;
+				backdrop-filter: none;
+				grid-column: 1;
+				grid-row: 1 / -1;
+				height: 100vh;
+				overflow: auto;
+			}
+
+			.brand {
+				display: flex;
+				align-items: flex-start;
+				gap: 12px;
+			}
+
+			.brand img {
+				width: 150px;
+				height: auto;
+				display: block;
+				max-width: 100%;
+			}
+
+			.nav {
+				margin-top: 54px;
+				display: grid;
+				gap: 22px;
+				padding-left: 18px;
+			}
+
+			.nav a {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				font-size: 17px;
+				font-weight: 700;
+				line-height: 1.2;
+				padding: 4px 0;
+				color: rgba(255, 255, 255, 0.86);
+				text-decoration: underline;
+				text-decoration-thickness: 2px;
+				text-underline-offset: 6px;
+				text-decoration-color: rgba(255, 255, 255, 0.22);
+				transition: color 160ms ease, text-decoration-color 160ms ease;
+			}
+
+			.nav a:hover {
+				color: #ffffff;
+				text-decoration-color: rgba(224, 0, 0, 0.65);
+			}
+
+			.nav a[aria-current="page"] {
+				color: #ffffff;
+				text-decoration-color: rgba(224, 0, 0, 0.85);
+			}
+
+			.nav a[data-caret]::after {
+				content: "";
+				width: 7px;
+				height: 7px;
+				border-right: 2px solid rgba(255, 255, 255, 0.72);
+				border-bottom: 2px solid rgba(255, 255, 255, 0.72);
+				transform: rotate(45deg);
+				margin-top: 2px;
+			}
+
+			.nav-item {
+				display: grid;
+				gap: 10px;
+			}
+
+			.nav-dropdown {
+				display: grid;
+				gap: 10px;
+				padding-left: 14px;
+				margin-left: 8px;
+				border-left: 2px solid rgba(255, 255, 255, 0.12);
+				max-height: 0;
+				opacity: 0;
+				overflow: hidden;
+				transform: translate3d(0, -6px, 0);
+				visibility: hidden;
+				pointer-events: none;
+				transition:
+					max-height 260ms var(--reveal-ease),
+					opacity 200ms ease,
+					transform 260ms var(--reveal-ease),
+					visibility 0ms linear 260ms;
+			}
+
+			.nav-services:hover .nav-dropdown,
+			.nav-services:focus-within .nav-dropdown {
+				max-height: 600px;
+				opacity: 1;
+				transform: translate3d(0, 0, 0);
+				visibility: visible;
+				pointer-events: auto;
+				transition-delay: 0ms;
+			}
+
+			.nav-dropdown a {
+				font-size: 15px;
+				font-weight: 750;
+				color: rgba(255, 255, 255, 0.78);
+				text-decoration: none;
+				text-underline-offset: 5px;
+				text-decoration-thickness: 2px;
+				text-decoration-color: rgba(255, 255, 255, 0.18);
+				padding: 2px 0;
+				transition: color 160ms ease, text-decoration-color 160ms ease;
+			}
+
+			.nav-dropdown a:hover {
+				color: #ffffff;
+				text-decoration: underline;
+				text-decoration-color: rgba(224, 0, 0, 0.65);
+			}
+
+			.cta {
+				margin-top: 22px;
+			}
+
+			.cta a {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				padding: 14px 14px;
+				font-weight: 700;
+				border-radius: 14px;
+				background: linear-gradient(180deg, var(--brand-red-2), var(--brand-red));
+				border: 1px solid rgba(255, 255, 255, 0.18);
+				box-shadow: 0 10px 28px rgba(224, 0, 0, 0.18);
+			}
+
+			.cta a:hover {
+				filter: brightness(1.05);
+			}
+
+			.social {
+				position: absolute;
+				left: 28px;
+				bottom: 26px;
+				display: grid;
+				gap: 8px;
+				font-weight: 650;
+				color: rgba(255, 255, 255, 0.82);
+			}
+
+			.social a {
+				width: max-content;
+				padding: 2px 0;
+			}
+
+			.social a:hover {
+				color: #ffffff;
+				text-decoration: underline;
+				text-decoration-thickness: 2px;
+				text-underline-offset: 5px;
+				text-decoration-color: rgba(224, 0, 0, 0.65);
+			}
+
+			/* Main hero */
+			.hero {
+				position: relative;
+				overflow: hidden;
+				padding: 74px 60px;
+				min-height: 100vh;
+				display: grid;
+				align-content: center;
+				grid-column: 2;
+			}
+
+			.anchor-target {
+				position: relative;
+				height: 1px;
+				grid-column: 2;
+			}
+
+			.hero::before,
+			.hero::after {
+				content: none;
+			}
+
+			.hero-content {
+				position: relative;
+				z-index: 1;
+				max-width: 760px;
+			}
+
+			.pill {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				padding: 10px 14px;
+				border-radius: 999px;
+				background: rgba(0, 0, 0, 0.28);
+				border: 1px solid rgba(255, 255, 255, 0.16);
+				color: rgba(255, 255, 255, 0.92);
+				font-weight: 750;
+				letter-spacing: 0.2px;
+			}
+
+			.pill .dot {
+				width: 10px;
+				height: 10px;
+				border-radius: 999px;
+				background: var(--brand-red-2);
+				box-shadow: 0 0 0 4px rgba(224, 0, 0, 0.18);
+			}
+
+			h1 {
+				margin: 22px 0 18px;
+				font-size: clamp(48px, 6.2vw, 92px);
+				line-height: 1.14;
+				letter-spacing: -0.03em;
+				word-spacing: 0.06em;
+				font-weight: 900;
+			}
+
+			.sub {
+				max-width: 620px;
+				margin: 0;
+				color: var(--muted);
+				font-size: 16px;
+				line-height: 1.75;
+				font-weight: 500;
+			}
+
+			.actions {
+				margin-top: 26px;
+				display: flex;
+				gap: 14px;
+				flex-wrap: wrap;
+			}
+
+			.btn {
+				appearance: none;
+				border: 1px solid rgba(255, 255, 255, 0.18);
+				background: rgba(0, 0, 0, 0.18);
+				color: #fff;
+				padding: 14px 18px;
+				border-radius: 14px;
+				font-weight: 800;
+				cursor: pointer;
+			}
+
+			.btn-primary {
+				background: linear-gradient(180deg, var(--brand-red-2), var(--brand-red));
+				box-shadow: 0 12px 30px rgba(224, 0, 0, 0.18);
+			}
+
+			.btn:hover {
+				filter: brightness(1.05);
+			}
+
+			/* Down indicator like the reference */
+			.down {
+				position: absolute;
+				left: 60px;
+				bottom: 34px;
+				width: 44px;
+				height: 44px;
+				border-radius: 999px;
+				border: 1px solid rgba(255, 255, 255, 0.22);
+				background: rgba(0, 0, 0, 0.18);
+				display: grid;
+				place-items: center;
+				z-index: 1;
+			}
+
+			.down::before {
+				content: "";
+				width: 12px;
+				height: 12px;
+				border-right: 3px solid rgba(255, 255, 255, 0.82);
+				border-bottom: 3px solid rgba(255, 255, 255, 0.82);
+				transform: rotate(45deg);
+				margin-top: -2px;
+			}
+
+			/* Below-hero: Global reach flags section */
+			.section {
+				padding: 40px 60px 64px;
+				position: relative;
+				z-index: 1;
+				grid-column: 2;
+			}
+
+			.section-inner {
+				max-width: 1220px;
+				margin: 0 auto;
+			}
+
+			.reach-card {
+				border-radius: 34px;
+				background: linear-gradient(180deg, rgba(18, 26, 44, 0.92), rgba(10, 16, 30, 0.9));
+				border: 1px solid rgba(255, 255, 255, 0.14);
+				padding: 46px;
+				display: grid;
+				grid-template-columns: 340px 1fr;
+				gap: 44px;
+				box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+				align-items: center;
+			}
+
+			.reach-right {
+				display: grid;
+				align-content: center;
+				justify-items: center;
+				gap: 18px;
+			}
+
+			.reach-panel {
+				border-radius: 30px;
+				border: 1px solid rgba(255, 255, 255, 0.14);
+				background: linear-gradient(180deg, rgba(16, 24, 40, 0.88), rgba(7, 12, 24, 0.82));
+				padding: 44px 34px;
+				display: flex;
+				flex-direction: column;
+				min-height: 520px;
+			}
+
+			.reach-title {
+				margin: 0;
+				font-size: clamp(44px, 4.4vw, 72px);
+				line-height: 1.02;
+				letter-spacing: -0.035em;
+				font-weight: 900;
+			}
+
+			.reach-title .reach-italic {
+				font-style: italic;
+				font-weight: 900;
+			}
+
+			.reach-apply {
+				width: max-content;
+				margin-top: 14px;
+			}
+
+			.stat {
+				display: grid;
+				gap: 6px;
+				margin-top: auto;
+				color: rgba(255, 255, 255, 0.82);
+			}
+
+			.stat-line {
+				display: flex;
+				align-items: baseline;
+				gap: 14px;
+				flex-wrap: wrap;
+			}
+
+			.stat-num {
+				font-size: 58px;
+				font-weight: 900;
+				color: rgba(224, 0, 0, 0.95);
+				letter-spacing: -0.02em;
+			}
+
+			.stat-text {
+				font-size: 18px;
+				font-weight: 650;
+				color: rgba(255, 255, 255, 0.85);
+			}
+
+			.stat-sub {
+				margin: 0;
+				color: rgba(255, 255, 255, 0.75);
+				font-size: 18px;
+			}
+
+			.country-pills {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 14px;
+				margin: 6px 0 20px;
+				justify-content: center;
+			}
+
+			.pill-tile {
+				height: 42px;
+				border-radius: 14px;
+				display: inline-grid;
+				place-items: center;
+				padding: 0 18px;
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				background: rgba(255, 255, 255, 0.07);
+				color: rgba(255, 255, 255, 0.82);
+				font-weight: 700;
+			}
+
+			.country-grid {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 170px));
+				gap: 18px;
+				justify-content: center;
+			}
+
+			.country {
+				border-radius: 18px;
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				background: rgba(255, 255, 255, 0.06);
+				padding: 18px 16px;
+				min-height: 124px;
+				display: grid;
+				align-content: center;
+				justify-items: center;
+				gap: 10px;
+				text-align: center;
+			}
+
+			.abbr {
+				width: 52px;
+				height: 52px;
+				border-radius: 999px;
+				display: grid;
+				place-items: center;
+				background: rgba(0, 0, 0, 0.18);
+				border: 1px solid rgba(255, 255, 255, 0.14);
+				font-size: 16px;
+				font-weight: 900;
+				letter-spacing: 0.08em;
+				color: rgba(255, 255, 255, 0.88);
+			}
+
+			.country-name {
+				font-weight: 700;
+				color: rgba(255, 255, 255, 0.82);
+			}
+
+			/* Responsive */
+			@media (max-width: 980px) {
+				.page {
+					grid-template-columns: 1fr;
+				}
+
+				.sidebar {
+					border-right: 0;
+					border-bottom: 0;
+					font-weight: 800;
+					grid-column: auto;
+					grid-row: auto;
+					height: auto;
+					overflow: visible;
+				}
+
+				.nav {
+					margin-top: 18px;
+					grid-auto-flow: column;
+					grid-auto-columns: max-content;
+					overflow: auto;
+					overflow-y: hidden;
+					-webkit-overflow-scrolling: touch;
+					gap: 16px;
+					padding-bottom: 8px;
+					padding-left: 0;
+				}
+
+				.nav a {
+					font-size: 15px;
+					text-decoration-thickness: 2px;
+				}
+
+				.cta {
+					margin-top: 14px;
+				}
+
+				.social {
+					position: static;
+					margin-top: 14px;
+					grid-auto-flow: column;
+					justify-content: start;
+					gap: 14px;
+				}
+
+				.hero {
+					padding: 56px 20px 90px;
+					grid-column: auto;
+				}
+
+				.anchor-target {
+					grid-column: auto;
+				}
+
+				.down {
+					left: 20px;
+				}
+
+				.section {
+					padding: 26px 20px 52px;
+					grid-column: auto;
+				}
+
+				.reach-card {
+					padding: 28px;
+					grid-template-columns: 1fr;
+					gap: 26px;
+					border-radius: 26px;
+				}
+
+				.reach-panel {
+					min-height: 0;
+					padding: 30px 22px;
+					border-radius: 22px;
+				}
+
+				.country-grid {
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+				}
+			}
+
+			@media (max-width: 520px) {
+				.country-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			/* Next section: Reference-style layout (DFDG-like) with Raizing theme */
+			.feature {
+				grid-column: 2;
+				position: relative;
+				overflow: hidden;
+				padding: 84px 60px 96px;
+				min-height: 100vh;
+				color: #ffffff;
+				--feature-image-url: linear-gradient(110deg, rgba(224, 0, 0, 0.14), rgba(0, 0, 0, 0.12)),
+					repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px 260px);
+			}
+
+			.feature::before {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background:
+					radial-gradient(900px 560px at 18% 30%, rgba(224, 0, 0, 0.18), transparent 62%),
+					radial-gradient(760px 560px at 86% 60%, rgba(255, 255, 255, 0.06), transparent 55%),
+					linear-gradient(120deg, rgba(8, 11, 18, 0.96), rgba(8, 11, 18, 0.9));
+				z-index: 0;
+			}
+
+			.feature::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background:
+					repeating-linear-gradient(132deg, rgba(255, 255, 255, 0.12) 0 1px, transparent 1px 320px),
+					repeating-linear-gradient(175deg, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px 260px);
+				opacity: 0.22;
+				mix-blend-mode: screen;
+				z-index: 0;
+			}
+
+			.feature-inner {
+				position: relative;
+				z-index: 1;
+				max-width: 1220px;
+				margin: 0 auto;
+				display: grid;
+				grid-template-rows: auto 1fr;
+				gap: 54px;
+				align-content: start;
+			}
+
+			.feature-top {
+				display: grid;
+				justify-items: end;
+			}
+
+			.feature-top p {
+				margin: 0;
+				max-width: 420px;
+				text-align: left;
+				color: rgba(255, 255, 255, 0.86);
+				font-size: 16px;
+				line-height: 1.85;
+			}
+
+			.feature-media {
+				position: relative;
+				width: min(1080px, 100%);
+				justify-self: center;
+				border-radius: 0;
+				overflow: hidden;
+				background: rgba(255, 255, 255, 0.06);
+				border: 1px solid rgba(255, 255, 255, 0.12);
+			}
+
+			.feature-image {
+				height: clamp(280px, 36vw, 430px);
+				background-image: var(--feature-image-url);
+				background-size: cover;
+				background-position: center;
+				position: relative;
+			}
+
+			.feature-image::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background:
+					linear-gradient(90deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.08) 45%, rgba(0, 0, 0, 0.18));
+			}
+
+			.feature-heading {
+				position: absolute;
+				left: 34px;
+				top: 40px;
+				z-index: 2;
+				font-size: clamp(54px, 7.2vw, 112px);
+				line-height: 0.92;
+				letter-spacing: -0.03em;
+				font-weight: 900;
+			}
+
+			.feature-heading .accent {
+				color: rgba(224, 0, 0, 0.96);
+			}
+
+			@media (max-width: 980px) {
+				.feature {
+					grid-column: auto;
+					padding: 64px 20px 70px;
+					min-height: 0;
+				}
+
+				.feature-inner {
+					gap: 28px;
+				}
+
+				.feature-top {
+					justify-items: start;
+				}
+
+				.feature-media {
+					width: 100%;
+				}
+
+				.feature-heading {
+					left: 18px;
+				}
+			}
+
+			/* Why choosing us (globe layout + animated SVG) */
+			.why {
+				grid-column: 2;
+				position: relative;
+				overflow: hidden;
+				color: #ffffff;
+				padding: 110px 60px;
+				background:
+					radial-gradient(900px 560px at 16% 36%, rgba(224, 0, 0, 0.14), transparent 62%),
+					radial-gradient(820px 560px at 88% 62%, rgba(255, 255, 255, 0.06), transparent 55%),
+					linear-gradient(120deg, rgba(8, 11, 18, 0.98), rgba(8, 11, 18, 0.92));
+			}
+
+			.why::after {
+				content: none;
+			}
+
+			.why-inner {
+				max-width: 1220px;
+				margin: 0 auto;
+				display: grid;
+				grid-template-columns: minmax(540px, 1fr) 520px;
+				gap: 84px;
+				align-items: center;
+				position: relative;
+				z-index: 1;
+			}
+
+			.why-visual {
+				display: grid;
+				place-items: center start;
+				padding-left: 10px;
+			}
+
+			.globe-svg {
+				width: min(760px, 100%);
+				height: auto;
+				display: block;
+				filter: drop-shadow(0 26px 42px rgba(0, 0, 0, 0.35));
+				opacity: 0.92;
+				transform: translateX(-22px);
+			}
+
+			.why-content {
+				display: grid;
+				gap: 18px;
+				align-content: start;
+				justify-items: start;
+			}
+
+			.why-badge {
+				width: max-content;
+				padding: 10px 14px;
+				border-radius: 12px;
+				background: linear-gradient(180deg, var(--brand-red-2), var(--brand-red));
+				color: #ffffff;
+				font-weight: 850;
+				border: 1px solid rgba(255, 255, 255, 0.16);
+				box-shadow: 0 14px 30px rgba(224, 0, 0, 0.18);
+			}
+
+			.why-title {
+				margin: 0;
+				font-size: clamp(44px, 4.8vw, 72px);
+				line-height: 1.06;
+				letter-spacing: -0.035em;
+				font-weight: 900;
+				color: rgba(224, 0, 0, 0.95);
+			}
+
+			.why-text {
+				margin: 0;
+				max-width: 520px;
+				font-size: 16px;
+				line-height: 1.85;
+				color: rgba(255, 255, 255, 0.78);
+			}
+
+			/* SVG animation */
+			.orbit-rotate {
+				transform-origin: 300px 210px;
+				animation: orbitRotate 18s linear infinite;
+			}
+
+			.orbit-rotate.slow {
+				animation-duration: 26s;
+			}
+
+			.orbit-dash {
+				stroke-dasharray: 10 12;
+				animation: orbitDash 7s linear infinite;
+			}
+
+			/* Run the globe motion only when the section is revealed */
+			.why .orbit-rotate,
+			.why .orbit-dash {
+				animation-play-state: paused;
+			}
+
+			.why.is-revealed .orbit-rotate,
+			.why.is-revealed .orbit-dash {
+				animation-play-state: running;
+			}
+
+			@keyframes orbitRotate {
+				to {
+					transform: rotate(360deg);
+				}
+			}
+
+			@keyframes orbitDash {
+				to {
+					stroke-dashoffset: -220;
+				}
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.orbit-rotate,
+				.orbit-dash {
+					animation: none;
+				}
+			}
+
+			@media (max-width: 980px) {
+				.why {
+					grid-column: auto;
+					padding: 72px 20px;
+				}
+
+				.why-inner {
+					grid-template-columns: 1fr;
+					gap: 26px;
+				}
+
+				.why-visual {
+					place-items: center;
+					padding-left: 0;
+				}
+
+				.globe-svg {
+					transform: none;
+				}
+			}
+
+			/* Stats strip (animated counters) */
+			.stats {
+				grid-column: 2;
+				padding: 70px 60px;
+				position: relative;
+				z-index: 1;
+			}
+
+			.stats-inner {
+				max-width: 1220px;
+				margin: 0 auto;
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				gap: 34px;
+				align-items: start;
+			}
+
+			.stat-item {
+				text-align: center;
+				padding: 10px 8px;
+			}
+
+			.stat-value {
+				font-size: clamp(56px, 5.2vw, 88px);
+				font-weight: 900;
+				letter-spacing: -0.03em;
+				line-height: 1;
+				color: rgba(224, 0, 0, 0.95);
+				margin: 0;
+			}
+
+			.stat-label {
+				margin: 12px 0 0;
+				font-size: 16px;
+				font-weight: 600;
+				letter-spacing: 0.02em;
+				color: rgba(255, 255, 255, 0.86);
+			}
+
+			@media (max-width: 980px) {
+				.stats {
+					grid-column: auto;
+					padding: 56px 20px;
+				}
+
+				.stats-inner {
+					grid-template-columns: repeat(2, 1fr);
+					gap: 22px;
+				}
+			}
+
+			@media (max-width: 520px) {
+				.stats-inner {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			/* Premium reveal animations (scroll-trigger) — Apple-like calm motion */
+			.reveal {
+				--reveal-delay: 0ms;
+				--reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+				--reveal-opacity: 820ms;
+				--reveal-transform: 1200ms;
+				--reveal-clip: 1350ms;
+				opacity: 0;
+				transform: translate3d(0, 16px, 0) scale(0.995);
+				transition-property: opacity, transform;
+				transition-duration: var(--reveal-opacity), var(--reveal-transform);
+				transition-timing-function: var(--reveal-ease);
+				transition-delay: var(--reveal-delay);
+				will-change: transform, opacity;
+				backface-visibility: hidden;
+			}
+
+			.reveal[data-reveal="left"] {
+				transform: translate3d(-20px, 10px, 0) scale(0.997);
+			}
+
+			.reveal[data-reveal="right"] {
+				transform: translate3d(20px, 10px, 0) scale(0.997);
+			}
+
+			.reveal[data-reveal="zoom"] {
+				transform: translate3d(0, 16px, 0) scale(0.985);
+			}
+
+			.reveal[data-reveal="clip"] {
+				transform: translate3d(14px, 10px, 0) scale(0.996);
+				clip-path: inset(12% 10% 12% 10% round 26px);
+				transition-property: opacity, transform, clip-path;
+				transition-duration: var(--reveal-opacity), var(--reveal-transform), var(--reveal-clip);
+			}
+
+			.reveal.is-revealed {
+				opacity: 1;
+				transform: translate3d(0, 0, 0) scale(1);
+				will-change: auto;
+			}
+
+			.reveal[data-reveal="clip"].is-revealed {
+				clip-path: inset(0% 0% 0% 0% round 18px);
+			}
+
+			/* Word-by-word headline reveal */
+			.reveal-words {
+				opacity: 1;
+				transform: none;
+			}
+
+			.reveal-words .w {
+				display: inline-block;
+				opacity: 0;
+				transform: translate3d(0, 12px, 0) scale(0.998);
+				transition-property: opacity, transform;
+				transition-duration: 700ms, 1100ms;
+				transition-timing-function: var(--reveal-ease);
+				will-change: transform, opacity;
+				backface-visibility: hidden;
+			}
+
+			.reveal-words.is-revealed .w {
+				opacity: 1;
+				transform: translate3d(0, 0, 0) scale(1);
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.reveal {
+					opacity: 1;
+					transform: none;
+					transition: none;
+				}
+
+				.reveal-words .w {
+					opacity: 1;
+					transform: none;
+					transition: none;
+				}
+			}
+
+			/* About-style section (reference layout: left text + right image block) */
+			.about {
+				grid-column: 2;
+				padding: 84px 60px 96px;
+				position: relative;
+				z-index: 1;
+			}
+
+			.about-inner {
+				max-width: 1220px;
+				margin: 0 auto;
+				display: grid;
+				grid-template-columns: 1.15fr 1fr;
+				gap: 44px;
+				align-items: start;
+			}
+
+			.about-kicker {
+				font-size: 14px;
+				font-weight: 800;
+				letter-spacing: 0.08em;
+				color: rgba(255, 255, 255, 0.82);
+				text-transform: uppercase;
+				margin: 0 0 18px;
+			}
+
+			.about-text {
+				margin: 0;
+				max-width: 640px;
+				font-size: 18px;
+				line-height: 1.85;
+				color: rgba(255, 255, 255, 0.86);
+				font-weight: 500;
+			}
+
+			.about-cta {
+				margin-top: 22px;
+				display: inline-flex;
+				align-items: center;
+				gap: 18px;
+				font-weight: 800;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				color: rgba(255, 255, 255, 0.88);
+			}
+
+			.about-cta::before {
+				content: "";
+				width: 120px;
+				height: 2px;
+				background: rgba(224, 0, 0, 0.9);
+				opacity: 0.95;
+			}
+
+			.about-media {
+				position: relative;
+				justify-self: end;
+				width: min(560px, 100%);
+				aspect-ratio: 16 / 10;
+				border-radius: 18px;
+				overflow: hidden;
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				background: rgba(255, 255, 255, 0.06);
+				margin-top: 44px;
+			}
+
+			.about-media::before {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background-image: url("https://raizinggroup.com/wp-content/uploads/2025/09/Untitled-design-50.jpg");
+				background-size: cover;
+				background-position: center;
+				filter: saturate(0.85) contrast(1.05);
+				opacity: 0.92;
+			}
+
+			.about-media::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background:
+					linear-gradient(135deg, rgba(8, 11, 18, 0.35), rgba(8, 11, 18, 0.10) 55%, rgba(224, 0, 0, 0.08));
+			}
+
+			@media (max-width: 980px) {
+				.about {
+					grid-column: auto;
+					padding: 64px 20px 74px;
+				}
+
+				.about-inner {
+					grid-template-columns: 1fr;
+					gap: 26px;
+				}
+
+				.about-media {
+					justify-self: start;
+					margin-top: 18px;
+					width: 100%;
+				}
+			}
+
+			/* Services section */
+			.services {
+				grid-column: 2;
+				padding: 84px 60px 96px;
+				position: relative;
+				z-index: 1;
+			}
+
+			.services-inner {
+				max-width: 1220px;
+				margin: 0 auto;
+			}
+
+			.services-head {
+				text-align: center;
+				max-width: 860px;
+				margin: 0 auto 42px;
+			}
+
+			.services-title {
+				margin: 0;
+				font-size: clamp(42px, 4.8vw, 76px);
+				line-height: 1.05;
+				letter-spacing: -0.03em;
+				font-weight: 900;
+				color: rgba(224, 0, 0, 0.95);
+			}
+
+			.services-sub {
+				margin: 16px auto 0;
+				color: rgba(255, 255, 255, 0.78);
+				font-size: 16px;
+				line-height: 1.8;
+				max-width: 720px;
+				font-weight: 500;
+			}
+
+			.services-grid {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 18px;
+			}
+
+			.service-card {
+				--svc-img: none;
+				position: relative;
+				display: grid;
+				gap: 14px;
+				padding: 22px;
+				border-radius: 20px;
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				background:
+					linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03)),
+					linear-gradient(135deg, rgba(224, 0, 0, 0.14), transparent 60%);
+				box-shadow: 0 22px 60px rgba(0, 0, 0, 0.24);
+				overflow: hidden;
+				transition: transform 220ms var(--reveal-ease), filter 220ms ease, border-color 220ms ease;
+			}
+
+			.service-card::before {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background-image:
+					linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.82)),
+					var(--svc-img);
+				background-size: cover;
+				background-position: center;
+				opacity: 0;
+				transition: opacity 260ms ease;
+			}
+
+			.service-card:hover {
+				transform: translate3d(0, -3px, 0);
+				filter: brightness(1.03);
+				border-color: rgba(224, 0, 0, 0.22);
+			}
+
+			.service-card:hover::before {
+				opacity: 0.25;
+			}
+
+			.service-top {
+				position: relative;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 14px;
+			}
+
+			.service-icon {
+				width: 46px;
+				height: 46px;
+				border-radius: 14px;
+				display: grid;
+				place-items: center;
+				background: linear-gradient(180deg, var(--brand-red-2), var(--brand-red));
+				border: 1px solid rgba(255, 255, 255, 0.18);
+				box-shadow: 0 14px 34px rgba(224, 0, 0, 0.16);
+			}
+
+			.service-icon svg {
+				width: 22px;
+				height: 22px;
+				fill: #ffffff;
+				display: block;
+			}
+
+			.service-pill {
+				position: relative;
+				padding: 6px 10px;
+				border-radius: 999px;
+				font-weight: 900;
+				font-size: 12px;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: rgba(255, 255, 255, 0.92);
+				background: rgba(224, 0, 0, 0.18);
+				border: 1px solid rgba(224, 0, 0, 0.25);
+			}
+
+			.service-name {
+				position: relative;
+				margin: 2px 0 0;
+				font-weight: 950;
+				letter-spacing: -0.02em;
+				font-size: 22px;
+			}
+
+			.service-desc {
+				position: relative;
+				margin: 0;
+				color: rgba(255, 255, 255, 0.76);
+				font-weight: 550;
+				line-height: 1.85;
+				font-size: 14px;
+			}
+
+			.service-cta {
+				position: relative;
+				display: inline-flex;
+				align-items: center;
+				gap: 12px;
+				font-weight: 900;
+				letter-spacing: 0.02em;
+				color: rgba(255, 255, 255, 0.92);
+				margin-top: 2px;
+			}
+
+			.service-cta::after {
+				content: "";
+				width: 8px;
+				height: 8px;
+				border-right: 2px solid rgba(255, 255, 255, 0.75);
+				border-bottom: 2px solid rgba(255, 255, 255, 0.75);
+				transform: rotate(-45deg);
+				margin-top: 1px;
+				opacity: 0.9;
+			}
+
+			@media (max-width: 980px) {
+				.services {
+					grid-column: auto;
+					padding: 64px 20px 74px;
+				}
+
+				.services-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			/* Certifications section */
+			.certs {
+				grid-column: 2;
+				padding: 84px 60px 96px;
+				position: relative;
+				z-index: 1;
+			}
+
+			.certs-inner {
+				max-width: 1220px;
+				margin: 0 auto;
+			}
+
+			.certs-head {
+				text-align: center;
+				max-width: 860px;
+				margin: 0 auto 42px;
+			}
+
+			.certs-title {
+				margin: 0;
+				font-size: clamp(42px, 4.8vw, 76px);
+				line-height: 1.05;
+				letter-spacing: -0.03em;
+				font-weight: 900;
+				color: rgba(224, 0, 0, 0.95);
+			}
+
+			.certs-sub {
+				margin: 16px auto 0;
+				color: rgba(255, 255, 255, 0.78);
+				font-size: 16px;
+				line-height: 1.8;
+				max-width: 640px;
+				font-weight: 500;
+			}
+
+			.certs-carousel {
+				position: relative;
+				border-radius: 26px;
+				border: 1px solid rgba(255, 255, 255, 0.10);
+				background: linear-gradient(180deg, rgba(10, 16, 30, 0.78), rgba(7, 10, 16, 0.72));
+				padding: 26px 54px;
+				overflow: hidden;
+			}
+
+			.certs-track {
+				display: grid;
+				grid-auto-flow: column;
+				grid-auto-columns: minmax(220px, 1fr);
+				gap: 26px;
+				overflow-x: auto;
+				overflow-y: hidden;
+				scroll-snap-type: x mandatory;
+				scroll-behavior: smooth;
+				padding: 10px 6px;
+				-webkit-overflow-scrolling: touch;
+				mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+			}
+
+			.certs-track::-webkit-scrollbar {
+				height: 8px;
+			}
+			.certs-track::-webkit-scrollbar-thumb {
+				background: rgba(255, 255, 255, 0.18);
+				border-radius: 999px;
+			}
+
+			.cert-card {
+				scroll-snap-align: center;
+				border-radius: 18px;
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				background: rgba(255, 255, 255, 0.04);
+				padding: 20px 18px;
+				text-align: center;
+				display: grid;
+				gap: 10px;
+				align-content: start;
+			}
+
+			.cert-logo {
+				width: min(190px, 100%);
+				height: 88px;
+				object-fit: contain;
+				display: block;
+				margin: 4px auto 0;
+				filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.25));
+			}
+
+			.cert-name {
+				margin: 6px 0 0;
+				font-weight: 900;
+				letter-spacing: 0.02em;
+				color: rgba(255, 255, 255, 0.92);
+			}
+
+			.cert-desc {
+				margin: 0;
+				color: rgba(255, 255, 255, 0.70);
+				font-size: 13px;
+				line-height: 1.6;
+				font-weight: 600;
+			}
+
+			.certs-btn {
+				appearance: none;
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 44px;
+				height: 44px;
+				border-radius: 999px;
+				border: 1px solid rgba(255, 255, 255, 0.20);
+				background: rgba(0, 0, 0, 0.18);
+				cursor: pointer;
+				display: grid;
+				place-items: center;
+				color: rgba(255, 255, 255, 0.88);
+				transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+				z-index: 2;
+			}
+
+			.certs-btn:hover {
+				transform: translateY(-50%) scale(1.04);
+				background: rgba(0, 0, 0, 0.28);
+				border-color: rgba(224, 0, 0, 0.55);
+			}
+
+			.certs-btn.prev {
+				left: 14px;
+			}
+
+			.certs-btn.next {
+				right: 14px;
+			}
+
+			.certs-btn::before {
+				content: "";
+				width: 10px;
+				height: 10px;
+				border-right: 3px solid rgba(255, 255, 255, 0.82);
+				border-bottom: 3px solid rgba(255, 255, 255, 0.82);
+			}
+
+			.certs-btn.prev::before {
+				transform: rotate(135deg);
+				margin-left: 2px;
+			}
+
+			.certs-btn.next::before {
+				transform: rotate(-45deg);
+				margin-right: 2px;
+			}
+
+			@media (max-width: 980px) {
+				.certs {
+					grid-column: auto;
+					padding: 64px 20px 74px;
+				}
+
+				.certs-carousel {
+					padding: 22px 48px;
+				}
+
+				.certs-track {
+					grid-auto-columns: minmax(200px, 82%);
+					mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+				}
+			}
+
+			@media (max-width: 520px) {
+				.certs-carousel {
+					padding: 18px 44px;
+				}
+			}
+
+			/* FAQ section (no dropdown) */
+			.faq {
+				grid-column: 2;
+				padding: 84px 60px 96px;
+				position: relative;
+				z-index: 1;
+			}
+
+			.faq-inner {
+				max-width: 980px;
+				margin: 0 auto;
+			}
+
+			.faq-head {
+				text-align: center;
+				margin: 0 auto 34px;
+			}
+
+			.faq-pill {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 10px 14px;
+				border-radius: 999px;
+				background: rgba(224, 0, 0, 0.16);
+				border: 1px solid rgba(224, 0, 0, 0.34);
+				color: rgba(255, 255, 255, 0.92);
+				font-weight: 800;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				font-size: 12px;
+			}
+
+			.faq-title {
+				margin: 18px 0 0;
+				font-size: clamp(28px, 3vw, 40px);
+				line-height: 1.2;
+				font-weight: 900;
+				letter-spacing: -0.02em;
+				color: rgba(255, 255, 255, 0.92);
+			}
+
+			.faq-title .accent {
+				color: rgba(224, 0, 0, 0.95);
+			}
+
+			.faq-list {
+				margin: 28px 0 0;
+				border-top: 1px solid rgba(255, 255, 255, 0.14);
+			}
+
+			.faq-item {
+				border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+			}
+
+			.faq-q {
+				width: 100%;
+				appearance: none;
+				background: transparent;
+				border: 0;
+				padding: 22px 6px;
+				display: grid;
+				grid-template-columns: 1fr auto;
+				gap: 18px;
+				align-items: center;
+				cursor: pointer;
+				text-align: left;
+				color: rgba(255, 255, 255, 0.86);
+				font-size: clamp(16px, 1.6vw, 20px);
+				font-weight: 800;
+				letter-spacing: 0.01em;
+			}
+
+			.faq-q:hover {
+				color: rgba(255, 255, 255, 0.95);
+			}
+
+			.faq-icon {
+				width: 18px;
+				height: 18px;
+				border-right: 2px solid rgba(255, 255, 255, 0.75);
+				border-bottom: 2px solid rgba(255, 255, 255, 0.75);
+				transform: rotate(45deg);
+				transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+				opacity: 0.92;
+			}
+
+			.faq-item.is-open .faq-icon {
+				transform: rotate(-135deg);
+			}
+
+			.faq-a {
+				display: grid;
+				grid-template-rows: 0fr;
+				transition: grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1);
+			}
+
+			.faq-item.is-open .faq-a {
+				grid-template-rows: 1fr;
+			}
+
+			.faq-a > div {
+				overflow: hidden;
+				padding: 0 6px;
+			}
+
+			.faq-a p {
+				margin: 0 0 18px;
+				color: rgba(255, 255, 255, 0.74);
+				font-size: 15px;
+				line-height: 1.85;
+				font-weight: 550;
+				max-width: 880px;
+			}
+
+			.faq-item.is-open .faq-a > div {
+				padding-bottom: 18px;
+			}
+
+			@media (max-width: 980px) {
+				.faq {
+					grid-column: auto;
+					padding: 64px 20px 74px;
+				}
+
+				.faq-q {
+					padding: 18px 2px;
+				}
+			}
+
+			/* Footer */
+			.footer {
+				position: relative;
+				z-index: 1;
+			}
+
+			.footer-shell {
+				display: grid;
+				grid-template-columns: var(--sidebar-w) 1fr;
+			}
+
+			.footer-spacer {
+				border-top: 1px solid rgba(255, 255, 255, 0.12);
+				background:
+					radial-gradient(860px 420px at 22% 0%, rgba(224, 0, 0, 0.10), transparent 60%),
+					linear-gradient(180deg, rgba(7, 10, 16, 0.35), rgba(7, 10, 16, 0.78));
+			}
+
+			.footer-panel {
+				position: relative;
+				padding: 56px 60px 44px;
+				overflow: hidden;
+			}
+
+			.footer-panel::before {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background:
+					radial-gradient(860px 420px at 22% 0%, rgba(224, 0, 0, 0.16), transparent 60%),
+					linear-gradient(180deg, rgba(7, 10, 16, 0.35), rgba(7, 10, 16, 0.78));
+				border-top: 1px solid rgba(255, 255, 255, 0.12);
+				z-index: 0;
+			}
+
+			.footer-inner {
+				position: relative;
+				z-index: 1;
+				max-width: 1220px;
+				margin: 0 auto;
+				display: grid;
+				grid-template-columns: 1.3fr 1fr;
+				gap: 34px;
+				align-items: start;
+			}
+
+			.footer-brand {
+				display: grid;
+				gap: 14px;
+			}
+
+			.footer-logo {
+				width: 190px;
+				height: auto;
+				display: block;
+			}
+
+			.footer-tag {
+				margin: 0;
+				max-width: 520px;
+				color: rgba(255, 255, 255, 0.76);
+				font-size: 15px;
+				line-height: 1.85;
+				font-weight: 550;
+			}
+
+			.footer-links {
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 18px 26px;
+				justify-items: start;
+			}
+
+			.footer-links a {
+				color: rgba(255, 255, 255, 0.78);
+				font-weight: 750;
+				letter-spacing: 0.01em;
+				text-decoration: none;
+				padding: 4px 0;
+				transition: color 160ms ease;
+			}
+
+			.footer-links a:hover {
+				color: rgba(255, 255, 255, 0.96);
+			}
+
+			.footer-bottom {
+				position: relative;
+				z-index: 1;
+				max-width: 1220px;
+				margin: 26px auto 0;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 14px;
+				padding-top: 18px;
+				border-top: 1px solid rgba(255, 255, 255, 0.10);
+				color: rgba(255, 255, 255, 0.62);
+				font-size: 13px;
+				font-weight: 650;
+			}
+
+			.footer-dot {
+				width: 8px;
+				height: 8px;
+				border-radius: 999px;
+				background: rgba(224, 0, 0, 0.92);
+				box-shadow: 0 0 0 6px rgba(224, 0, 0, 0.14);
+				display: inline-block;
+				margin-right: 10px;
+			}
+
+			@media (max-width: 980px) {
+				.footer-shell {
+					grid-template-columns: 1fr;
+				}
+
+				.footer-spacer {
+					display: none;
+				}
+
+				.footer-panel {
+					padding: 48px 20px 36px;
+				}
+
+				.footer-inner {
+					grid-template-columns: 1fr;
+					gap: 22px;
+				}
+
+				.footer-links {
+					grid-template-columns: 1fr 1fr;
+					gap: 10px 18px;
+				}
+
+				.footer-bottom {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+			}
+		</style>
+		<link rel="stylesheet" href="responsive.css" />
+		<link rel="stylesheet" href="preloader.css" />
+		<script src="preloader.js" defer></script>
+		<script src="responsive.js" defer></script>
+	</head>
+	<body>
+		<div id="rg-preloader" role="status" aria-live="polite" aria-label="Loading">
+			<div class="rg-preloader__inner">
+				<div class="rg-preloader__stage">
+					<div class="rg-preloader__accent" aria-hidden="true"></div>
+					<div class="rg-preloader__logoWrap">
+						<div class="rg-preloader__logoGlow" aria-hidden="true"></div>
+						<div class="rg-preloader__logoFrame">
+							<img class="rg-preloader__logo is-sharp" src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png" alt="Raizing Group" />
+							<img class="rg-preloader__logo is-blur" src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png" alt="" aria-hidden="true" />
+						</div>
+					</div>
+				</div>
+				<div class="rg-preloader__tagline">RISE TO EXCELLENCE</div>
+				<div class="rg-preloader__bar" aria-hidden="true">
+					<div class="rg-preloader__barFill"></div>
+					<div class="rg-preloader__barShine"></div>
+				</div>
+				<button class="rg-preloader__skip" type="button" data-rg-skip>Skip</button>
+				<span class="rg-preloader__sr">Loading…</span>
+			</div>
+		</div>
+		<header class="mobile-topbar" aria-label="Mobile top bar">
+			<a class="mobile-brand" href="index.html#home" aria-label="Raizing Group Home">
+				<img
+					src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png"
+					alt="Raizing Group"
+					loading="eager"
+				/>
+			</a>
+			<button class="menu-btn" type="button" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false" data-menu-button>
+				<span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+			</button>
+		</header>
+		<div class="mobile-overlay" data-menu-overlay aria-hidden="true"></div>
+		<div class="page">
+			<aside class="sidebar" id="mobile-drawer" aria-label="Primary">
+				<div class="brand reveal" data-reveal="left">
+					<a href="index.html#home" aria-label="Raizing Group Home">
+						<img
+							src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png"
+							alt="Raizing Group"
+							loading="eager"
+						/>
+					</a>
+				</div>
+
+				<nav class="nav" aria-label="Site">
+					<a href="#home" aria-current="page" class="reveal" data-reveal="left" data-delay>Home</a>
+					<a href="about.html" class="reveal" data-reveal="left" data-delay>About Us</a>
+					<div class="nav-item nav-services reveal" data-reveal="left" data-delay>
+						<a href="#services" data-caret aria-haspopup="true">Our Services</a>
+						<div class="nav-dropdown" aria-label="Service pages">
+							<a href="visas.html">Raizing Visas</a>
+							<a href="immigration.html">Immigration (Raizing Sovereign)</a>
+							<a href="insurance.html">Raizing Insurance</a>
+							<a href="company-formation.html">Company Formation</a>
+							<a href="manpower-recruitment.html">Manpower Recruitment (Cavec Global)</a>
+							<a href="verify.html">Raizing Verify</a>
+							<a href="sim.html">Raizing Sim</a>
+							<a href="edu.html">Raizing Edu</a>
+						</div>
+					</div>
+					<a href="news-media.html" class="reveal" data-reveal="left" data-delay>News &amp; Media</a>
+					<a href="contact.html" class="reveal" data-reveal="left" data-delay>Contact Us</a>
+				</nav>
+
+				<div class="cta reveal" data-reveal="left" data-delay>
+					<a href="#partner">Partner With Us</a>
+				</div>
+
+				<div class="social reveal" data-reveal="left" data-delay aria-label="Social links">
+					<a href="#" rel="nofollow">LinkedIn</a>
+					<a href="#" rel="nofollow">Facebook</a>
+					<a href="#" rel="nofollow">Instagram</a>
+				</div>
+			</aside>
+
+			<main class="hero" id="home">
+				<div class="hero-content reveal" data-reveal="zoom" data-delay>
+					<div class="pill"><span class="dot" aria-hidden="true"></span> #1 Priority Clients</div>
+
+					<h1 class="reveal-words">
+						Your Gateway to<br />
+						Global Mobility
+					</h1>
+
+					<p class="sub">
+						From UAE company formation to global residency, visas, and recruitment, Raizing Group delivers
+						end-to-end solutions that unlock mobility, security, and opportunity.
+					</p>
+
+					<div class="actions">
+						<a class="btn btn-primary" href="contact.html">Contact Us</a>
+					</div>
+				</div>
+
+				<a class="down reveal" data-reveal="up" data-delay href="#reach" aria-label="Scroll to next section"></a>
+			</main>
+
+			<section class="section reveal" data-reveal="up" id="reach" aria-label="Global reach">
+				<div class="section-inner">
+					<div class="reach-card reveal" data-reveal="zoom" data-delay>
+						<div class="reach-panel">
+							<h2 class="reach-title">
+								Global<br />
+								reach -<br />
+								<span class="reach-italic">countries<br />we serve</span>
+							</h2>
+
+							<div class="reach-apply">
+								<a class="btn btn-primary" href="#partner">Apply Now</a>
+							</div>
+
+							<div class="stat" aria-label="Global reach stats">
+								<div class="stat-line">
+									<div class="stat-num">18</div>
+									<div class="stat-text">countries with 53+ offices</div>
+								</div>
+								<p class="stat-sub">across the Globe</p>
+							</div>
+						</div>
+
+						<div class="reach-right" aria-label="Countries grid">
+							<div class="country-pills" aria-label="Highlighted countries">
+								<div class="pill-tile">India</div>
+								<div class="pill-tile">Romania</div>
+								<div class="pill-tile">Sri Lanka</div>
+							</div>
+
+							<div class="country-grid" role="list" aria-label="Countries we serve">
+								<div class="country" role="listitem" aria-label="Bangladesh">
+									<div class="abbr" aria-hidden="true">BD</div>
+									<div class="country-name">Bangladesh</div>
+								</div>
+								<div class="country" role="listitem" aria-label="Nepal">
+									<div class="abbr" aria-hidden="true">NP</div>
+									<div class="country-name">Nepal</div>
+								</div>
+								<div class="country" role="listitem" aria-label="UAE">
+									<div class="abbr" aria-hidden="true">AE</div>
+									<div class="country-name">UAE</div>
+								</div>
+								<div class="country" role="listitem" aria-label="Jordan">
+									<div class="abbr" aria-hidden="true">JO</div>
+									<div class="country-name">Jordan</div>
+								</div>
+								<div class="country" role="listitem" aria-label="Thailand">
+									<div class="abbr" aria-hidden="true">TH</div>
+									<div class="country-name">Thailand</div>
+								</div>
+								<div class="country" role="listitem" aria-label="Malaysia">
+									<div class="abbr" aria-hidden="true">MY</div>
+									<div class="country-name">Malaysia</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="why reveal" data-reveal="up" id="why" aria-label="Why Choosing Us">
+				<div class="why-inner">
+					<div class="why-visual reveal" data-reveal="left" data-delay aria-hidden="true">
+						<svg class="globe-svg" viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg">
+							<defs>
+								<radialGradient id="rg-globe" cx="42%" cy="36%" r="66%">
+									<stop offset="0%" stop-color="#ffffff" />
+									<stop offset="60%" stop-color="#f2f4f8" />
+									<stop offset="100%" stop-color="#e8ecf3" />
+								</radialGradient>
+								<linearGradient id="rg-orbit" x1="0" x2="1" y1="0" y2="1">
+									<stop offset="0%" stop-color="#cfd6e6" stop-opacity="0.95" />
+									<stop offset="100%" stop-color="#a9b6d0" stop-opacity="0.5" />
+								</linearGradient>
+							</defs>
+
+							<!-- shadow -->
+							<ellipse cx="300" cy="372" rx="190" ry="22" fill="#000" opacity="0.08" />
+
+							<!-- globe -->
+							<circle cx="300" cy="210" r="150" fill="url(#rg-globe)" />
+							<circle cx="300" cy="210" r="150" fill="none" stroke="#cfd6e6" opacity="0.45" />
+
+							<!-- simple land shapes -->
+							<path
+								d="M205 165c32-30 66-45 104-45 35 0 67 10 96 28-22 7-43 20-62 42-28 32-48 72-64 118-16-37-40-77-74-143z"
+								fill="#d7dbe5"
+								opacity="0.9"
+							/>
+							<path
+								d="M238 285c18 16 44 24 78 23 42-1 82-22 116-55-10 52-46 103-100 126-54 23-114 10-151-28 15-19 33-40 57-66z"
+								fill="#cfd6e6"
+								opacity="0.75"
+							/>
+
+							<!-- orbit set 1 -->
+							<g class="orbit-rotate">
+								<ellipse cx="300" cy="210" rx="270" ry="150" fill="none" stroke="url(#rg-orbit)" stroke-width="4" opacity="0.7" class="orbit-dash" />
+								<circle cx="68" cy="210" r="9" fill="#e00000" />
+								<circle cx="520" cy="110" r="7" fill="#9aa6bf" opacity="0.9" />
+							</g>
+
+							<!-- orbit set 2 -->
+							<g class="orbit-rotate slow">
+								<ellipse cx="300" cy="210" rx="210" ry="200" fill="none" stroke="#b9c3d8" stroke-width="4" opacity="0.55" />
+								<circle cx="510" cy="295" r="9" fill="#e00000" />
+								<circle cx="168" cy="120" r="7" fill="#c5ccdc" opacity="0.95" />
+							</g>
+
+							<!-- static accent node -->
+							<circle cx="540" cy="210" r="10" fill="#e00000" opacity="0.9" />
+						</svg>
+					</div>
+
+					<div class="why-content reveal" data-reveal="right" data-delay>
+						<div class="why-badge">Why Choosing Us?</div>
+						<h2 class="why-title reveal-words">Global Reach.<br />Proven Trust.</h2>
+						<p class="why-text">
+							With a presence across 18 countries and centres, Raizing Group has empowered millions of clients
+							through seamless mobility, residency, and business solutions. Our experience, scale, and commitment
+							ensure success at every step.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="stats reveal" data-reveal="up" id="stats" aria-label="Company stats">
+				<div class="stats-inner">
+					<div class="stat-item reveal" data-reveal="zoom" data-delay>
+						<p class="stat-value" data-count data-target="500" data-suffix="">0</p>
+						<p class="stat-label">Employees</p>
+					</div>
+					<div class="stat-item reveal" data-reveal="zoom" data-delay>
+						<p class="stat-value" data-count data-target="30" data-suffix="M">0</p>
+						<p class="stat-label">Applications</p>
+					</div>
+					<div class="stat-item reveal" data-reveal="zoom" data-delay>
+						<p class="stat-value" data-count data-target="18" data-suffix="">0</p>
+						<p class="stat-label">Countries</p>
+					</div>
+					<div class="stat-item reveal" data-reveal="zoom" data-delay>
+						<p class="stat-value" data-count data-target="53" data-suffix="">0</p>
+						<p class="stat-label">Offices</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="about reveal" data-reveal="up" id="about" aria-label="About Raizing Group">
+				<div class="about-inner">
+					<div class="reveal" data-reveal="left" data-delay>
+						<p class="about-kicker">Global Consultants</p>
+						<p class="about-text">
+							At Raizing Group, our consultants help individuals and businesses move forward with confidence—from
+							UAE company formation and licensing, to residency and visa services, and end-to-end recruitment
+							solutions. We focus on compliant processes, clear guidance, and reliable execution so you can achieve
+							growth with clarity and discretion.
+						</p>
+						<a class="about-cta" href="#services">Explore Our Services</a>
+					</div>
+
+					<div class="about-media reveal" data-reveal="clip" data-delay role="img" aria-label="Raizing Group team photo"></div>
+				</div>
+			</section>
+
+			<section class="services reveal" data-reveal="up" id="services" aria-label="Our Services">
+				<div class="services-inner">
+					<header class="services-head reveal" data-reveal="zoom" data-delay>
+						<h2 class="services-title reveal-words">Our Services</h2>
+						<p class="services-sub">
+							Explore specialized, end-to-end solutions across visas, residency, and business support — delivered with a
+							single accountable team.
+						</p>
+					</header>
+
+					<div class="services-grid" role="list" aria-label="Service pages">
+						<a
+							class="service-card reveal"
+							data-reveal="up"
+							data-delay
+							href="visas.html"
+							role="listitem"
+							aria-label="Raizing Visas"
+						>
+							<div class="service-top">
+								<div class="service-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm0 2v16h10V4H7Zm2 2h6v2H9V6Zm0 4h6v2H9v-2Zm0 4h4v2H9v-2Z" />
+									</svg>
+								</div>
+								<div class="service-pill">Raizing</div>
+							</div>
+							<h3 class="service-name">Raizing Visas</h3>
+							<p class="service-desc">
+								End-to-end visa application solutions — documentation, biometrics, appointments, and status updates.
+							</p>
+							<span class="service-cta">Explore</span>
+						</a>
+
+						<a
+							class="service-card reveal"
+							data-reveal="up"
+							data-delay
+							href="immigration.html"
+							role="listitem"
+							aria-label="Immigration (Raizing Sovereign)"
+						>
+							<div class="service-top">
+								<div class="service-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M12 2c2.76 0 5 2.24 5 5v1h1.2c.99 0 1.8.81 1.8 1.8v8.4c0 .99-.81 1.8-1.8 1.8H5.8c-.99 0-1.8-.81-1.8-1.8V9.8C4 8.81 4.81 8 5.8 8H7V7c0-2.76 2.24-5 5-5Zm-3 6h6V7a3 3 0 0 0-6 0v1Zm-3 3v7h12v-7H6Zm6 1.4c.88 0 1.6.72 1.6 1.6 0 .54-.27 1.02-.68 1.31V17a.92.92 0 0 1-1.84 0v-.69c-.41-.29-.68-.77-.68-1.31 0-.88.72-1.6 1.6-1.6Z" />
+									</svg>
+								</div>
+								<div class="service-pill">Sovereign</div>
+							</div>
+							<h3 class="service-name">Immigration</h3>
+							<p class="service-desc">
+								Residency &amp; citizenship by investment solutions, including Golden Visa pathways and global mobility programs.
+							</p>
+							<span class="service-cta">Explore</span>
+						</a>
+
+						<a
+							class="service-card reveal"
+							data-reveal="up"
+							data-delay
+							href="insurance.html"
+							role="listitem"
+							aria-label="Raizing Insurance"
+						>
+							<div class="service-top">
+								<div class="service-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M12 2 20 5v6c0 5.2-3.3 9.8-8 11-4.7-1.2-8-5.8-8-11V5l8-3Zm0 2.2L6 6.2V11c0 4.1 2.4 7.6 6 8.8 3.6-1.2 6-4.7 6-8.8V6.2l-6-2Z" />
+								</svg>
+							</div>
+								<div class="service-pill">Insurance</div>
+							</div>
+							<h3 class="service-name">Raizing Insurance</h3>
+							<p class="service-desc">
+								Travel insurance plans built for business, leisure, and global mobility — with support you can trust.
+							</p>
+							<span class="service-cta">Explore</span>
+						</a>
+
+						<a
+							class="service-card reveal"
+							data-reveal="up"
+							data-delay
+							href="company-formation.html"
+							role="listitem"
+							aria-label="Company Formation"
+						>
+							<div class="service-top">
+								<div class="service-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M4 22V4a2 2 0 0 1 2-2h8l6 6v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Zm2 0h12V9h-5V4H6v18Zm2-10h8v2H8v-2Zm0 4h8v2H8v-2Z" />
+									</svg>
+								</div>
+								<div class="service-pill">Business</div>
+							</div>
+							<h3 class="service-name">Company Formation</h3>
+							<p class="service-desc">
+								Incorporation, licensing, compliance, and setup — handled end-to-end so you can launch faster.
+							</p>
+							<span class="service-cta">Explore</span>
+						</a>
+
+						<a
+							class="service-card reveal"
+							data-reveal="up"
+							data-delay
+							href="manpower-recruitment.html"
+							role="listitem"
+							aria-label="Manpower Recruitment (Cavec Global)"
+						>
+							<div class="service-top">
+								<div class="service-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M16 11a4 4 0 1 0-3.2-6.4A4 4 0 0 0 16 11Zm-8 0a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm8 2c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4Zm-8 0c-.3 0-.66.02-1.07.06C4.3 13.4 2 14.5 2 17v3h6v-3c0-1.54 1-2.73 2.6-3.55A14.4 14.4 0 0 0 8 13Z" />
+									</svg>
+								</div>
+								<div class="service-pill">Cavec Global</div>
+							</div>
+							<h3 class="service-name">Manpower Recruitment</h3>
+							<p class="service-desc">
+								Training programs and recruitment support — helping candidates become job-ready and connect with opportunities.
+							</p>
+							<span class="service-cta">Explore</span>
+						</a>
+
+						<a
+							class="service-card reveal"
+							data-reveal="up"
+							data-delay
+							href="verify.html"
+							role="listitem"
+							aria-label="Raizing Verify"
+						>
+							<div class="service-top">
+								<div class="service-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M12 2 20 5v6c0 5.2-3.3 9.8-8 11-4.7-1.2-8-5.8-8-11V5l8-3Zm0 2.2L6 6.2V11c0 4.1 2.4 7.6 6 8.8 3.6-1.2 6-4.7 6-8.8V6.2l-6-2Zm-1 12.1 5.3-5.3-1.4-1.4-3.9 3.9-1.8-1.8-1.4 1.4 3.2 3.2Z" />
+									</svg>
+								</div>
+								<div class="service-pill">Verify</div>
+							</div>
+							<h3 class="service-name">Raizing Verify</h3>
+							<p class="service-desc">
+								Fast, secure, and compliant digital document verification for embassies, consulates, and institutions.
+							</p>
+							<span class="service-cta">Explore</span>
+						</a>
+
+						<a
+							class="service-card reveal"
+							data-reveal="up"
+							data-delay
+							href="sim.html"
+							role="listitem"
+							aria-label="Raizing Sim"
+						>
+							<div class="service-top">
+								<div class="service-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M17 7a2 2 0 0 1 2 2v10a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v0Zm-2-1H9a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8a2 2 0 0 0-2-2Zm-4 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Zm7-11h2v2h-2V6Zm0 4h2v2h-2v-2Z" />
+								</svg>
+								</div>
+								<div class="service-pill">eSIM</div>
+							</div>
+							<h3 class="service-name">Raizing Sim</h3>
+							<p class="service-desc">Cost-effective eSIM connectivity across 145+ countries for modern travellers.</p>
+							<span class="service-cta">Explore</span>
+						</a>
+
+						<a
+							class="service-card reveal"
+							data-reveal="up"
+							data-delay
+							href="edu.html"
+							role="listitem"
+							aria-label="Raizing Edu"
+						>
+							<div class="service-top">
+								<div class="service-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M12 3 1.8 8.1 12 13.2l8-4V16h2V8.1L12 3Zm-6.2 8.3V15c0 2.8 4 5 6.2 5s6.2-2.2 6.2-5v-3.7L12 15.6 5.8 11.3Z" />
+									</svg>
+								</div>
+								<div class="service-pill">Edu</div>
+							</div>
+							<h3 class="service-name">Raizing Edu</h3>
+							<p class="service-desc">Study abroad counselling and admissions support — from program selection to enrolment.</p>
+							<span class="service-cta">Explore</span>
+						</a>
+					</div>
+				</div>
+			</section>
+
+			<section class="certs reveal" data-reveal="up" id="certifications" aria-label="Our Certifications">
+				<div class="certs-inner">
+					<div class="certs-head reveal" data-reveal="zoom" data-delay>
+						<h2 class="certs-title reveal-words">ISO Certified</h2>
+						<p class="certs-sub">
+							We proudly showcase ISO certifications, tourism affiliations, and global accreditations, ensuring trust,
+							quality, and excellence.
+						</p>
+					</div>
+
+					<div class="certs-carousel">
+						<button class="certs-btn prev" type="button" aria-label="Previous certifications" data-certs-prev></button>
+						<div class="certs-track" id="certsTrack" aria-label="Certifications carousel">
+							<article class="cert-card reveal" data-reveal="zoom" data-delay>
+								<img
+									class="cert-logo"
+									src="https://raizingsovereign.com/assets/a2-BMVPXAN-.png"
+									alt="ISO 9001:2015"
+									loading="lazy"
+								/>
+								<h3 class="cert-name">ISO 9001:2015</h3>
+								<p class="cert-desc">Quality Management System</p>
+							</article>
+
+							<article class="cert-card reveal" data-reveal="zoom" data-delay>
+								<img
+									class="cert-logo"
+									src="https://raizingsovereign.com/assets/a3-DHC0Pnzp.png"
+									alt="ISO/IEC 27001:2022"
+									loading="lazy"
+								/>
+								<h3 class="cert-name">ISO/IEC 27001:2022</h3>
+								<p class="cert-desc">Information Security Management System</p>
+							</article>
+
+							<article class="cert-card reveal" data-reveal="zoom" data-delay>
+								<img
+									class="cert-logo"
+									src="https://raizingsovereign.com/assets/a4-D0DO62I0.png"
+									alt="ISO 14001:2015"
+									loading="lazy"
+								/>
+								<h3 class="cert-name">ISO 14001:2015</h3>
+								<p class="cert-desc">Environmental Management System</p>
+							</article>
+
+							<article class="cert-card reveal" data-reveal="zoom" data-delay>
+								<img
+									class="cert-logo"
+									src="https://raizingsovereign.com/assets/a5-SB_-LkW2.png"
+									alt="ISO/IEC 23026:2015"
+									loading="lazy"
+								/>
+								<h3 class="cert-name">ISO/IEC 23026:2015</h3>
+								<p class="cert-desc">System and Software Engineering</p>
+							</article>
+						</div>
+						<button class="certs-btn next" type="button" aria-label="Next certifications" data-certs-next></button>
+					</div>
+				</div>
+			</section>
+
+			<section class="faq reveal" data-reveal="up" id="faqs" aria-label="Recent FAQs">
+				<div class="faq-inner">
+					<header class="faq-head reveal" data-reveal="zoom" data-delay>
+						<div class="faq-pill">Recent FAQs</div>
+						<h2 class="faq-title">Quick <span class="accent">answers</span> to the most common queries from our clients.</h2>
+					</header>
+
+					<div class="faq-list" role="list">
+						<div class="faq-item reveal" data-reveal="up" data-delay role="listitem">
+							<button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-1" id="faq-q-1">
+								<span>What types of company structures are available for foreign investors in the UAE?</span>
+								<span class="faq-icon" aria-hidden="true"></span>
+							</button>
+							<div class="faq-a" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
+								<div>
+									<p>
+										Common options include Mainland, Free Zone, and Offshore structures. The best choice depends on your
+										business activity, target market (UAE vs international), office requirements, visa needs, and compliance
+										preferences. Raizing Group guides you through selecting the structure that fits your goals and budget.
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="faq-item reveal" data-reveal="up" data-delay role="listitem">
+							<button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-2" id="faq-q-2">
+								<span>Can I have 100% foreign ownership of a UAE company?</span>
+								<span class="faq-icon" aria-hidden="true"></span>
+							</button>
+							<div class="faq-a" id="faq-a-2" role="region" aria-labelledby="faq-q-2">
+								<div>
+									<p>
+										In many cases, yes—especially in Free Zones and for eligible Mainland activities. Ownership rules can vary
+										by license type, activity, and regulatory approvals. We confirm eligibility, prepare documentation, and
+										handle the setup end-to-end to keep the process clear and compliant.
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="faq-item reveal" data-reveal="up" data-delay role="listitem">
+							<button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-3" id="faq-q-3">
+								<span>What are the residency benefits of setting up a company in the UAE?</span>
+								<span class="faq-icon" aria-hidden="true"></span>
+							</button>
+							<div class="faq-a" id="faq-a-3" role="region" aria-labelledby="faq-q-3">
+								<div>
+									<p>
+										Company formation can enable eligibility for investor/partner visas (subject to requirements), along with
+										options to sponsor family and staff based on your license and office setup. Raizing Group helps you plan the
+										structure, quotas, and timelines so residency steps align with your business goals.
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="faq-item reveal" data-reveal="up" data-delay role="listitem">
+							<button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-4" id="faq-q-4">
+								<span>How does Raizing Group support investors during the company setup process?</span>
+								<span class="faq-icon" aria-hidden="true"></span>
+							</button>
+							<div class="faq-a" id="faq-a-4" role="region" aria-labelledby="faq-q-4">
+								<div>
+									<p>
+										We manage the complete journey: activity and jurisdiction selection, name reservation, licensing,
+										document preparation, bank account assistance (where applicable), and residency/visa coordination. You get
+										one clear workflow with transparent steps and ongoing compliance support.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Anchor targets for existing nav links -->
+			<div class="anchor-target" id="news" aria-hidden="true"></div>
+			<div class="anchor-target" id="contact" aria-hidden="true"></div>
+			<div class="anchor-target" id="partner" aria-hidden="true"></div>
+		</div>
+
+		<footer class="footer reveal" data-reveal="up" id="footer" aria-label="Footer">
+			<div class="footer-shell">
+				<div class="footer-spacer" aria-hidden="true"></div>
+				<div class="footer-panel">
+					<div class="footer-inner">
+						<div class="footer-brand reveal" data-reveal="left" data-delay>
+							<img
+								class="footer-logo"
+								src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png"
+								alt="Raizing Group"
+								loading="lazy"
+							/>
+							<p class="footer-tag">
+								<span class="footer-dot" aria-hidden="true"></span>
+								End-to-end mobility, residency, and business setup support—delivered with clarity, compliance, and care.
+							</p>
+						</div>
+
+						<nav class="footer-links reveal" data-reveal="right" data-delay aria-label="Footer links">
+							<a href="#home">Home</a>
+							<a href="about.html">About Us</a>
+							<a href="#services">Our Services</a>
+							<a href="#certifications">Certifications</a>
+							<a href="#faqs">FAQs</a>
+							<a href="contact.html">Contact Us</a>
+						</nav>
+					</div>
+
+					<div class="footer-bottom">
+						<div>© <span id="year"></span> Raizing Group. All rights reserved.</div>
+						<div>Built for speed. Designed for trust.</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<div class="cursor" aria-hidden="true"></div>
+
+		<script>
+			(function () {
+				var prefersReduced = false;
+				try {
+					prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+				} catch (e) {}
+
+				function escapeHTML(s) {
+					return String(s)
+						.replace(/&/g, "&amp;")
+						.replace(/</g, "&lt;")
+						.replace(/>/g, "&gt;")
+						.replace(/\"/g, "&quot;")
+						.replace(/'/g, "&#39;");
+				}
+
+				function splitWords(el) {
+					var nodes = Array.prototype.slice.call(el.childNodes || []);
+					if (!nodes.length) return;
+
+					var out = [];
+					var i = 0;
+
+					function pushWord(w) {
+						out.push(
+							'<span class="w" style="transition-delay:' + String(i * 55) + 'ms">' + escapeHTML(w) + "</span>"
+						);
+						i += 1;
+					}
+
+					function pushText(text) {
+						var parts = String(text || "").split(/(\s+)/);
+						for (var p = 0; p < parts.length; p++) {
+							var part = parts[p];
+							if (!part) continue;
+							if (/^\s+$/.test(part)) {
+								out.push(" ");
+							} else {
+								pushWord(part);
+							}
+						}
+					}
+
+					nodes.forEach(function (node) {
+						if (!node) return;
+						// Text
+						if (node.nodeType === 3) {
+							pushText(node.textContent);
+							return;
+						}
+
+						// Element
+						if (node.nodeType === 1) {
+							var tag = String(node.tagName || "").toUpperCase();
+							if (tag === "BR") {
+								out.push("<br />");
+								return;
+							}
+							pushText(node.textContent);
+						}
+					});
+
+					var html = out.join("")
+						.replace(/ +/g, " ")
+						.replace(/ <br \/>/g, "<br />")
+						.replace(/<br \/> /g, "<br />");
+					el.innerHTML = html.trim();
+				}
+
+				// Prepare word reveals
+				var wordEls = Array.prototype.slice.call(document.querySelectorAll(".reveal-words"));
+				wordEls.forEach(function (el) {
+					splitWords(el);
+				});
+
+				var items = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+				if (!items.length && !wordEls.length) return;
+
+				// Stagger: compute a stable delay per section group
+				function applyStagger(root) {
+					var revealables = root.querySelectorAll(".reveal[data-delay]");
+					var i = 0;
+					revealables.forEach(function (el) {
+						var delay = Math.min(260, i * 70);
+						el.style.setProperty("--reveal-delay", delay + "ms");
+						i += 1;
+					});
+				}
+
+				["home", "reach", "why", "stats", "about", "services", "certifications", "faqs", "footer"].forEach(function (id) {
+					var sec = document.getElementById(id);
+					if (sec) applyStagger(sec);
+				});
+				
+				// Stagger sidebar navigation items
+				var sidebar = document.querySelector(".sidebar");
+				if (sidebar) applyStagger(sidebar);
+
+				function initRevealAnimations() {
+					if (prefersReduced || !("IntersectionObserver" in window)) {
+						items.forEach(function (el) {
+							el.classList.add("is-revealed");
+							var wordsInside = el.querySelectorAll ? el.querySelectorAll(".reveal-words") : [];
+							wordsInside.forEach(function (w) {
+								w.classList.add("is-revealed");
+							});
+						});
+						wordEls.forEach(function (el) {
+							el.classList.add("is-revealed");
+						});
+						return;
+					}
+
+					var io = new IntersectionObserver(
+						function (entries) {
+							entries.forEach(function (entry) {
+								if (!entry.isIntersecting) return;
+								entry.target.classList.add("is-revealed");
+								if (entry.target.classList && entry.target.classList.contains("reveal-words")) {
+									entry.target.classList.add("is-revealed");
+								}
+								var words = entry.target.querySelectorAll ? entry.target.querySelectorAll(".reveal-words") : [];
+								words.forEach(function (w) {
+									w.classList.add("is-revealed");
+								});
+								io.unobserve(entry.target);
+							});
+						},
+						{ threshold: 0.12, rootMargin: "0px 0px -2% 0px" }
+					);
+
+					items.forEach(function (el) {
+						io.observe(el);
+					});
+
+					wordEls.forEach(function (el) {
+						if (el.classList && el.classList.contains("reveal")) return;
+						io.observe(el);
+					});
+				}
+
+				// Wait for preloader to complete before starting reveal animations
+				var preloaderComplete = false;
+				window.addEventListener("rg-preloader-complete", function () {
+					preloaderComplete = true;
+					initRevealAnimations();
+				});
+
+				// Fallback: if no preloader exists, init immediately
+				window.setTimeout(function () {
+					if (!preloaderComplete && !document.getElementById("rg-preloader")) {
+						initRevealAnimations();
+					}
+				}, 100);
+			})();
+		</script>
+
+		<script>
+			(function () {
+				var cursor = document.querySelector(".cursor");
+				if (!cursor) return;
+
+				var isCoarse = false;
+				try {
+					isCoarse = window.matchMedia && window.matchMedia("(hover: none), (pointer: coarse)").matches;
+				} catch (e) {}
+				if (isCoarse) return;
+
+				var targetX = window.innerWidth / 2;
+				var targetY = window.innerHeight / 2;
+				var currentX = targetX;
+				var currentY = targetY;
+				var raf = 0;
+
+				function isInteractive(el) {
+					if (!el || !el.closest) return false;
+					return !!el.closest(
+						'a, button, input, textarea, select, summary, [role="button"], [data-cursor="hover"], .faq-q'
+					);
+				}
+
+				function tick() {
+					var ease = 0.18;
+					currentX = currentX + (targetX - currentX) * ease;
+					currentY = currentY + (targetY - currentY) * ease;
+					cursor.style.transform = "translate3d(" + currentX + "px," + currentY + "px,0) translate3d(-50%,-50%,0)";
+					raf = window.requestAnimationFrame(tick);
+				}
+
+				document.addEventListener(
+					"mousemove",
+					function (e) {
+						targetX = e.clientX;
+						targetY = e.clientY;
+						cursor.classList.add("is-visible");
+
+						var hover = isInteractive(e.target);
+						cursor.classList.toggle("is-hover", hover);
+
+						if (!raf) raf = window.requestAnimationFrame(tick);
+					},
+					{ passive: true }
+				);
+
+				document.addEventListener(
+					"mousedown",
+					function () {
+						cursor.classList.add("is-down");
+					},
+					{ passive: true }
+				);
+
+				document.addEventListener(
+					"mouseup",
+					function () {
+						cursor.classList.remove("is-down");
+					},
+					{ passive: true }
+				);
+
+				window.addEventListener(
+					"blur",
+					function () {
+						cursor.classList.remove("is-down");
+					},
+					{ passive: true }
+				);
+
+				// Hide cursor when leaving the viewport
+				document.addEventListener(
+					"mouseleave",
+					function () {
+						cursor.classList.remove("is-visible");
+					},
+					{ passive: true }
+				);
+			})();
+		</script>
+
+		<script>
+			(function () {
+				var track = document.getElementById("certsTrack");
+				if (!track) return;
+				var prev = document.querySelector("[data-certs-prev]");
+				var next = document.querySelector("[data-certs-next]");
+				if (!prev || !next) return;
+
+				function step() {
+					return Math.max(260, Math.round(track.clientWidth * 0.75));
+				}
+
+				prev.addEventListener("click", function () {
+					track.scrollBy({ left: -step(), behavior: "smooth" });
+				});
+
+				next.addEventListener("click", function () {
+					track.scrollBy({ left: step(), behavior: "smooth" });
+				});
+
+				// Keyboard support
+				track.setAttribute("tabindex", "0");
+				track.addEventListener("keydown", function (e) {
+					if (e.key === "ArrowLeft") {
+						e.preventDefault();
+						track.scrollBy({ left: -step(), behavior: "smooth" });
+					}
+					if (e.key === "ArrowRight") {
+						e.preventDefault();
+						track.scrollBy({ left: step(), behavior: "smooth" });
+					}
+				});
+			})();
+		</script>
+
+		<script>
+			(function () {
+				var y = document.getElementById("year");
+				if (y) y.textContent = String(new Date().getFullYear());
+			})();
+		</script>
+
+		<script>
+			(function () {
+				var root = document.getElementById("faqs");
+				if (!root) return;
+				var items = Array.prototype.slice.call(root.querySelectorAll(".faq-item"));
+				if (!items.length) return;
+
+				function closeItem(item) {
+					item.classList.remove("is-open");
+					var btn = item.querySelector(".faq-q");
+					if (btn) btn.setAttribute("aria-expanded", "false");
+				}
+
+				function openItem(item) {
+					item.classList.add("is-open");
+					var btn = item.querySelector(".faq-q");
+					if (btn) btn.setAttribute("aria-expanded", "true");
+				}
+
+				items.forEach(function (item) {
+					var btn = item.querySelector(".faq-q");
+					if (!btn) return;
+					btn.addEventListener("click", function () {
+						var isOpen = item.classList.contains("is-open");
+						items.forEach(function (other) {
+							if (other !== item) closeItem(other);
+						});
+						if (isOpen) closeItem(item);
+						else openItem(item);
+					});
+				});
+			})();
+		</script>
+
+		<script>
+			(function () {
+				var section = document.getElementById("stats");
+				if (!section) return;
+
+				var prefersReduced = false;
+				try {
+					prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+				} catch (e) {}
+
+				var hasRun = false;
+
+				function formatNumber(value, suffix) {
+					var rounded = Math.round(value);
+					return String(rounded) + (suffix || "");
+				}
+
+				function animateCounter(el, target, suffix) {
+					if (prefersReduced) {
+						el.textContent = formatNumber(target, suffix);
+						return;
+					}
+
+					var start = 0;
+					var duration = 1200;
+					var startTime = null;
+
+					function easeOutCubic(t) {
+						return 1 - Math.pow(1 - t, 3);
+					}
+
+					function step(ts) {
+						if (startTime === null) startTime = ts;
+						var p = Math.min(1, (ts - startTime) / duration);
+						var eased = easeOutCubic(p);
+						var current = start + (target - start) * eased;
+						el.textContent = formatNumber(current, suffix);
+						if (p < 1) window.requestAnimationFrame(step);
+					}
+
+					window.requestAnimationFrame(step);
+				}
+
+				function run() {
+					if (hasRun) return;
+					hasRun = true;
+					section.classList.add("is-visible");
+					var counters = section.querySelectorAll("[data-count]");
+					counters.forEach(function (el) {
+						var target = Number(el.getAttribute("data-target") || "0");
+						var suffix = el.getAttribute("data-suffix") || "";
+						animateCounter(el, target, suffix);
+					});
+				}
+
+				if (!("IntersectionObserver" in window)) {
+					run();
+					return;
+				}
+
+				var io = new IntersectionObserver(
+					function (entries) {
+						entries.forEach(function (entry) {
+							if (entry.isIntersecting) run();
+						});
+					},
+					{ threshold: 0.35 }
+				);
+				io.observe(section);
+			})();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,2306 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>About Us — Raizing Group</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			:root {
+				--brand-red: #b40000;
+				--brand-red-2: #e00000;
+				--bg: #070a0f;
+				--text: #ffffff;
+				--muted: rgba(255, 255, 255, 0.78);
+				--muted-2: rgba(255, 255, 255, 0.62);
+				--sidebar-w: 280px;
+				--border: rgba(255, 255, 255, 0.16);
+				--focus: rgba(224, 0, 0, 0.35);
+				--font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+				--reveal-ease: cubic-bezier(0.2, 0.95, 0.15, 1);
+				--reveal-opacity: 680ms;
+				--reveal-transform: 980ms;
+				--reveal-clip: 860ms;
+				--reveal-delay: 0ms;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			html,
+			body {
+				height: 100%;
+			}
+
+			body {
+				margin: 0;
+				font-family: var(--font-sans);
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				text-rendering: geometricPrecision;
+				background-color: var(--bg);
+				background-image:
+					radial-gradient(1000px 560px at 22% 34%, rgba(224, 0, 0, 0.24), transparent 60%),
+					radial-gradient(800px 520px at 86% 70%, rgba(255, 255, 255, 0.08), transparent 55%),
+					linear-gradient(110deg, rgba(10, 14, 22, 0.86), rgba(10, 14, 22, 0.62)),
+					repeating-linear-gradient(105deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 240px),
+					repeating-linear-gradient(160deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 320px);
+				background-size: cover;
+				background-position: center;
+				color: var(--text);
+				overflow-x: hidden;
+				cursor: none;
+			}
+
+			a {
+				color: inherit;
+				text-decoration: none;
+			}
+
+			a:focus-visible,
+			button:focus-visible {
+				outline: 3px solid var(--focus);
+				outline-offset: 3px;
+			}
+
+			/* Themed scrollbar (best-effort across browsers)
+			   Note: on many browsers the main scrollbar is on `html`, not `body`. */
+			html,
+			body,
+			.sidebar,
+			* {
+				scrollbar-width: thin;
+				scrollbar-color: rgba(224, 0, 0, 0.78) rgba(255, 255, 255, 0.08);
+			}
+
+			html::-webkit-scrollbar,
+			body::-webkit-scrollbar,
+			.sidebar::-webkit-scrollbar,
+			*::-webkit-scrollbar {
+				width: 12px;
+				height: 12px;
+			}
+
+			html::-webkit-scrollbar-track,
+			body::-webkit-scrollbar-track,
+			.sidebar::-webkit-scrollbar-track,
+			*::-webkit-scrollbar-track {
+				background: rgba(0, 0, 0, 0.28);
+			}
+
+			html::-webkit-scrollbar-thumb,
+			body::-webkit-scrollbar-thumb,
+			.sidebar::-webkit-scrollbar-thumb,
+			*::-webkit-scrollbar-thumb {
+				background: linear-gradient(180deg, var(--brand-red-2), var(--brand-red));
+				border-radius: 999px;
+				border: 3px solid rgba(0, 0, 0, 0.36);
+				min-height: 44px;
+			}
+
+			html::-webkit-scrollbar-thumb:hover,
+			body::-webkit-scrollbar-thumb:hover,
+			.sidebar::-webkit-scrollbar-thumb:hover,
+			*::-webkit-scrollbar-thumb:hover {
+				filter: brightness(1.1);
+			}
+
+			.page {
+				min-height: 100vh;
+				display: grid;
+				grid-template-columns: var(--sidebar-w) 1fr;
+				grid-auto-rows: min-content;
+			}
+
+			/* Sidebar */
+			.sidebar {
+				position: sticky;
+				top: 0;
+				padding: 36px 28px 28px;
+				background: transparent;
+				grid-column: 1;
+				grid-row: 1 / -1;
+				height: 100vh;
+				overflow: auto;
+			}
+
+			.brand {
+				display: flex;
+				align-items: flex-start;
+				gap: 12px;
+			}
+
+			.brand img {
+				width: 150px;
+				height: auto;
+				display: block;
+				max-width: 100%;
+			}
+
+			.nav {
+				margin-top: 54px;
+				display: grid;
+				gap: 22px;
+				padding-left: 18px;
+			}
+
+			.nav a {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				font-size: 17px;
+				font-weight: 700;
+				line-height: 1.2;
+				padding: 4px 0;
+				color: rgba(255, 255, 255, 0.86);
+				text-decoration: underline;
+				text-decoration-thickness: 2px;
+				text-underline-offset: 6px;
+				text-decoration-color: rgba(255, 255, 255, 0.22);
+				transition: color 160ms ease, text-decoration-color 160ms ease;
+			}
+
+			.nav a:hover {
+				color: #ffffff;
+				text-decoration-color: rgba(224, 0, 0, 0.65);
+			}
+
+			.nav a[aria-current="page"] {
+				color: #ffffff;
+				text-decoration-color: rgba(224, 0, 0, 0.85);
+			}
+
+			.nav a[data-caret]::after {
+				content: "";
+				width: 7px;
+				height: 7px;
+				border-right: 2px solid rgba(255, 255, 255, 0.72);
+				border-bottom: 2px solid rgba(255, 255, 255, 0.72);
+				transform: rotate(45deg);
+				margin-top: 2px;
+			}
+
+			.nav-item {
+				display: grid;
+				gap: 10px;
+			}
+
+			.nav-dropdown {
+				display: grid;
+				gap: 10px;
+				padding-left: 14px;
+				margin-left: 8px;
+				border-left: 2px solid rgba(255, 255, 255, 0.12);
+				max-height: 0;
+				opacity: 0;
+				overflow: hidden;
+				transform: translate3d(0, -6px, 0);
+				visibility: hidden;
+				pointer-events: none;
+				transition:
+					max-height 260ms var(--reveal-ease),
+					opacity 200ms ease,
+					transform 260ms var(--reveal-ease),
+					visibility 0ms linear 260ms;
+			}
+
+			.nav-services:hover .nav-dropdown,
+			.nav-services:focus-within .nav-dropdown {
+				max-height: 600px;
+				opacity: 1;
+				transform: translate3d(0, 0, 0);
+				visibility: visible;
+				pointer-events: auto;
+				transition-delay: 0ms;
+			}
+
+			.nav-dropdown a {
+				font-size: 15px;
+				font-weight: 750;
+				color: rgba(255, 255, 255, 0.78);
+				text-decoration: none;
+				text-underline-offset: 5px;
+				text-decoration-thickness: 2px;
+				text-decoration-color: rgba(255, 255, 255, 0.18);
+				padding: 2px 0;
+				transition: color 160ms ease, text-decoration-color 160ms ease;
+			}
+
+			.nav-dropdown a:hover {
+				color: #ffffff;
+				text-decoration: underline;
+				text-decoration-color: rgba(224, 0, 0, 0.65);
+			}
+
+			.cta {
+				margin-top: 22px;
+			}
+
+			.cta a {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				padding: 14px 14px;
+				font-weight: 700;
+				border-radius: 14px;
+				background: linear-gradient(180deg, var(--brand-red-2), var(--brand-red));
+				border: 1px solid rgba(255, 255, 255, 0.18);
+				box-shadow: 0 10px 28px rgba(224, 0, 0, 0.18);
+			}
+
+			.cta a:hover {
+				filter: brightness(1.05);
+			}
+
+			.social {
+				position: absolute;
+				left: 28px;
+				bottom: 26px;
+				display: grid;
+				gap: 8px;
+				font-weight: 650;
+				color: rgba(255, 255, 255, 0.82);
+			}
+
+			.social a {
+				width: max-content;
+				padding: 2px 0;
+			}
+
+			.social a:hover {
+				color: #ffffff;
+				text-decoration: underline;
+				text-decoration-thickness: 2px;
+				text-underline-offset: 5px;
+				text-decoration-color: rgba(224, 0, 0, 0.65);
+			}
+
+			/* Buttons */
+			.btn {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				gap: 10px;
+				padding: 14px 18px;
+				border-radius: 14px;
+				font-weight: 800;
+				letter-spacing: 0.01em;
+				border: 1px solid rgba(255, 255, 255, 0.14);
+				transition: transform 160ms ease, filter 160ms ease, background 160ms ease, border-color 160ms ease;
+			}
+
+			.btn:hover {
+				transform: translate3d(0, -1px, 0);
+			}
+
+			.btn-primary {
+				background: linear-gradient(180deg, var(--brand-red-2), var(--brand-red));
+				border-color: rgba(255, 255, 255, 0.18);
+				box-shadow: 0 10px 28px rgba(224, 0, 0, 0.18);
+			}
+
+			.btn-primary:hover {
+				filter: brightness(1.05);
+			}
+
+			.btn-ghost {
+				background: rgba(255, 255, 255, 0.06);
+				border-color: rgba(224, 0, 0, 0.35);
+			}
+
+			.btn-ghost:hover {
+				background: rgba(255, 255, 255, 0.09);
+				border-color: rgba(224, 0, 0, 0.55);
+			}
+
+			/* Reveal animations */
+			.reveal {
+				opacity: 0;
+				transform: translate3d(0, 22px, 0) scale(0.998);
+				transition-property: opacity, transform;
+				transition-duration: var(--reveal-opacity), var(--reveal-transform);
+				transition-timing-function: var(--reveal-ease);
+				transition-delay: var(--reveal-delay);
+				will-change: transform, opacity;
+				backface-visibility: hidden;
+			}
+
+			.reveal[data-reveal="left"] {
+				transform: translate3d(-20px, 10px, 0) scale(0.997);
+			}
+
+			.reveal[data-reveal="right"] {
+				transform: translate3d(20px, 10px, 0) scale(0.997);
+			}
+
+			.reveal[data-reveal="zoom"] {
+				transform: translate3d(0, 16px, 0) scale(0.985);
+			}
+
+			.reveal[data-reveal="clip"] {
+				transform: translate3d(14px, 10px, 0) scale(0.996);
+				clip-path: inset(12% 10% 12% 10% round 26px);
+				transition-property: opacity, transform, clip-path;
+				transition-duration: var(--reveal-opacity), var(--reveal-transform), var(--reveal-clip);
+			}
+
+			.reveal.is-revealed {
+				opacity: 1;
+				transform: translate3d(0, 0, 0) scale(1);
+				will-change: auto;
+			}
+
+			.reveal[data-reveal="clip"].is-revealed {
+				clip-path: inset(0% 0% 0% 0% round 18px);
+			}
+
+			.reveal-words {
+				opacity: 1;
+				transform: none;
+			}
+
+			.reveal-words .w {
+				display: inline-block;
+				opacity: 0;
+				transform: translate3d(0, 12px, 0) scale(0.998);
+				transition-property: opacity, transform;
+				transition-duration: 700ms, 1100ms;
+				transition-timing-function: var(--reveal-ease);
+				will-change: transform, opacity;
+				backface-visibility: hidden;
+			}
+
+			.reveal-words.is-revealed .w {
+				opacity: 1;
+				transform: translate3d(0, 0, 0) scale(1);
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.reveal {
+					opacity: 1;
+					transform: none;
+					transition: none;
+				}
+
+				.reveal-words .w {
+					opacity: 1;
+					transform: none;
+					transition: none;
+				}
+			}
+
+			/* About hero */
+			.about-hero {
+				grid-column: 2;
+				padding: 74px 60px;
+				min-height: 100vh;
+				display: grid;
+				align-content: center;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.about-hero::before {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background:
+					radial-gradient(820px 440px at 18% 28%, rgba(224, 0, 0, 0.18), transparent 58%),
+					radial-gradient(900px 520px at 92% 62%, rgba(255, 255, 255, 0.07), transparent 60%);
+				opacity: 0.9;
+				pointer-events: none;
+			}
+
+			.hero-inner {
+				position: relative;
+				z-index: 1;
+				max-width: 980px;
+			}
+
+			.pill {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				padding: 10px 14px;
+				border-radius: 999px;
+				background: rgba(0, 0, 0, 0.28);
+				border: 1px solid rgba(255, 255, 255, 0.16);
+				color: rgba(255, 255, 255, 0.92);
+				font-weight: 750;
+				letter-spacing: 0.2px;
+			}
+
+			.pill .dot {
+				width: 10px;
+				height: 10px;
+				border-radius: 999px;
+				background: var(--brand-red-2);
+				box-shadow: 0 0 0 4px rgba(224, 0, 0, 0.18);
+			}
+
+			h1 {
+				margin: 22px 0 16px;
+				font-size: clamp(44px, 5.6vw, 84px);
+				line-height: 1.12;
+				letter-spacing: -0.03em;
+				font-weight: 900;
+			}
+
+			.sub {
+				margin: 0;
+				max-width: 820px;
+				color: var(--muted);
+				font-size: 16px;
+				line-height: 1.8;
+				font-weight: 500;
+			}
+
+			.actions {
+				margin-top: 26px;
+				display: flex;
+				gap: 14px;
+				flex-wrap: wrap;
+			}
+
+			.hero-cards {
+				margin-top: 34px;
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 14px;
+			}
+
+			.card {
+				padding: 18px 18px;
+				border-radius: 18px;
+				background: rgba(255, 255, 255, 0.06);
+				border: 1px solid rgba(255, 255, 255, 0.12);
+			}
+
+			.card strong {
+				display: block;
+				font-size: 18px;
+				font-weight: 900;
+				letter-spacing: -0.01em;
+			}
+
+			.card span {
+				display: block;
+				margin-top: 8px;
+				color: rgba(255, 255, 255, 0.74);
+				font-weight: 650;
+				line-height: 1.55;
+				font-size: 13px;
+			}
+
+			/* Sections */
+			.section {
+				grid-column: 2;
+				padding: 84px 60px;
+			}
+
+			.section-inner {
+				max-width: 1220px;
+				margin: 0 auto;
+			}
+
+			.kicker {
+				margin: 0 0 14px;
+				color: rgba(255, 255, 255, 0.82);
+				font-weight: 900;
+				letter-spacing: 0.1em;
+				font-size: 13px;
+				text-transform: uppercase;
+			}
+
+			h2 {
+				margin: 0 0 14px;
+				font-size: clamp(26px, 3vw, 40px);
+				line-height: 1.2;
+				letter-spacing: -0.02em;
+				font-weight: 900;
+			}
+
+			.lead {
+				margin: 0;
+				color: rgba(255, 255, 255, 0.76);
+				font-size: 15px;
+				line-height: 1.9;
+				font-weight: 550;
+				max-width: 980px;
+			}
+
+			.grid-2 {
+				margin-top: 26px;
+				display: grid;
+				grid-template-columns: 1.2fr 1fr;
+				gap: 22px;
+				align-items: start;
+			}
+
+			.grid-2.one {
+				grid-template-columns: 1fr;
+			}
+
+			.panel {
+				padding: 22px;
+				border-radius: 18px;
+				background: rgba(0, 0, 0, 0.28);
+				border: 1px solid rgba(255, 255, 255, 0.12);
+			}
+
+			.panel h3 {
+				margin: 0 0 10px;
+				font-size: 18px;
+				font-weight: 900;
+				letter-spacing: -0.01em;
+			}
+
+			.panel p {
+				margin: 0;
+				color: rgba(255, 255, 255, 0.74);
+				font-weight: 550;
+				line-height: 1.85;
+				font-size: 14px;
+			}
+
+			.values {
+				margin-top: 18px;
+				display: grid;
+				grid-template-columns: repeat(4, minmax(0, 1fr));
+				gap: 14px;
+			}
+
+			/* Vision section (map + content) */
+			.vision {
+				grid-column: 2;
+				padding: 84px 60px;
+			}
+
+			.vision-inner {
+				max-width: 1220px;
+				margin: 0 auto;
+			}
+
+			.vision-card {
+				border-radius: 22px;
+				background: rgba(255, 255, 255, 0.06);
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				box-shadow: 0 22px 70px rgba(0, 0, 0, 0.24);
+				padding: 22px;
+				overflow: hidden;
+			}
+
+			.vision-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 26px;
+				align-items: center;
+			}
+
+			.vision-map {
+				position: relative;
+				border-radius: 18px;
+				background-image:
+					linear-gradient(180deg, rgba(70, 0, 0, 0.62), rgba(70, 0, 0, 0.62)),
+					url("https://raizinggroup.com/wp-content/uploads/2025/09/Untitled-design-54.jpg");
+				background-size: cover;
+				background-position: center;
+				background-repeat: no-repeat;
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				overflow: hidden;
+				min-height: 280px;
+			}
+
+			.pin {
+				position: absolute;
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				transform: translate(-50%, -50%);
+				color: rgba(255, 255, 255, 0.86);
+				font-weight: 900;
+				font-size: 12px;
+				letter-spacing: 0.01em;
+				text-shadow: 0 10px 18px rgba(0, 0, 0, 0.45);
+			}
+
+			.pin span {
+				display: none;
+			}
+
+			.pin svg {
+				width: 18px;
+				height: 18px;
+				display: block;
+				filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.35));
+			}
+
+			.vision-side {
+				display: grid;
+				gap: 12px;
+				align-content: start;
+			}
+
+			.vision-icon {
+				width: 52px;
+				height: 52px;
+				border-radius: 14px;
+				display: grid;
+				place-items: center;
+				background: linear-gradient(180deg, var(--brand-red-2), var(--brand-red));
+				box-shadow: 0 14px 34px rgba(224, 0, 0, 0.18);
+				border: 1px solid rgba(255, 255, 255, 0.18);
+			}
+
+			.vision-icon svg {
+				width: 24px;
+				height: 24px;
+				fill: #ffffff;
+			}
+
+			.vision-title {
+				margin: 0;
+				font-weight: 950;
+				letter-spacing: -0.02em;
+				font-size: 22px;
+				color: rgba(224, 0, 0, 0.92);
+			}
+
+			.vision-text {
+				margin: 0;
+				color: rgba(255, 255, 255, 0.78);
+				font-weight: 550;
+				line-height: 1.9;
+				font-size: 14px;
+			}
+
+			/* Offices */
+			.offices {
+				grid-column: 2;
+				padding: 84px 60px;
+			}
+
+			.offices-inner {
+				max-width: 1220px;
+				margin: 0 auto;
+			}
+
+			.offices-head {
+				text-align: center;
+				margin-bottom: 28px;
+			}
+
+			.offices-sub {
+				margin: 10px auto 0;
+				max-width: 720px;
+				color: rgba(255, 255, 255, 0.74);
+				font-weight: 600;
+				line-height: 1.8;
+				font-size: 14px;
+			}
+
+			.office-grid {
+				display: grid;
+				grid-template-columns: repeat(4, minmax(0, 1fr));
+				gap: 18px;
+			}
+
+			.office-card {
+				--office-img: none;
+				position: relative;
+				border-radius: 18px;
+				overflow: hidden;
+				min-height: 300px;
+				background-image:
+					linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.72) 72%, rgba(0, 0, 0, 0.86) 100%),
+					var(--office-img);
+				background-size: cover;
+				background-position: center;
+				background-repeat: no-repeat;
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				box-shadow: 0 22px 60px rgba(0, 0, 0, 0.25);
+				transition: transform 220ms var(--reveal-ease), filter 220ms ease;
+			}
+
+			.office-card:hover {
+				transform: translate3d(0, -3px, 0);
+				filter: brightness(1.03);
+			}
+
+			.office-content {
+				position: absolute;
+				inset: 0;
+				padding: 18px;
+				display: grid;
+				grid-template-rows: 1fr auto;
+				gap: 12px;
+			}
+
+			.office-meta {
+				align-self: end;
+				display: grid;
+				gap: 6px;
+			}
+
+			.office-city {
+				margin: 0;
+				font-weight: 950;
+				letter-spacing: -0.02em;
+				font-size: 18px;
+			}
+
+			.office-country {
+				margin: 0;
+				color: rgba(255, 255, 255, 0.84);
+				font-weight: 750;
+				font-size: 13px;
+			}
+
+			.office-address {
+				margin: 0;
+				color: rgba(255, 255, 255, 0.8);
+				font-weight: 650;
+				font-size: 12px;
+				line-height: 1.7;
+				max-width: 42ch;
+			}
+
+			.office-map {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				gap: 10px;
+				width: 100%;
+				padding: 12px 14px;
+				border-radius: 999px;
+				background: linear-gradient(180deg, var(--brand-red-2), var(--brand-red));
+				border: 1px solid rgba(255, 255, 255, 0.16);
+				color: #ffffff;
+				font-weight: 900;
+				font-size: 13px;
+				box-shadow: 0 14px 34px rgba(224, 0, 0, 0.16);
+				transition: transform 180ms ease, filter 180ms ease;
+			}
+
+			.office-map:hover {
+				transform: translate3d(0, -1px, 0);
+				filter: brightness(1.05);
+			}
+
+			.office-map svg {
+				width: 16px;
+				height: 16px;
+				fill: #ffffff;
+				display: block;
+			}
+
+			@media (max-width: 1200px) {
+				.office-grid {
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+				}
+			}
+
+			@media (max-width: 720px) {
+				.office-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			/* Founder / leadership */
+			.leadership {
+				grid-column: 2;
+				padding: 84px 60px;
+			}
+
+			.leadership-inner {
+				max-width: 1220px;
+				margin: 0 auto;
+			}
+
+			.leadership-card {
+				position: relative;
+				overflow: hidden;
+				border-radius: 22px;
+				background: rgba(255, 255, 255, 0.06);
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				box-shadow: 0 22px 70px rgba(0, 0, 0, 0.24);
+				padding: 22px;
+			}
+
+			.leadership-card::before {
+				content: "";
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				height: 2px;
+				background: linear-gradient(90deg, rgba(224, 0, 0, 0.0), rgba(224, 0, 0, 0.9), rgba(255, 255, 255, 0.0));
+				opacity: 0.75;
+				pointer-events: none;
+			}
+
+			.leadership-grid {
+				display: grid;
+				grid-template-columns: 1.05fr 1fr;
+				gap: 28px;
+				align-items: start;
+			}
+
+			.founder-media {
+				display: grid;
+				gap: 14px;
+			}
+
+			.founder-photo {
+				width: 100%;
+				aspect-ratio: 16 / 9;
+				object-fit: cover;
+				border-radius: 18px;
+				display: block;
+				border: 1px solid rgba(255, 255, 255, 0.14);
+				box-shadow: 0 18px 60px rgba(0, 0, 0, 0.26);
+			}
+
+			.founder-name {
+				margin: 2px 0 0;
+				display: inline-block;
+				font-weight: 950;
+				letter-spacing: -0.02em;
+				font-size: 22px;
+				position: relative;
+				padding-bottom: 10px;
+			}
+
+			.founder-name::after {
+				content: "";
+				position: absolute;
+				left: 0;
+				bottom: 2px;
+				width: min(260px, 78%);
+				height: 3px;
+				border-radius: 999px;
+				background: linear-gradient(90deg, rgba(224, 0, 0, 0.0), rgba(224, 0, 0, 0.92), rgba(224, 0, 0, 0.0));
+				opacity: 0.9;
+			}
+
+			.founder-title {
+				margin: 0;
+				color: rgba(255, 255, 255, 0.74);
+				font-weight: 700;
+				font-size: 13px;
+				line-height: 1.6;
+			}
+
+			.leadership-title {
+				margin: 0 0 12px;
+				font-size: clamp(26px, 3.2vw, 42px);
+				line-height: 1.15;
+				font-weight: 950;
+				letter-spacing: -0.02em;
+				position: relative;
+			}
+
+			.leadership-title .accent {
+				background: linear-gradient(180deg, var(--brand-red-2), var(--brand-red));
+				-webkit-background-clip: text;
+				background-clip: text;
+				color: transparent;
+				text-shadow: 0 10px 26px rgba(224, 0, 0, 0.18);
+			}
+
+			@supports not (-webkit-background-clip: text) {
+				.leadership-title .accent {
+					color: rgba(224, 0, 0, 0.92);
+				}
+			}
+
+			.leadership-title::after {
+				content: "";
+				display: block;
+				margin-top: 12px;
+				width: 86px;
+				height: 2px;
+				border-radius: 999px;
+				background: linear-gradient(90deg, rgba(224, 0, 0, 0.0), rgba(224, 0, 0, 0.85), rgba(255, 255, 255, 0.0));
+				opacity: 0.95;
+			}
+
+			.leadership-copy {
+				margin: 0;
+				color: rgba(255, 255, 255, 0.78);
+				font-weight: 550;
+				line-height: 1.95;
+				font-size: 14px;
+			}
+
+			.leadership-copy p {
+				margin: 0 0 14px;
+			}
+
+			.leadership-copy p:last-child {
+				margin-bottom: 0;
+			}
+
+			@media (max-width: 980px) {
+				.leadership {
+					grid-column: 1;
+					padding: 64px 20px;
+				}
+
+				.leadership-card {
+					padding: 18px;
+				}
+
+				.leadership-grid {
+					grid-template-columns: 1fr;
+					gap: 18px;
+				}
+			}
+
+			/* Milestones timeline */
+			.timeline {
+				position: relative;
+			}
+
+			.timeline-inner {
+				max-width: 1220px;
+				margin: 0 auto;
+			}
+
+			.tl {
+				position: relative;
+				margin-top: 34px;
+				padding: 12px 0;
+			}
+
+			.tl::before {
+				content: "";
+				position: absolute;
+				left: 50%;
+				top: 0;
+				bottom: 0;
+				width: 2px;
+				transform: translateX(-50%);
+				background: linear-gradient(180deg, rgba(224, 0, 0, 0.0), rgba(224, 0, 0, 0.55), rgba(255, 255, 255, 0.12));
+				opacity: 0.9;
+			}
+
+			.tl-item {
+				display: grid;
+				grid-template-columns: 1fr 160px 1fr;
+				gap: 24px;
+				align-items: center;
+				position: relative;
+				padding: 18px 0;
+			}
+
+			.tl-mid {
+				position: relative;
+				display: grid;
+				justify-items: center;
+				gap: 10px;
+			}
+
+			.tl-badge {
+				display: inline-flex;
+				align-items: center;
+				gap: 12px;
+				padding: 10px 14px;
+				border-radius: 999px;
+				background: rgba(255, 255, 255, 0.06);
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				backdrop-filter: blur(8px);
+				-webkit-backdrop-filter: blur(8px);
+			}
+
+			.tl-node {
+				width: 56px;
+				height: 56px;
+				border-radius: 999px;
+				display: grid;
+				place-items: center;
+				background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
+				border: 1px solid rgba(255, 255, 255, 0.16);
+				box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+				position: relative;
+			}
+
+			.tl-node::after {
+				content: "";
+				position: absolute;
+				inset: -10px;
+				border-radius: 999px;
+				background: radial-gradient(circle at 50% 50%, rgba(224, 0, 0, 0.25), transparent 60%);
+				opacity: 0.85;
+				pointer-events: none;
+			}
+
+			.tl-node svg {
+				width: 26px;
+				height: 26px;
+				display: block;
+				position: relative;
+				z-index: 1;
+				fill: currentColor;
+				color: rgba(255, 255, 255, 0.92);
+			}
+
+			.tl-year {
+				font-weight: 950;
+				letter-spacing: 0.02em;
+				font-size: 22px;
+				color: var(--tl-color, rgba(224, 0, 0, 0.92));
+			}
+
+			.tl-card {
+				padding: 18px 18px;
+				border-radius: 18px;
+				background: rgba(255, 255, 255, 0.06);
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				box-shadow: 0 18px 50px rgba(0, 0, 0, 0.26);
+			}
+
+			.tl-card ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				display: grid;
+				gap: 10px;
+			}
+
+			.tl-card li {
+				display: grid;
+				grid-template-columns: 10px 1fr;
+				gap: 10px;
+				align-items: start;
+				color: rgba(255, 255, 255, 0.78);
+				font-weight: 650;
+				line-height: 1.6;
+				font-size: 13.5px;
+			}
+
+			.tl-dot {
+				width: 8px;
+				height: 8px;
+				border-radius: 2px;
+				background: var(--tl-color, rgba(224, 0, 0, 0.92));
+				margin-top: 5px;
+				box-shadow: 0 0 0 6px rgba(224, 0, 0, 0.12);
+			}
+
+			.tl-side--right {
+				grid-column: 3;
+			}
+
+			.tl-side--left {
+				grid-column: 1;
+			}
+
+			.tl-blank {
+				min-height: 1px;
+			}
+
+			@media (max-width: 980px) {
+				.tl::before {
+					left: 18px;
+					transform: none;
+				}
+
+				.tl-item {
+					grid-template-columns: 1fr;
+					gap: 12px;
+					padding: 18px 0;
+				}
+
+				.tl-mid {
+					justify-items: start;
+					padding-left: 0;
+				}
+
+				.tl-badge {
+					margin-left: 0;
+				}
+
+				.tl-year {
+					font-size: 20px;
+				}
+
+				.tl-side--left,
+				.tl-side--right {
+					grid-column: 1;
+				}
+			}
+
+			.value {
+				padding: 16px;
+				border-radius: 18px;
+				background: rgba(255, 255, 255, 0.06);
+				border: 1px solid rgba(255, 255, 255, 0.12);
+			}
+
+			.value .t {
+				font-weight: 900;
+				letter-spacing: -0.01em;
+			}
+
+			.value .d {
+				margin-top: 8px;
+				color: rgba(255, 255, 255, 0.74);
+				font-weight: 650;
+				line-height: 1.55;
+				font-size: 13px;
+			}
+
+			/* Footer */
+			.footer {
+				position: relative;
+				z-index: 1;
+			}
+
+			.footer-shell {
+				display: grid;
+				grid-template-columns: var(--sidebar-w) 1fr;
+			}
+
+			.footer-spacer {
+				border-top: 1px solid rgba(255, 255, 255, 0.12);
+				background:
+					radial-gradient(860px 420px at 22% 0%, rgba(224, 0, 0, 0.10), transparent 60%),
+					linear-gradient(180deg, rgba(7, 10, 16, 0.35), rgba(7, 10, 16, 0.78));
+			}
+
+			.footer-panel {
+				position: relative;
+				padding: 56px 60px 44px;
+				overflow: hidden;
+			}
+
+			.footer-panel::before {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background:
+					radial-gradient(860px 420px at 22% 0%, rgba(224, 0, 0, 0.16), transparent 60%),
+					linear-gradient(180deg, rgba(7, 10, 16, 0.35), rgba(7, 10, 16, 0.78));
+				border-top: 1px solid rgba(255, 255, 255, 0.12);
+				z-index: 0;
+			}
+
+			.footer-inner {
+				position: relative;
+				z-index: 1;
+				max-width: 1220px;
+				margin: 0 auto;
+				display: grid;
+				grid-template-columns: 1.2fr 0.8fr;
+				gap: 28px;
+				align-items: start;
+			}
+
+			.footer-brand {
+				display: grid;
+				gap: 14px;
+			}
+
+			.footer-logo {
+				width: 190px;
+				height: auto;
+				display: block;
+			}
+
+			.footer-tag {
+				margin: 0;
+				max-width: 520px;
+				color: rgba(255, 255, 255, 0.76);
+				font-size: 15px;
+				line-height: 1.85;
+				font-weight: 550;
+			}
+
+			.footer-links {
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 18px 26px;
+				justify-items: start;
+			}
+
+			.footer-links a {
+				color: rgba(255, 255, 255, 0.78);
+				font-weight: 750;
+				letter-spacing: 0.01em;
+				text-decoration: none;
+				padding: 4px 0;
+				transition: color 160ms ease;
+			}
+
+			.footer-links a:hover {
+				color: rgba(255, 255, 255, 0.96);
+			}
+
+			.footer-bottom {
+				position: relative;
+				z-index: 1;
+				max-width: 1220px;
+				margin: 26px auto 0;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 14px;
+				padding-top: 18px;
+				border-top: 1px solid rgba(255, 255, 255, 0.1);
+				color: rgba(255, 255, 255, 0.62);
+				font-size: 13px;
+				font-weight: 650;
+			}
+
+			.footer-dot {
+				width: 8px;
+				height: 8px;
+				border-radius: 999px;
+				background: rgba(224, 0, 0, 0.92);
+				box-shadow: 0 0 0 6px rgba(224, 0, 0, 0.14);
+				display: inline-block;
+				margin-right: 10px;
+			}
+
+			/* Custom cursor */
+			.cursor {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 54px;
+				height: 54px;
+				border-radius: 999px;
+				border: 1.6px solid rgba(224, 0, 0, 0.62);
+				background: rgba(224, 0, 0, 0.08);
+				transform: translate3d(-50%, -50%, 0);
+				pointer-events: none;
+				z-index: 9999;
+				backdrop-filter: blur(6px);
+				-webkit-backdrop-filter: blur(6px);
+				opacity: 0;
+				transition: opacity 180ms ease, width 180ms ease, height 180ms ease, background 180ms ease, border-color 180ms ease;
+				will-change: transform;
+			}
+
+			.cursor.is-visible {
+				opacity: 1;
+			}
+
+			.cursor.is-hover {
+				width: 64px;
+				height: 64px;
+				background: rgba(224, 0, 0, 0.14);
+				border-color: rgba(224, 0, 0, 0.92);
+			}
+
+			.cursor.is-down {
+				width: 48px;
+				height: 48px;
+			}
+
+			@media (hover: none), (pointer: coarse) {
+				body {
+					cursor: auto;
+				}
+				.cursor {
+					display: none;
+				}
+			}
+
+			@media (max-width: 980px) {
+				.page {
+					grid-template-columns: 1fr;
+				}
+
+				.sidebar {
+					position: relative;
+					height: auto;
+					overflow: visible;
+					padding: 26px 20px 18px;
+				}
+
+				.social {
+					position: static;
+					margin-top: 18px;
+				}
+
+				.about-hero,
+				.section {
+					grid-column: 1;
+					padding: 64px 20px;
+				}
+
+				.hero-cards {
+					grid-template-columns: 1fr;
+				}
+
+				.grid-2 {
+					grid-template-columns: 1fr;
+				}
+
+				.values {
+					grid-template-columns: 1fr 1fr;
+				}
+
+				.vision {
+					grid-column: 1;
+					padding: 64px 20px;
+				}
+
+				.vision-card {
+					padding: 18px;
+				}
+
+				.vision-grid {
+					grid-template-columns: 1fr;
+					gap: 18px;
+				}
+
+				.footer-shell {
+					grid-template-columns: 1fr;
+				}
+
+				.footer-spacer {
+					display: none;
+				}
+
+				.footer-panel {
+					padding: 48px 20px 36px;
+				}
+
+				.footer-inner {
+					grid-template-columns: 1fr;
+					gap: 22px;
+				}
+
+				.footer-links {
+					grid-template-columns: 1fr 1fr;
+					gap: 10px 18px;
+				}
+
+				.footer-bottom {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+			}
+		</style>
+		<link rel="stylesheet" href="responsive.css" />
+		<link rel="stylesheet" href="preloader.css" />
+		<script src="preloader.js" defer></script>
+		<script src="responsive.js" defer></script>
+	</head>
+	<body>
+		<div id="rg-preloader" role="status" aria-live="polite" aria-label="Loading">
+			<div class="rg-preloader__inner">
+				<div class="rg-preloader__stage">
+					<div class="rg-preloader__accent" aria-hidden="true"></div>
+					<div class="rg-preloader__logoWrap">
+						<div class="rg-preloader__logoGlow" aria-hidden="true"></div>
+						<div class="rg-preloader__logoFrame">
+							<img class="rg-preloader__logo is-sharp" src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png" alt="Raizing Group" />
+							<img class="rg-preloader__logo is-blur" src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png" alt="" aria-hidden="true" />
+						</div>
+					</div>
+				</div>
+				<div class="rg-preloader__tagline">RISE TO EXCELLENCE</div>
+				<div class="rg-preloader__bar" aria-hidden="true">
+					<div class="rg-preloader__barFill"></div>
+					<div class="rg-preloader__barShine"></div>
+				</div>
+				<button class="rg-preloader__skip" type="button" data-rg-skip>Skip</button>
+				<span class="rg-preloader__sr">Loading…</span>
+			</div>
+		</div>
+		<header class="mobile-topbar" aria-label="Mobile top bar">
+			<a class="mobile-brand" href="index.html#home" aria-label="Raizing Group Home">
+				<img
+					src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png"
+					alt="Raizing Group"
+					loading="eager"
+				/>
+			</a>
+			<button class="menu-btn" type="button" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false" data-menu-button>
+				<span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+			</button>
+		</header>
+		<div class="mobile-overlay" data-menu-overlay aria-hidden="true"></div>
+		<div class="page">
+			<aside class="sidebar" id="mobile-drawer" aria-label="Primary">
+				<div class="brand reveal" data-reveal="left">
+					<a href="index.html#home" aria-label="Raizing Group Home">
+						<img
+							src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png"
+							alt="Raizing Group"
+							loading="eager"
+						/>
+					</a>
+				</div>
+
+				<nav class="nav" aria-label="Site">
+					<a href="index.html#home" class="reveal" data-reveal="left" data-delay>Home</a>
+					<a href="about.html" aria-current="page" class="reveal" data-reveal="left" data-delay>About Us</a>
+					<div class="nav-item nav-services reveal" data-reveal="left" data-delay>
+						<a href="index.html#services" data-caret aria-haspopup="true">Our Services</a>
+						<div class="nav-dropdown" aria-label="Service pages">
+							<a href="visas.html">Raizing Visas</a>
+							<a href="immigration.html">Immigration (Raizing Sovereign)</a>
+							<a href="insurance.html">Raizing Insurance</a>
+							<a href="company-formation.html">Company Formation</a>
+							<a href="manpower-recruitment.html">Manpower Recruitment (Cavec Global)</a>
+							<a href="verify.html">Raizing Verify</a>
+							<a href="sim.html">Raizing Sim</a>
+							<a href="edu.html">Raizing Edu</a>
+						</div>
+					</div>
+					<a href="news-media.html" class="reveal" data-reveal="left" data-delay>News &amp; Media</a>
+							<a href="contact.html" class="reveal" data-reveal="left" data-delay>Contact Us</a>
+				</nav>
+
+				<div class="cta reveal" data-reveal="left" data-delay>
+					<a href="index.html#partner">Partner With Us</a>
+				</div>
+
+				<div class="social reveal" data-reveal="left" data-delay aria-label="Social links">
+					<a href="#" rel="nofollow">LinkedIn</a>
+					<a href="#" rel="nofollow">Facebook</a>
+					<a href="#" rel="nofollow">Instagram</a>
+				</div>
+			</aside>
+
+			<main class="about-hero" id="about" aria-label="About hero">
+				<div class="hero-inner">
+					<div class="pill reveal" data-reveal="zoom" data-delay>
+						<span class="dot" aria-hidden="true"></span>
+						About Raizing Group
+					</div>
+
+					<h1 class="reveal-words">Who we are.<br />What we stand for.</h1>
+
+					<p class="sub reveal" data-reveal="up" data-delay>
+						Raizing Group supports global mobility with a clear, compliant, and end-to-end workflow — from company
+						formation and residency pathways to visas, recruitment, and ongoing operational support.
+					</p>
+
+					<div class="actions reveal" data-reveal="up" data-delay>
+						<a class="btn btn-primary" href="contact.html">Contact Us</a>
+						<a class="btn btn-ghost" href="#" data-cursor="hover">Download Brochure</a>
+					</div>
+
+					<div class="hero-cards">
+						<div class="card reveal" data-reveal="up" data-delay>
+							<strong>53+ Centers</strong>
+							<span>International centers supporting clients across regions.</span>
+						</div>
+						<div class="card reveal" data-reveal="up" data-delay>
+							<strong>Global Process</strong>
+							<span>Structured steps that reduce friction and keep timelines predictable.</span>
+						</div>
+						<div class="card reveal" data-reveal="up" data-delay>
+							<strong>Compliance-led</strong>
+							<span>Clear documentation, accurate filings, and transparent guidance.</span>
+						</div>
+					</div>
+				</div>
+			</main>
+
+			<section class="section" id="story" aria-label="Our story">
+				<div class="section-inner">
+					<p class="kicker reveal" data-reveal="left" data-delay>WHO WE ARE</p>
+					<h2 class="reveal-words">Built on clarity. Driven by outcomes.</h2>
+					<p class="lead reveal" data-reveal="up" data-delay>
+						For nearly two decades, Raizing Group has supported individuals and businesses navigating cross-border
+						mobility. We simplify complex processes — delivering seamless, secure, and user-friendly solutions so you can
+						focus on your goals, not the paperwork.
+					</p>
+
+					<div class="grid-2 one">
+						<div class="panel reveal" data-reveal="up" data-delay>
+							<h3>Mission</h3>
+							<p>
+								Deliver trusted mobility, residency, and business setup services with a single accountable team and a
+								transparent workflow.
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="section" id="values" aria-label="Our values">
+				<div class="section-inner">
+					<p class="kicker reveal" data-reveal="left" data-delay>OUR VALUES</p>
+					<h2 class="reveal-words">Premium service — without confusion.</h2>
+					<p class="lead reveal" data-reveal="up" data-delay>
+						We keep things simple: the right structure, the right documents, the right sequence — and clear communication at
+						every step.
+					</p>
+
+					<div class="values" role="list">
+						<div class="value reveal" data-reveal="up" data-delay role="listitem">
+							<div class="t">Clarity</div>
+							<div class="d">Straight answers, clean timelines, and transparent steps.</div>
+						</div>
+						<div class="value reveal" data-reveal="up" data-delay role="listitem">
+							<div class="t">Compliance</div>
+							<div class="d">Process-first execution with accurate documentation.</div>
+						</div>
+						<div class="value reveal" data-reveal="up" data-delay role="listitem">
+							<div class="t">Care</div>
+							<div class="d">Client-first support that stays responsive end-to-end.</div>
+						</div>
+						<div class="value reveal" data-reveal="up" data-delay role="listitem">
+							<div class="t">Execution</div>
+							<div class="d">We focus on outcomes — delivered with precision.</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="leadership" id="leadership" aria-label="Visionary Leadership">
+				<div class="leadership-inner">
+					<div class="leadership-card">
+						<div class="leadership-grid">
+							<div class="founder-media">
+								<img
+									class="founder-photo reveal"
+									data-reveal="clip"
+									src="https://raizingsovereign.com/assets/founder-UJZtc_W3.jpg"
+									alt="Mr. Bharat Sidheshwar Rai"
+									loading="lazy"
+								/>
+								<p class="founder-name reveal" data-reveal="up" data-delay>Mr. Bharat Sidheshwar Rai</p>
+								<p class="founder-title reveal" data-reveal="up" data-delay>Founder &amp; Managing Director, Raizing Group</p>
+							</div>
+
+							<div>
+								<h2 class="leadership-title reveal" data-reveal="right" data-delay><span class="accent">Visionary</span> Leadership</h2>
+								<div class="leadership-copy">
+									<p class="reveal" data-reveal="up" data-delay>
+										Since 2005, Mr. Bharat Sidheshwar Rai has led Raizing Group with vision and determination, transforming it into
+										a trusted global enterprise.
+									</p>
+									<p class="reveal" data-reveal="up" data-delay>
+										A finance graduate with a BBA degree, he embodies the spirit of a young entrepreneur whose foresight and
+										conviction continue to shape the company’s growth.
+									</p>
+									<p class="reveal" data-reveal="up" data-delay>
+										His leadership has been instrumental in driving innovation, expanding international presence, and establishing
+										Raizing Group as a name synonymous with trust and excellence.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="section timeline" id="milestones" aria-label="Milestones">
+				<div class="timeline-inner">
+					<p class="kicker reveal" data-reveal="left" data-delay>MILESTONES</p>
+					<h2 class="reveal-words">A track record you can trust.</h2>
+					<p class="lead reveal" data-reveal="up" data-delay>
+						Step by step, we’ve earned contracts, expanded authorizations, and launched new programs — building a stronger
+						mobility platform each year.
+					</p>
+
+					<div class="tl" role="list">
+						<!-- 2005 -->
+						<div class="tl-item" role="listitem" style="--tl-color: rgba(224, 0, 0, 0.95);">
+							<div class="tl-side--left tl-card reveal" data-reveal="left" data-delay>
+								<ul>
+									<li>
+										<span class="tl-dot" aria-hidden="true"></span>
+										<span>Appointed as an Authorized Training Centre by the Embassy of Israel.</span>
+									</li>
+									<li>
+										<span class="tl-dot" aria-hidden="true"></span>
+										<span>Granted Immigration Services License</span>
+									</li>
+								</ul>
+							</div>
+
+							<div class="tl-mid reveal" data-reveal="zoom" data-delay>
+								<div class="tl-badge" aria-label="Year 2005">
+									<div class="tl-node" aria-hidden="true">
+										<svg viewBox="0 0 24 24" role="img" aria-label="Team icon">
+											<path d="M16 11c1.66 0 3-1.57 3-3.5S17.66 4 16 4s-3 1.57-3 3.5S14.34 11 16 11Zm-8 0c1.66 0 3-1.57 3-3.5S9.66 4 8 4 5 5.57 5 7.5 6.34 11 8 11Zm0 2c-2.67 0-8 1.34-8 4v3h10v-3c0-1.2.53-2.27 1.39-3.07C10.22 13.34 8.85 13 8 13Zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 2.03 1.97 3.45v3h7v-3c0-2.66-5.33-4-8-4Z" />
+										</svg>
+									</div>
+									<div class="tl-year">2005</div>
+								</div>
+							</div>
+
+							<div class="tl-blank" aria-hidden="true"></div>
+						</div>
+
+						<!-- 2012 -->
+						<div class="tl-item" role="listitem" style="--tl-color: rgba(82, 102, 255, 0.95);">
+							<div class="tl-blank" aria-hidden="true"></div>
+							<div class="tl-mid reveal" data-reveal="zoom" data-delay>
+								<div class="tl-badge" aria-label="Year 2012">
+									<div class="tl-node" aria-hidden="true">
+										<svg viewBox="0 0 24 24" role="img" aria-label="Team icon">
+											<path d="M16 11c1.66 0 3-1.57 3-3.5S17.66 4 16 4s-3 1.57-3 3.5S14.34 11 16 11Zm-8 0c1.66 0 3-1.57 3-3.5S9.66 4 8 4 5 5.57 5 7.5 6.34 11 8 11Zm0 2c-2.67 0-8 1.34-8 4v3h10v-3c0-1.2.53-2.27 1.39-3.07C10.22 13.34 8.85 13 8 13Zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 2.03 1.97 3.45v3h7v-3c0-2.66-5.33-4-8-4Z" />
+										</svg>
+									</div>
+									<div class="tl-year">2012</div>
+								</div>
+							</div>
+							<div class="tl-side--right tl-card reveal" data-reveal="right" data-delay>
+								<ul>
+									<li>
+										<span class="tl-dot" aria-hidden="true"></span>
+										<span>Awarded with Israel Visa Contract Worldwide</span>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<!-- 2016 -->
+						<div class="tl-item" role="listitem" style="--tl-color: rgba(192, 86, 255, 0.95);">
+							<div class="tl-side--left tl-card reveal" data-reveal="left" data-delay>
+								<ul>
+									<li>
+										<span class="tl-dot" aria-hidden="true"></span>
+										<span>Awarded with Greece Visa Contract for India, Sri Lanka and Nepal</span>
+									</li>
+								</ul>
+							</div>
+							<div class="tl-mid reveal" data-reveal="zoom" data-delay>
+								<div class="tl-badge" aria-label="Year 2016">
+									<div class="tl-node" aria-hidden="true">
+										<svg viewBox="0 0 24 24" role="img" aria-label="Team icon">
+											<path d="M16 11c1.66 0 3-1.57 3-3.5S17.66 4 16 4s-3 1.57-3 3.5S14.34 11 16 11Zm-8 0c1.66 0 3-1.57 3-3.5S9.66 4 8 4 5 5.57 5 7.5 6.34 11 8 11Zm0 2c-2.67 0-8 1.34-8 4v3h10v-3c0-1.2.53-2.27 1.39-3.07C10.22 13.34 8.85 13 8 13Zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 2.03 1.97 3.45v3h7v-3c0-2.66-5.33-4-8-4Z" />
+										</svg>
+									</div>
+									<div class="tl-year">2016</div>
+								</div>
+							</div>
+							<div class="tl-blank" aria-hidden="true"></div>
+						</div>
+
+						<!-- 2019 -->
+						<div class="tl-item" role="listitem" style="--tl-color: rgba(224, 0, 0, 0.9);">
+							<div class="tl-blank" aria-hidden="true"></div>
+							<div class="tl-mid reveal" data-reveal="zoom" data-delay>
+								<div class="tl-badge" aria-label="Year 2019">
+									<div class="tl-node" aria-hidden="true">
+										<svg viewBox="0 0 24 24" role="img" aria-label="Team icon">
+											<path d="M16 11c1.66 0 3-1.57 3-3.5S17.66 4 16 4s-3 1.57-3 3.5S14.34 11 16 11Zm-8 0c1.66 0 3-1.57 3-3.5S9.66 4 8 4 5 5.57 5 7.5 6.34 11 8 11Zm0 2c-2.67 0-8 1.34-8 4v3h10v-3c0-1.2.53-2.27 1.39-3.07C10.22 13.34 8.85 13 8 13Zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 2.03 1.97 3.45v3h7v-3c0-2.66-5.33-4-8-4Z" />
+										</svg>
+									</div>
+									<div class="tl-year">2019</div>
+								</div>
+							</div>
+							<div class="tl-side--right tl-card reveal" data-reveal="right" data-delay>
+								<ul>
+									<li>
+										<span class="tl-dot" aria-hidden="true"></span>
+										<span>Awarded the contract for Golden Visa Program for the UAE</span>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<!-- 2022 -->
+						<div class="tl-item" role="listitem" style="--tl-color: rgba(255, 140, 0, 0.95);">
+							<div class="tl-side--left tl-card reveal" data-reveal="left" data-delay>
+								<ul>
+									<li>
+										<span class="tl-dot" aria-hidden="true"></span>
+										<span>Became the Authorized VAC for Lebanon</span>
+									</li>
+									<li>
+										<span class="tl-dot" aria-hidden="true"></span>
+										<span>Became the Authorized VAC for Malaysia</span>
+									</li>
+								</ul>
+							</div>
+							<div class="tl-mid reveal" data-reveal="zoom" data-delay>
+								<div class="tl-badge" aria-label="Year 2022">
+									<div class="tl-node" aria-hidden="true">
+										<svg viewBox="0 0 24 24" role="img" aria-label="Team icon">
+											<path d="M16 11c1.66 0 3-1.57 3-3.5S17.66 4 16 4s-3 1.57-3 3.5S14.34 11 16 11Zm-8 0c1.66 0 3-1.57 3-3.5S9.66 4 8 4 5 5.57 5 7.5 6.34 11 8 11Zm0 2c-2.67 0-8 1.34-8 4v3h10v-3c0-1.2.53-2.27 1.39-3.07C10.22 13.34 8.85 13 8 13Zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 2.03 1.97 3.45v3h7v-3c0-2.66-5.33-4-8-4Z" />
+										</svg>
+									</div>
+									<div class="tl-year">2022</div>
+								</div>
+							</div>
+							<div class="tl-blank" aria-hidden="true"></div>
+						</div>
+
+						<!-- 2023 -->
+						<div class="tl-item" role="listitem" style="--tl-color: rgba(255, 200, 0, 0.95);">
+							<div class="tl-blank" aria-hidden="true"></div>
+							<div class="tl-mid reveal" data-reveal="zoom" data-delay>
+								<div class="tl-badge" aria-label="Year 2023">
+									<div class="tl-node" aria-hidden="true">
+										<svg viewBox="0 0 24 24" role="img" aria-label="Team icon">
+											<path d="M16 11c1.66 0 3-1.57 3-3.5S17.66 4 16 4s-3 1.57-3 3.5S14.34 11 16 11Zm-8 0c1.66 0 3-1.57 3-3.5S9.66 4 8 4 5 5.57 5 7.5 6.34 11 8 11Zm0 2c-2.67 0-8 1.34-8 4v3h10v-3c0-1.2.53-2.27 1.39-3.07C10.22 13.34 8.85 13 8 13Zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 2.03 1.97 3.45v3h7v-3c0-2.66-5.33-4-8-4Z" />
+										</svg>
+									</div>
+									<div class="tl-year">2023</div>
+								</div>
+							</div>
+							<div class="tl-side--right tl-card reveal" data-reveal="right" data-delay>
+								<ul>
+									<li>
+										<span class="tl-dot" aria-hidden="true"></span>
+										<span>Granted license for company formation in UAE.</span>
+									</li>
+									<li>
+										<span class="tl-dot" aria-hidden="true"></span>
+										<span>Launched LivCroatia Residency Program</span>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<!-- 2024 -->
+						<div class="tl-item" role="listitem" style="--tl-color: rgba(0, 170, 170, 0.95);">
+							<div class="tl-side--left tl-card reveal" data-reveal="left" data-delay>
+								<ul>
+									<li>
+										<span class="tl-dot" aria-hidden="true"></span>
+										<span>Sole Authorized Partner for Thailand Privilege Program</span>
+									</li>
+									<li>
+										<span class="tl-dot" aria-hidden="true"></span>
+										<span>Secured authorization to Visa for H1N’s.</span>
+									</li>
+									<li>
+										<span class="tl-dot" aria-hidden="true"></span>
+										<span>Authorized Partner for Panama Travel Passport</span>
+									</li>
+								</ul>
+							</div>
+							<div class="tl-mid reveal" data-reveal="zoom" data-delay>
+								<div class="tl-badge" aria-label="Year 2024">
+									<div class="tl-node" aria-hidden="true">
+										<svg viewBox="0 0 24 24" role="img" aria-label="Team icon">
+											<path d="M16 11c1.66 0 3-1.57 3-3.5S17.66 4 16 4s-3 1.57-3 3.5S14.34 11 16 11Zm-8 0c1.66 0 3-1.57 3-3.5S9.66 4 8 4 5 5.57 5 7.5 6.34 11 8 11Zm0 2c-2.67 0-8 1.34-8 4v3h10v-3c0-1.2.53-2.27 1.39-3.07C10.22 13.34 8.85 13 8 13Zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 2.03 1.97 3.45v3h7v-3c0-2.66-5.33-4-8-4Z" />
+										</svg>
+									</div>
+									<div class="tl-year">2024</div>
+								</div>
+							</div>
+							<div class="tl-blank" aria-hidden="true"></div>
+						</div>
+
+						<!-- 2025 -->
+						<div class="tl-item" role="listitem" style="--tl-color: rgba(120, 210, 255, 0.95);">
+							<div class="tl-blank" aria-hidden="true"></div>
+							<div class="tl-mid reveal" data-reveal="zoom" data-delay>
+								<div class="tl-badge" aria-label="Year 2025">
+									<div class="tl-node" aria-hidden="true">
+										<svg viewBox="0 0 24 24" role="img" aria-label="Team icon">
+											<path d="M16 11c1.66 0 3-1.57 3-3.5S17.66 4 16 4s-3 1.57-3 3.5S14.34 11 16 11Zm-8 0c1.66 0 3-1.57 3-3.5S9.66 4 8 4 5 5.57 5 7.5 6.34 11 8 11Zm0 2c-2.67 0-8 1.34-8 4v3h10v-3c0-1.2.53-2.27 1.39-3.07C10.22 13.34 8.85 13 8 13Zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 2.03 1.97 3.45v3h7v-3c0-2.66-5.33-4-8-4Z" />
+										</svg>
+									</div>
+									<div class="tl-year">2025</div>
+								</div>
+							</div>
+							<div class="tl-side--right tl-card reveal" data-reveal="right" data-delay>
+								<ul>
+									<li>
+										<span class="tl-dot" aria-hidden="true"></span>
+										<span>Authorized Partner for Amexico Residency Program</span>
+									</li>
+									<li>
+										<span class="tl-dot" aria-hidden="true"></span>
+										<span>Authorized Partner for Brazil Citizenship Program</span>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="vision" id="vision" aria-label="Our Vision">
+				<div class="vision-inner">
+					<div class="vision-card">
+						<div class="vision-grid">
+							<div class="vision-map reveal" data-reveal="clip" data-delay role="img" aria-label="Global presence map">
+								<!-- Pins + labels (SVG icons, no emojis) -->
+								<div class="pin reveal" data-reveal="up" data-delay style="left: 55%; top: 36%;">
+									<svg viewBox="0 0 24 24" role="img" aria-label="Location pin">
+										<path fill="currentColor" d="M12 2c-3.86 0-7 3.14-7 7 0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7Zm0 9.2A2.2 2.2 0 1 1 12 6.8a2.2 2.2 0 0 1 0 4.4Z" />
+									</svg>
+									<span>Greece</span>
+								</div>
+
+								<div class="pin reveal" data-reveal="up" data-delay style="left: 58%; top: 41%;">
+									<svg viewBox="0 0 24 24" role="img" aria-label="Location pin">
+										<path fill="currentColor" d="M12 2c-3.86 0-7 3.14-7 7 0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7Zm0 9.2A2.2 2.2 0 1 1 12 6.8a2.2 2.2 0 0 1 0 4.4Z" />
+									</svg>
+									<span>Israel</span>
+								</div>
+
+								<div class="pin reveal" data-reveal="up" data-delay style="left: 61%; top: 40%;">
+									<svg viewBox="0 0 24 24" role="img" aria-label="Location pin">
+										<path fill="currentColor" d="M12 2c-3.86 0-7 3.14-7 7 0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7Zm0 9.2A2.2 2.2 0 1 1 12 6.8a2.2 2.2 0 0 1 0 4.4Z" />
+									</svg>
+									<span>Jordan</span>
+								</div>
+
+								<div class="pin reveal" data-reveal="up" data-delay style="left: 79%; top: 52%;">
+									<svg viewBox="0 0 24 24" role="img" aria-label="Location pin">
+										<path fill="currentColor" d="M12 2c-3.86 0-7 3.14-7 7 0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7Zm0 9.2A2.2 2.2 0 1 1 12 6.8a2.2 2.2 0 0 1 0 4.4Z" />
+									</svg>
+									<span>Malaysia</span>
+								</div>
+							</div>
+
+							<div class="vision-side">
+								<div class="vision-icon reveal" data-reveal="zoom" data-delay aria-hidden="true">
+									<svg viewBox="0 0 24 24" role="img" aria-label="Rocket icon">
+										<path d="M14 2c3.3 0 6 2.7 6 6 0 4.3-3.4 9.8-8.2 13.2-.6.4-1.4.4-2 0l-1.3-.9 2.4-2.4c.4-.4.4-1 0-1.4s-1-.4-1.4 0l-2.4 2.4-.9-1.3c-.4-.6-.4-1.4 0-2C4.2 11.4 9.7 8 14 8c3.3 0 6-2.7 6-6 0-.3 0-.7-.1-1-1.1.6-2.4 1-3.9 1-1.3 0-2.6-.2-3.9-.6-.7-.2-1.4.3-1.5 1.1-.1.7.3 1.4 1.1 1.5.9.2 1.8.4 2.8.4-.6 1.6-2.1 2.7-3.9 2.7-5.1 0-11.7 4-13.9 8.4-.6 1.1-.5 2.4.2 3.4l1.8 2.6c.3.4.7.7 1.2.8.5.1 1 0 1.4-.4l2.7-2.7.9.6c1.1.7 2.5.7 3.6 0C19.3 18.1 23 12 23 8c0-4.4-3.6-8-8-8h-1Z" />
+									</svg>
+								</div>
+								<h3 class="vision-title reveal" data-reveal="right" data-delay>Our Vision</h3>
+								<p class="vision-text reveal" data-reveal="up" data-delay>
+									To be the world’s most trusted and innovative global service conglomerate — empowering seamless international
+									travel, identity solutions, and global mobility while setting new benchmarks in quality, value, and service.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="offices" id="offices" aria-label="Our Offices">
+				<div class="offices-inner">
+					<div class="offices-head">
+						<h2 class="reveal-words">Our Offices</h2>
+						<p class="offices-sub reveal" data-reveal="up" data-delay>
+							Strategically located offices worldwide, providing localized expertise with a global perspective.
+						</p>
+					</div>
+
+					<div class="office-grid" role="list" aria-label="Office locations">
+						<article class="office-card reveal" data-reveal="up" data-delay role="listitem">
+							<div class="office-content">
+								<div class="office-meta">
+									<h3 class="office-city">Delhi</h3>
+									<p class="office-country">India</p>
+									<p class="office-address">
+										Rai House: C-4 Commercial Complex, SDA Market, Safdarjung Development Area, Hauz Khas, New Delhi, Delhi
+										110016
+									</p>
+								</div>
+								<a
+									class="office-map"
+									href="https://www.google.com/maps/search/?api=1&query=Rai%20House%20C-4%20Commercial%20Complex%20SDA%20Market%20Safdarjung%20Development%20Area%20Hauz%20Khas%20New%20Delhi%20110016"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<svg viewBox="0 0 24 24" aria-hidden="true">
+										<path d="M12 2c-3.86 0-7 3.14-7 7 0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7Zm0 9.2A2.2 2.2 0 1 1 12 6.8a2.2 2.2 0 0 1 0 4.4Z" />
+									</svg>
+									View on Map
+								</a>
+							</div>
+						</article>
+
+						<article class="office-card reveal" data-reveal="up" data-delay role="listitem">
+							<div class="office-content">
+								<div class="office-meta">
+									<h3 class="office-city">Mumbai</h3>
+									<p class="office-country">India</p>
+									<p class="office-address">
+										206A, 2nd Floor, The Arcadia Building, Vinayak Kumar Shah Marg, NCPA, Nariman Point, Mumbai - 400021
+									</p>
+								</div>
+								<a
+									class="office-map"
+									href="https://www.google.com/maps/search/?api=1&query=206A%202nd%20Floor%20The%20Arcadia%20Building%20Vinayak%20Kumar%20Shah%20Marg%20NCPA%20Nariman%20Point%20Mumbai%20400021"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<svg viewBox="0 0 24 24" aria-hidden="true">
+										<path d="M12 2c-3.86 0-7 3.14-7 7 0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7Zm0 9.2A2.2 2.2 0 1 1 12 6.8a2.2 2.2 0 0 1 0 4.4Z" />
+									</svg>
+									View on Map
+								</a>
+							</div>
+						</article>
+
+						<article class="office-card reveal" data-reveal="up" data-delay role="listitem">
+							<div class="office-content">
+								<div class="office-meta">
+									<h3 class="office-city">Bangalore</h3>
+									<p class="office-country">India</p>
+									<p class="office-address">
+										S-207, 2nd floor, South Block Manipal Centre, 47, Dickenson road, Bengaluru - 560042
+									</p>
+								</div>
+								<a
+									class="office-map"
+									href="https://www.google.com/maps/search/?api=1&query=South%20Block%20Manipal%20Centre%2047%20Dickenson%20Road%20Bengaluru%20560042"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<svg viewBox="0 0 24 24" aria-hidden="true">
+										<path d="M12 2c-3.86 0-7 3.14-7 7 0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7Zm0 9.2A2.2 2.2 0 1 1 12 6.8a2.2 2.2 0 0 1 0 4.4Z" />
+									</svg>
+									View on Map
+								</a>
+							</div>
+						</article>
+
+						<article class="office-card reveal" data-reveal="up" data-delay role="listitem">
+							<div class="office-content">
+								<div class="office-meta">
+									<h3 class="office-city">Dubai</h3>
+									<p class="office-country">UAE</p>
+									<p class="office-address">HDS Tower Cluster F Office no 3601, Jumeirah Lake Tower, Dubai, UAE</p>
+								</div>
+								<a
+									class="office-map"
+									href="https://www.google.com/maps/search/?api=1&query=HDS%20Tower%20Cluster%20F%20Office%203601%20Jumeirah%20Lake%20Towers%20Dubai"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<svg viewBox="0 0 24 24" aria-hidden="true">
+										<path d="M12 2c-3.86 0-7 3.14-7 7 0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7Zm0 9.2A2.2 2.2 0 1 1 12 6.8a2.2 2.2 0 0 1 0 4.4Z" />
+									</svg>
+									View on Map
+								</a>
+							</div>
+						</article>
+
+						<article class="office-card reveal" data-reveal="up" data-delay role="listitem">
+							<div class="office-content">
+								<div class="office-meta">
+									<h3 class="office-city">Colombo</h3>
+									<p class="office-country">Sri Lanka</p>
+									<p class="office-address">8/12 Old Kesbewa road, Delkanda, Gangodawila, Nugegoda Colombo 10250</p>
+								</div>
+								<a
+									class="office-map"
+									href="https://www.google.com/maps/search/?api=1&query=Old%20Kesbewa%20Road%20Delkanda%20Gangodawila%20Nugegoda%20Colombo%2010250"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<svg viewBox="0 0 24 24" aria-hidden="true">
+										<path d="M12 2c-3.86 0-7 3.14-7 7 0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7Zm0 9.2A2.2 2.2 0 1 1 12 6.8a2.2 2.2 0 0 1 0 4.4Z" />
+									</svg>
+									View on Map
+								</a>
+							</div>
+						</article>
+
+						<article class="office-card reveal" data-reveal="up" data-delay role="listitem">
+							<div class="office-content">
+								<div class="office-meta">
+									<h3 class="office-city">Bangkok</h3>
+									<p class="office-country">Thailand</p>
+									<p class="office-address">
+										No.77/28 Sinn Sathorn Tower, 11th Floor, Krung Thon Buri Road, Khlong Ton Sai Sub district, Khlong San
+										District, Bangkok Metropolis
+									</p>
+								</div>
+								<a
+									class="office-map"
+									href="https://www.google.com/maps/search/?api=1&query=Sinn%20Sathorn%20Tower%20Krung%20Thon%20Buri%20Road%20Bangkok"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<svg viewBox="0 0 24 24" aria-hidden="true">
+										<path d="M12 2c-3.86 0-7 3.14-7 7 0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7Zm0 9.2A2.2 2.2 0 1 1 12 6.8a2.2 2.2 0 0 1 0 4.4Z" />
+									</svg>
+									View on Map
+								</a>
+							</div>
+						</article>
+					</div>
+				</div>
+			</section>
+
+		</div>
+
+		<footer class="footer reveal" data-reveal="up" id="footer" aria-label="Footer">
+			<div class="footer-shell">
+				<div class="footer-spacer" aria-hidden="true"></div>
+				<div class="footer-panel">
+					<div class="footer-inner">
+						<div class="footer-brand reveal" data-reveal="left" data-delay>
+							<img
+								class="footer-logo"
+								src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png"
+								alt="Raizing Group"
+								loading="lazy"
+							/>
+							<p class="footer-tag">
+								<span class="footer-dot" aria-hidden="true"></span>
+								End-to-end mobility, residency, and business setup support—delivered with clarity, compliance, and care.
+							</p>
+						</div>
+
+						<nav class="footer-links reveal" data-reveal="right" data-delay aria-label="Footer links">
+							<a href="index.html#home">Home</a>
+							<a href="about.html">About Us</a>
+							<a href="index.html#services">Our Services</a>
+							<a href="index.html#certifications">Certifications</a>
+							<a href="index.html#faqs">FAQs</a>
+							<a href="contact.html">Contact Us</a>
+						</nav>
+					</div>
+
+					<div class="footer-bottom">
+						<div>© <span id="year"></span> Raizing Group. All rights reserved.</div>
+						<div>Built for speed. Designed for trust.</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<div class="cursor" aria-hidden="true"></div>
+
+		<script>
+			(function () {
+				var prefersReduced = false;
+				try {
+					prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+				} catch (e) {}
+
+				function escapeHTML(s) {
+					return String(s)
+						.replace(/&/g, "&amp;")
+						.replace(/</g, "&lt;")
+						.replace(/>/g, "&gt;")
+						.replace(/\"/g, "&quot;")
+						.replace(/'/g, "&#39;");
+				}
+
+				function splitWords(el) {
+					var nodes = Array.prototype.slice.call(el.childNodes || []);
+					if (!nodes.length) return;
+
+					var out = [];
+					var i = 0;
+
+					function pushWord(w) {
+						out.push(
+							'<span class="w" style="transition-delay:' + String(i * 55) + 'ms">' + escapeHTML(w) + "</span>"
+						);
+						i += 1;
+					}
+
+					function pushText(text) {
+						var parts = String(text || "").split(/(\s+)/);
+						for (var p = 0; p < parts.length; p++) {
+							var part = parts[p];
+							if (!part) continue;
+							if (/^\s+$/.test(part)) {
+								out.push(" ");
+							} else {
+								pushWord(part);
+							}
+						}
+					}
+
+					nodes.forEach(function (node) {
+						if (!node) return;
+						if (node.nodeType === 3) {
+							pushText(node.textContent);
+							return;
+						}
+						if (node.nodeType === 1) {
+							var tag = String(node.tagName || "").toUpperCase();
+							if (tag === "BR") {
+								out.push("<br />");
+								return;
+							}
+							pushText(node.textContent);
+						}
+					});
+
+					var html = out.join("")
+						.replace(/ +/g, " ")
+						.replace(/ <br \/>/g, "<br />")
+						.replace(/<br \/> /g, "<br />");
+					el.innerHTML = html.trim();
+				}
+
+				var wordEls = Array.prototype.slice.call(document.querySelectorAll(".reveal-words"));
+				wordEls.forEach(function (el) {
+					splitWords(el);
+				});
+
+				var items = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+				if (!items.length && !wordEls.length) return;
+
+				function applyStagger(root) {
+					var revealables = root.querySelectorAll(".reveal[data-delay]");
+					var i = 0;
+					revealables.forEach(function (el) {
+						var delay = Math.min(260, i * 70);
+						el.style.setProperty("--reveal-delay", delay + "ms");
+						i += 1;
+					});
+				}
+
+				["about", "story", "values", "leadership", "milestones", "vision", "offices", "footer"].forEach(function (id) {
+					var sec = document.getElementById(id);
+					if (sec) applyStagger(sec);
+				});
+				
+				// Stagger sidebar navigation items
+				var sidebar = document.querySelector(".sidebar");
+				if (sidebar) applyStagger(sidebar);
+
+				if (prefersReduced || !("IntersectionObserver" in window)) {
+					items.forEach(function (el) {
+						el.classList.add("is-revealed");
+						var wordsInside = el.querySelectorAll ? el.querySelectorAll(".reveal-words") : [];
+						wordsInside.forEach(function (w) {
+							w.classList.add("is-revealed");
+						});
+					});
+					wordEls.forEach(function (el) {
+						el.classList.add("is-revealed");
+					});
+					return;
+				}
+
+				function initRevealAnimations() {
+					if (prefersReduced || !("IntersectionObserver" in window)) {
+						return;
+					}
+
+					var io = new IntersectionObserver(
+						function (entries) {
+							entries.forEach(function (entry) {
+								if (!entry.isIntersecting) return;
+								entry.target.classList.add("is-revealed");
+								if (entry.target.classList && entry.target.classList.contains("reveal-words")) {
+									entry.target.classList.add("is-revealed");
+								}
+								var words = entry.target.querySelectorAll ? entry.target.querySelectorAll(".reveal-words") : [];
+								words.forEach(function (w) {
+									w.classList.add("is-revealed");
+								});
+								io.unobserve(entry.target);
+							});
+						},
+						{ threshold: 0.12, rootMargin: "0px 0px -2% 0px" }
+					);
+
+					items.forEach(function (el) {
+						io.observe(el);
+					});
+
+					wordEls.forEach(function (el) {
+						if (el.classList && el.classList.contains("reveal")) return;
+						io.observe(el);
+					});
+				}
+
+				// Wait for preloader to complete before starting reveal animations
+				var preloaderComplete = false;
+				window.addEventListener("rg-preloader-complete", function () {
+					preloaderComplete = true;
+					initRevealAnimations();
+				});
+
+				// Fallback: if no preloader exists, init immediately
+				window.setTimeout(function () {
+					if (!preloaderComplete && !document.getElementById("rg-preloader")) {
+						initRevealAnimations();
+					}
+				}, 100);
+			})();
+		</script>
+
+		<script>
+			(function () {
+				var y = document.getElementById("year");
+				if (y) y.textContent = String(new Date().getFullYear());
+			})();
+		</script>
+
+		<script>
+			(function () {
+				var cursor = document.querySelector(".cursor");
+				if (!cursor) return;
+
+				var isCoarse = false;
+				try {
+					isCoarse = window.matchMedia && window.matchMedia("(hover: none), (pointer: coarse)").matches;
+				} catch (e) {}
+				if (isCoarse) return;
+
+				var targetX = window.innerWidth / 2;
+				var targetY = window.innerHeight / 2;
+				var currentX = targetX;
+				var currentY = targetY;
+				var raf = 0;
+
+				function isInteractive(el) {
+					if (!el || !el.closest) return false;
+					return !!el.closest(
+						'a, button, input, textarea, select, summary, [role="button"], [data-cursor="hover"]'
+					);
+				}
+
+				function tick() {
+					var ease = 0.18;
+					currentX = currentX + (targetX - currentX) * ease;
+					currentY = currentY + (targetY - currentY) * ease;
+					cursor.style.transform =
+						"translate3d(" + currentX + "px," + currentY + "px,0) translate3d(-50%,-50%,0)";
+					raf = window.requestAnimationFrame(tick);
+				}
+
+				document.addEventListener(
+					"mousemove",
+					function (e) {
+						targetX = e.clientX;
+						targetY = e.clientY;
+						cursor.classList.add("is-visible");
+
+						var hover = isInteractive(e.target);
+						cursor.classList.toggle("is-hover", hover);
+
+						if (!raf) raf = window.requestAnimationFrame(tick);
+					},
+					{ passive: true }
+				);
+
+				document.addEventListener(
+					"mousedown",
+					function () {
+						cursor.classList.add("is-down");
+					},
+					{ passive: true }
+				);
+
+				document.addEventListener(
+					"mouseup",
+					function () {
+						cursor.classList.remove("is-down");
+					},
+					{ passive: true }
+				);
+
+				document.addEventListener(
+					"mouseleave",
+					function () {
+						cursor.classList.remove("is-visible");
+					},
+					{ passive: true }
+				);
+			})();
+		</script>
+	</body>
+</html>

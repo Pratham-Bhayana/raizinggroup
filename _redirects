@@ -1,0 +1,18 @@
+# Redirects file for Netlify
+# This ensures that all routes work properly
+
+# Pretty URLs (optional - allow accessing pages without .html extension)
+/about              /about.html              200
+/contact            /contact.html            200
+/visas              /visas.html              200
+/immigration        /immigration.html        200
+/insurance          /insurance.html          200
+/company-formation  /company-formation.html  200
+/manpower-recruitment /manpower-recruitment.html 200
+/verify             /verify.html             200
+/sim                /sim.html                200
+/edu                /edu.html                200
+/news-media         /news-media.html         200
+
+# Fallback for 404 pages - redirect to home
+/* /index.html 404

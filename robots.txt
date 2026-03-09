@@ -1,0 +1,11 @@
+# robots.txt for Raizing Group website
+
+User-agent: *
+Allow: /
+
+# Sitemap location (update this URL after deployment)
+# Sitemap: https://your-site-name.netlify.app/sitemap.xml
+
+# Disallow crawling of Netlify admin paths
+Disallow: /.netlify/
+Disallow: /admin/

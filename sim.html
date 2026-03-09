@@ -1,0 +1,1484 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Raizing Sim — Raizing Group</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			:root {
+				--brand-red: #b40000;
+				--brand-red-2: #e00000;
+				--bg: #070a0f;
+				--text: #ffffff;
+				--muted: rgba(255, 255, 255, 0.78);
+				--muted-2: rgba(255, 255, 255, 0.62);
+				--sidebar-w: 280px;
+				--border: rgba(255, 255, 255, 0.16);
+				--focus: rgba(224, 0, 0, 0.35);
+				--font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+				--reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+				--reveal-opacity: 820ms;
+				--reveal-transform: 1200ms;
+				--reveal-clip: 1350ms;
+				--reveal-delay: 0ms;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			html,
+			body {
+				height: 100%;
+			}
+
+			body {
+				margin: 0;
+				font-family: var(--font-sans);
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				text-rendering: geometricPrecision;
+				background-color: var(--bg);
+				background-image:
+					radial-gradient(1000px 560px at 22% 34%, rgba(224, 0, 0, 0.24), transparent 60%),
+					radial-gradient(800px 520px at 86% 70%, rgba(255, 255, 255, 0.08), transparent 55%),
+					linear-gradient(110deg, rgba(10, 14, 22, 0.86), rgba(10, 14, 22, 0.62)),
+					repeating-linear-gradient(105deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 240px),
+					repeating-linear-gradient(160deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 320px);
+				background-size: cover;
+				background-position: center;
+				color: var(--text);
+				overflow-x: hidden;
+				cursor: none;
+			}
+
+			/* Themed scrollbar */
+			html,
+			body,
+			.sidebar,
+			* {
+				scrollbar-width: thin;
+				scrollbar-color: rgba(224, 0, 0, 0.78) rgba(255, 255, 255, 0.08);
+			}
+
+			html::-webkit-scrollbar,
+			body::-webkit-scrollbar,
+			.sidebar::-webkit-scrollbar,
+			*::-webkit-scrollbar {
+				width: 12px;
+				height: 12px;
+			}
+
+			html::-webkit-scrollbar-track,
+			body::-webkit-scrollbar-track,
+			.sidebar::-webkit-scrollbar-track,
+			*::-webkit-scrollbar-track {
+				background: rgba(0, 0, 0, 0.28);
+			}
+
+			html::-webkit-scrollbar-thumb,
+			body::-webkit-scrollbar-thumb,
+			.sidebar::-webkit-scrollbar-thumb,
+			*::-webkit-scrollbar-thumb {
+				background: linear-gradient(180deg, var(--brand-red-2), var(--brand-red));
+				border-radius: 999px;
+				border: 3px solid rgba(0, 0, 0, 0.36);
+				min-height: 44px;
+			}
+
+			/* Custom cursor (desktop only) */
+			.cursor {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 54px;
+				height: 54px;
+				border-radius: 999px;
+				border: 1.6px solid rgba(224, 0, 0, 0.62);
+				background: rgba(224, 0, 0, 0.08);
+				transform: translate3d(-50%, -50%, 0);
+				pointer-events: none;
+				z-index: 9999;
+				backdrop-filter: blur(6px);
+				-webkit-backdrop-filter: blur(6px);
+				opacity: 0;
+				transition: opacity 180ms ease, width 180ms ease, height 180ms ease, background 180ms ease, border-color 180ms ease;
+				will-change: transform;
+			}
+
+			.cursor.is-visible {
+				opacity: 1;
+			}
+
+			.cursor.is-hover {
+				width: 64px;
+				height: 64px;
+				background: rgba(224, 0, 0, 0.14);
+				border-color: rgba(224, 0, 0, 0.92);
+			}
+
+			.cursor.is-down {
+				width: 48px;
+				height: 48px;
+			}
+
+			@media (hover: none), (pointer: coarse) {
+				body {
+					cursor: auto;
+				}
+				.cursor {
+					display: none;
+				}
+			}
+
+			a {
+				color: inherit;
+				text-decoration: none;
+			}
+
+			a:focus-visible,
+			button:focus-visible {
+				outline: 3px solid var(--focus);
+				outline-offset: 3px;
+			}
+
+			.page {
+				min-height: 100vh;
+				display: grid;
+				grid-template-columns: var(--sidebar-w) 1fr;
+				grid-auto-rows: min-content;
+			}
+
+			/* Sidebar */
+			.sidebar {
+				position: sticky;
+				top: 0;
+				padding: 36px 28px 28px;
+				background: transparent;
+				grid-column: 1;
+				grid-row: 1 / -1;
+				height: 100vh;
+				overflow: auto;
+			}
+
+			.brand {
+				display: flex;
+				align-items: flex-start;
+				gap: 12px;
+			}
+
+			.brand img {
+				width: 150px;
+				height: auto;
+				display: block;
+				max-width: 100%;
+			}
+
+			.nav {
+				margin-top: 54px;
+				display: grid;
+				gap: 22px;
+				padding-left: 18px;
+			}
+
+			.nav a {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				font-size: 17px;
+				font-weight: 700;
+				line-height: 1.2;
+				padding: 4px 0;
+				color: rgba(255, 255, 255, 0.86);
+				text-decoration: underline;
+				text-decoration-thickness: 2px;
+				text-underline-offset: 6px;
+				text-decoration-color: rgba(255, 255, 255, 0.22);
+				transition: color 160ms ease, text-decoration-color 160ms ease;
+			}
+
+			.nav a:hover {
+				color: #ffffff;
+				text-decoration-color: rgba(224, 0, 0, 0.65);
+			}
+
+			.nav a[aria-current="page"] {
+				color: #ffffff;
+				text-decoration-color: rgba(224, 0, 0, 0.85);
+			}
+
+			.nav a[data-caret]::after {
+				content: "";
+				width: 7px;
+				height: 7px;
+				border-right: 2px solid rgba(255, 255, 255, 0.72);
+				border-bottom: 2px solid rgba(255, 255, 255, 0.72);
+				transform: rotate(45deg);
+				margin-top: 2px;
+			}
+
+			.nav-item {
+				display: grid;
+				gap: 10px;
+			}
+
+			.nav-dropdown {
+				display: grid;
+				gap: 10px;
+				padding-left: 14px;
+				margin-left: 8px;
+				border-left: 2px solid rgba(255, 255, 255, 0.12);
+				max-height: 0;
+				opacity: 0;
+				overflow: hidden;
+				transform: translate3d(0, -6px, 0);
+				visibility: hidden;
+				pointer-events: none;
+				transition:
+					max-height 260ms var(--reveal-ease),
+					opacity 200ms ease,
+					transform 260ms var(--reveal-ease),
+					visibility 0ms linear 260ms;
+			}
+
+			.nav-services:hover .nav-dropdown,
+			.nav-services:focus-within .nav-dropdown {
+				max-height: 600px;
+				opacity: 1;
+				transform: translate3d(0, 0, 0);
+				visibility: visible;
+				pointer-events: auto;
+				transition-delay: 0ms;
+			}
+
+			.nav-dropdown a {
+				font-size: 15px;
+				font-weight: 750;
+				color: rgba(255, 255, 255, 0.78);
+				text-decoration: none;
+				text-underline-offset: 5px;
+				text-decoration-thickness: 2px;
+				text-decoration-color: rgba(255, 255, 255, 0.18);
+				padding: 2px 0;
+				transition: color 160ms ease, text-decoration-color 160ms ease;
+			}
+
+			.nav-dropdown a:hover {
+				color: #ffffff;
+				text-decoration: underline;
+				text-decoration-color: rgba(224, 0, 0, 0.65);
+			}
+
+			.cta {
+				margin-top: 22px;
+			}
+
+			.cta a {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				padding: 14px 14px;
+				font-weight: 700;
+				border-radius: 14px;
+				background: linear-gradient(180deg, var(--brand-red-2), var(--brand-red));
+				border: 1px solid rgba(255, 255, 255, 0.18);
+				box-shadow: 0 10px 28px rgba(224, 0, 0, 0.18);
+			}
+
+			.social {
+				position: absolute;
+				left: 28px;
+				bottom: 26px;
+				display: grid;
+				gap: 8px;
+				font-weight: 650;
+				color: rgba(255, 255, 255, 0.82);
+			}
+
+			/* Premium reveal animations */
+			.reveal {
+				--reveal-delay: 0ms;
+				opacity: 0;
+				transform: translate3d(0, 16px, 0) scale(0.995);
+				transition-property: opacity, transform;
+				transition-duration: var(--reveal-opacity), var(--reveal-transform);
+				transition-timing-function: var(--reveal-ease);
+				transition-delay: var(--reveal-delay);
+				will-change: transform, opacity;
+				backface-visibility: hidden;
+			}
+
+			.reveal[data-reveal="clip"] {
+				transform: translate3d(14px, 10px, 0) scale(0.996);
+				clip-path: inset(12% 10% 12% 10% round 26px);
+				transition-property: opacity, transform, clip-path;
+				transition-duration: var(--reveal-opacity), var(--reveal-transform), var(--reveal-clip);
+			}
+
+			.reveal.is-revealed {
+				opacity: 1;
+				transform: translate3d(0, 0, 0) scale(1);
+				will-change: auto;
+			}
+
+			.reveal[data-reveal="clip"].is-revealed {
+				clip-path: inset(0% 0% 0% 0% round 18px);
+			}
+
+			.reveal-words {
+				opacity: 1;
+				transform: none;
+			}
+
+			.reveal-words .w {
+				display: inline-block;
+				opacity: 0;
+				transform: translate3d(0, 12px, 0) scale(0.998);
+				transition-property: opacity, transform;
+				transition-duration: 700ms, 1100ms;
+				transition-timing-function: var(--reveal-ease);
+				will-change: transform, opacity;
+				backface-visibility: hidden;
+			}
+
+			.reveal-words.is-revealed .w {
+				opacity: 1;
+				transform: translate3d(0, 0, 0) scale(1);
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.reveal {
+					opacity: 1;
+					transform: none;
+					transition: none;
+				}
+				.reveal-words .w {
+					opacity: 1;
+					transform: none;
+					transition: none;
+				}
+			}
+
+			/* Hero */
+			.service-hero {
+				grid-column: 2;
+				padding: 84px 60px 24px;
+			}
+
+			.service-hero-inner {
+				max-width: 1220px;
+				margin: 0 auto;
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 42px;
+				align-items: start;
+			}
+
+			.service-media {
+				position: relative;
+				border-radius: 22px;
+				overflow: hidden;
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				background:
+					radial-gradient(800px 520px at 30% 22%, rgba(224, 0, 0, 0.20), transparent 60%),
+					radial-gradient(900px 560px at 86% 78%, rgba(255, 255, 255, 0.10), transparent 55%),
+					linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+				box-shadow: 0 22px 70px rgba(0, 0, 0, 0.22);
+				min-height: 380px;
+			}
+
+			.service-media::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background:
+					repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 240px);
+				opacity: 0.30;
+				mix-blend-mode: overlay;
+				pointer-events: none;
+			}
+
+			.sim-mark {
+				position: absolute;
+				inset: 0;
+				display: grid;
+				place-items: center;
+				padding: 26px;
+			}
+
+			.sim-mark svg {
+				width: min(300px, 78%);
+				height: auto;
+				display: block;
+				filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.35));
+				opacity: 0.92;
+			}
+
+			.service-copy {
+				display: grid;
+				gap: 16px;
+				padding-top: 6px;
+			}
+
+			.service-kicker {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				width: max-content;
+				padding: 8px 12px;
+				border-radius: 999px;
+				font-weight: 900;
+				font-size: 12px;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				background: rgba(224, 0, 0, 0.18);
+				border: 1px solid rgba(224, 0, 0, 0.26);
+				color: rgba(255, 255, 255, 0.94);
+			}
+
+			.service-h1 {
+				margin: 0;
+				font-size: clamp(40px, 4.4vw, 68px);
+				line-height: 1.06;
+				letter-spacing: -0.035em;
+				font-weight: 950;
+				color: rgba(224, 0, 0, 0.96);
+			}
+
+			.service-p {
+				margin: 0;
+				max-width: 78ch;
+				color: rgba(255, 255, 255, 0.78);
+				font-weight: 550;
+				line-height: 1.95;
+				font-size: 14px;
+			}
+
+			.svc-subhead {
+				margin: 10px 0 0;
+				font-weight: 950;
+				font-size: 18px;
+				letter-spacing: -0.02em;
+				color: rgba(255, 255, 255, 0.90);
+			}
+
+			.svc-list {
+				margin: 10px 0 0;
+				padding-left: 22px;
+				display: grid;
+				gap: 10px;
+			}
+
+			.svc-list li {
+				color: rgba(255, 255, 255, 0.78);
+				font-weight: 650;
+				line-height: 1.85;
+				font-size: 15px;
+			}
+
+			/* Entity block */
+			.entity {
+				grid-column: 2;
+				padding: 0 60px 56px;
+			}
+
+			.entity-inner {
+				max-width: 1220px;
+				margin: 0 auto;
+			}
+
+			.entity-card {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 22px;
+				padding: 18px;
+				border-radius: 20px;
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				background: rgba(255, 255, 255, 0.05);
+				box-shadow: 0 22px 70px rgba(0, 0, 0, 0.20);
+			}
+
+			.entity-left {
+				display: flex;
+				align-items: center;
+				gap: 14px;
+			}
+
+			.entity-logo {
+				width: 46px;
+				height: 46px;
+				border-radius: 14px;
+				overflow: hidden;
+				border: 1px solid rgba(255, 255, 255, 0.14);
+				background: rgba(0, 0, 0, 0.28);
+				display: grid;
+				place-items: center;
+				flex: 0 0 auto;
+			}
+
+			.entity-logo img {
+				width: 40px;
+				height: auto;
+				display: block;
+			}
+
+			.entity-meta {
+				display: grid;
+				gap: 4px;
+			}
+
+			.entity-kicker {
+				margin: 0;
+				font-weight: 900;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				font-size: 12px;
+				color: rgba(255, 255, 255, 0.72);
+			}
+
+			.entity-name {
+				margin: 0;
+				font-weight: 950;
+				letter-spacing: -0.02em;
+				font-size: 16px;
+			}
+
+			.entity-link {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				padding: 12px 14px;
+				border-radius: 999px;
+				background: linear-gradient(180deg, var(--brand-red-2), var(--brand-red));
+				border: 1px solid rgba(255, 255, 255, 0.16);
+				color: #ffffff;
+				font-weight: 900;
+				font-size: 13px;
+				box-shadow: 0 14px 34px rgba(224, 0, 0, 0.16);
+				transition: transform 180ms ease, filter 180ms ease;
+			}
+
+			.entity-link:hover {
+				transform: translate3d(0, -1px, 0);
+				filter: brightness(1.05);
+			}
+
+			.entity-link svg {
+				width: 16px;
+				height: 16px;
+				fill: #ffffff;
+				display: block;
+			}
+
+			/* Sections */
+			.section {
+				grid-column: 2;
+				padding: 0 60px 86px;
+			}
+
+			.section-inner {
+				max-width: 1220px;
+				margin: 0 auto;
+			}
+
+			.section-title {
+				margin: 0 0 18px;
+				font-weight: 950;
+				letter-spacing: -0.03em;
+				font-size: 34px;
+				color: rgba(255, 255, 255, 0.92);
+			}
+
+			.offers-grid {
+				display: grid;
+				grid-template-columns: repeat(4, minmax(0, 1fr));
+				gap: 22px;
+			}
+
+			.offer {
+				border-radius: 22px;
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				background: rgba(255, 255, 255, 0.05);
+				box-shadow: 0 22px 70px rgba(0, 0, 0, 0.20);
+				overflow: hidden;
+				display: grid;
+				grid-template-rows: 168px 1fr;
+			}
+
+			.offer-media {
+				background:
+					radial-gradient(800px 300px at 20% 20%, rgba(224, 0, 0, 0.22), transparent 55%),
+					radial-gradient(600px 260px at 80% 80%, rgba(255, 255, 255, 0.12), transparent 55%),
+					linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+				position: relative;
+			}
+
+			.offer-media::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				opacity: 0.30;
+				background: repeating-linear-gradient(120deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 260px);
+				mix-blend-mode: overlay;
+			}
+
+			.offer-body {
+				padding: 18px;
+				display: grid;
+				gap: 12px;
+			}
+
+			.offer-name {
+				margin: 0;
+				font-weight: 950;
+				letter-spacing: -0.02em;
+				font-size: 18px;
+				color: rgba(255, 255, 255, 0.92);
+			}
+
+			.offer-rule {
+				height: 1px;
+				background: rgba(255, 255, 255, 0.14);
+			}
+
+			.offer-btn {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 12px 14px;
+				border-radius: 999px;
+				background: rgba(255, 255, 255, 0.06);
+				border: 1px solid rgba(255, 255, 255, 0.14);
+				color: rgba(255, 255, 255, 0.92);
+				font-weight: 900;
+				letter-spacing: 0.02em;
+				text-transform: uppercase;
+				font-size: 12px;
+				width: max-content;
+			}
+
+			.offer-btn:hover {
+				background: rgba(224, 0, 0, 0.16);
+				border-color: rgba(224, 0, 0, 0.28);
+			}
+
+			.dest-grid {
+				display: grid;
+				grid-template-columns: repeat(4, minmax(0, 1fr));
+				gap: 22px;
+			}
+
+			.dest {
+				border-radius: 22px;
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				background: rgba(255, 255, 255, 0.05);
+				box-shadow: 0 22px 70px rgba(0, 0, 0, 0.20);
+				overflow: hidden;
+				display: grid;
+				grid-template-rows: 150px 1fr auto;
+			}
+
+			.dest-media {
+				background:
+					radial-gradient(700px 280px at 20% 20%, rgba(224, 0, 0, 0.20), transparent 55%),
+					radial-gradient(600px 260px at 80% 80%, rgba(255, 255, 255, 0.12), transparent 55%),
+					linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+				position: relative;
+			}
+
+			.dest-media::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				opacity: 0.30;
+				background: repeating-linear-gradient(120deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 260px);
+				mix-blend-mode: overlay;
+			}
+
+			.dest-body {
+				padding: 16px 18px;
+				display: grid;
+				gap: 10px;
+			}
+
+			.dest-top {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 10px;
+			}
+
+			.dest-name {
+				margin: 0;
+				font-weight: 950;
+				letter-spacing: -0.02em;
+				font-size: 15px;
+				color: rgba(255, 255, 255, 0.92);
+			}
+
+			.dest-pill {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 8px 12px;
+				border-radius: 999px;
+				background: rgba(255, 255, 255, 0.07);
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				color: rgba(255, 255, 255, 0.88);
+				font-weight: 900;
+				font-size: 11px;
+				text-transform: uppercase;
+				letter-spacing: 0.04em;
+			}
+
+			.dest-meta {
+				margin: 0;
+				color: rgba(255, 255, 255, 0.68);
+				font-weight: 650;
+				font-size: 12px;
+			}
+
+			.pricebar {
+				display: grid;
+				grid-template-columns: 1fr auto 1fr;
+				gap: 10px;
+				align-items: center;
+				padding: 12px 14px;
+				border-top: 1px solid rgba(255, 255, 255, 0.12);
+				background: rgba(0, 0, 0, 0.22);
+			}
+
+			.price {
+				display: grid;
+				gap: 2px;
+			}
+
+			.price label {
+				font-size: 11px;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				font-weight: 900;
+				color: rgba(255, 255, 255, 0.60);
+			}
+
+			.price strong {
+				font-size: 16px;
+				letter-spacing: -0.02em;
+				color: rgba(255, 255, 255, 0.92);
+			}
+
+			.plane {
+				opacity: 0.9;
+			}
+
+			.plane svg {
+				width: 22px;
+				height: 22px;
+				fill: rgba(255, 255, 255, 0.76);
+				display: block;
+			}
+
+			.faq {
+				display: grid;
+				gap: 12px;
+			}
+
+			.faq details {
+				border-radius: 18px;
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				background: rgba(255, 255, 255, 0.05);
+				box-shadow: 0 22px 70px rgba(0, 0, 0, 0.18);
+				overflow: hidden;
+			}
+
+			.faq summary {
+				list-style: none;
+				cursor: pointer;
+				padding: 16px 18px;
+				font-weight: 900;
+				color: rgba(255, 255, 255, 0.92);
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 14px;
+			}
+
+			.faq summary::-webkit-details-marker {
+				display: none;
+			}
+
+			.faq summary::after {
+				content: "";
+				width: 10px;
+				height: 10px;
+				border-right: 2px solid rgba(255, 255, 255, 0.70);
+				border-bottom: 2px solid rgba(255, 255, 255, 0.70);
+				transform: rotate(45deg);
+				transition: transform 180ms ease;
+				flex: 0 0 auto;
+			}
+
+			.faq details[open] summary::after {
+				transform: rotate(225deg);
+			}
+
+			.faq .ans {
+				padding: 0 18px 16px;
+				color: rgba(255, 255, 255, 0.74);
+				font-weight: 600;
+				line-height: 1.9;
+				font-size: 14px;
+			}
+
+			@media (max-width: 1100px) {
+				.offers-grid {
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+				}
+				.dest-grid {
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+				}
+			}
+
+			@media (max-width: 980px) {
+				.page {
+					grid-template-columns: 1fr;
+				}
+
+				.sidebar {
+					position: relative;
+					height: auto;
+					grid-row: auto;
+					grid-column: auto;
+					padding: 24px 20px;
+				}
+
+				.social {
+					position: static;
+					margin-top: 22px;
+				}
+
+				.service-hero {
+					grid-column: auto;
+					padding: 44px 20px 18px;
+				}
+
+				.service-hero-inner {
+					grid-template-columns: 1fr;
+					gap: 22px;
+				}
+
+				.entity {
+					grid-column: auto;
+					padding: 0 20px 48px;
+				}
+
+				.entity-card {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+
+				.section {
+					grid-column: auto;
+					padding: 0 20px 64px;
+				}
+
+				.service-media {
+					min-height: 280px;
+				}
+			}
+
+			@media (max-width: 560px) {
+				.offers-grid {
+					grid-template-columns: 1fr;
+				}
+				.dest-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+		<link rel="stylesheet" href="responsive.css" />
+		<link rel="stylesheet" href="preloader.css" />
+		<script src="preloader.js" defer></script>
+		<script src="responsive.js" defer></script>
+	</head>
+	<body>
+		<div id="rg-preloader" role="status" aria-live="polite" aria-label="Loading">
+			<div class="rg-preloader__inner">
+				<div class="rg-preloader__stage">
+					<div class="rg-preloader__accent" aria-hidden="true"></div>
+					<div class="rg-preloader__logoWrap">
+						<div class="rg-preloader__logoGlow" aria-hidden="true"></div>
+						<div class="rg-preloader__logoFrame">
+							<img class="rg-preloader__logo is-sharp" src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png" alt="Raizing Group" />
+							<img class="rg-preloader__logo is-blur" src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png" alt="" aria-hidden="true" />
+						</div>
+					</div>
+				</div>
+				<div class="rg-preloader__tagline">RISE TO EXCELLENCE</div>
+				<div class="rg-preloader__bar" aria-hidden="true">
+					<div class="rg-preloader__barFill"></div>
+					<div class="rg-preloader__barShine"></div>
+				</div>
+				<button class="rg-preloader__skip" type="button" data-rg-skip>Skip</button>
+				<span class="rg-preloader__sr">Loading…</span>
+			</div>
+		</div>
+		<header class="mobile-topbar" aria-label="Mobile top bar">
+			<a class="mobile-brand" href="index.html#home" aria-label="Raizing Group Home">
+				<img
+					src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png"
+					alt="Raizing Group"
+					loading="eager"
+				/>
+			</a>
+			<button class="menu-btn" type="button" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false" data-menu-button>
+				<span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+			</button>
+		</header>
+		<div class="mobile-overlay" data-menu-overlay aria-hidden="true"></div>
+		<div class="page">
+			<aside class="sidebar" id="mobile-drawer" aria-label="Primary">
+				<div class="brand reveal" data-reveal="left">
+					<a href="index.html#home" aria-label="Raizing Group Home">
+						<img
+							src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png"
+							alt="Raizing Group"
+							loading="eager"
+						/>
+					</a>
+				</div>
+
+				<nav class="nav" aria-label="Site">
+					<a href="index.html#home" class="reveal" data-reveal="left" data-delay>Home</a>
+					<a href="about.html" class="reveal" data-reveal="left" data-delay>About Us</a>
+					<div class="nav-item nav-services reveal" data-reveal="left" data-delay>
+						<a href="index.html#services" data-caret aria-haspopup="true" aria-current="page">Our Services</a>
+						<div class="nav-dropdown" aria-label="Service pages">
+							<a href="visas.html">Raizing Visas</a>
+							<a href="immigration.html">Immigration (Raizing Sovereign)</a>
+							<a href="insurance.html">Raizing Insurance</a>
+							<a href="company-formation.html">Company Formation</a>
+							<a href="manpower-recruitment.html">Manpower Recruitment (Cavec Global)</a>
+							<a href="verify.html">Raizing Verify</a>
+							<a href="sim.html" aria-current="page">Raizing Sim</a>
+							<a href="edu.html">Raizing Edu</a>
+						</div>
+					</div>
+					<a href="news-media.html" class="reveal" data-reveal="left" data-delay>News &amp; Media</a>
+					<a href="contact.html" class="reveal" data-reveal="left" data-delay>Contact Us</a>
+				</nav>
+
+				<div class="cta reveal" data-reveal="left" data-delay>
+					<a href="index.html#partner">Partner With Us</a>
+				</div>
+
+				<div class="social reveal" data-reveal="left" data-delay aria-label="Social links">
+					<a href="#" rel="nofollow">LinkedIn</a>
+					<a href="#" rel="nofollow">Facebook</a>
+					<a href="#" rel="nofollow">Instagram</a>
+				</div>
+			</aside>
+
+			<main class="service-hero" id="sim" aria-label="Raizing Sim">
+				<div class="service-hero-inner">
+					<div class="service-media reveal" data-reveal="clip" data-delay role="img" aria-label="Worldwide eSIM connection">
+						<div class="sim-mark" aria-hidden="true">
+							<svg viewBox="0 0 180 120">
+								<defs>
+									<linearGradient id="simG" x1="0" y1="0" x2="1" y2="1">
+										<stop offset="0" stop-color="#ffffff" stop-opacity="0.90" />
+										<stop offset="1" stop-color="#ffffff" stop-opacity="0.55" />
+									</linearGradient>
+								</defs>
+								<path d="M60 18h60a10 10 0 0 1 10 10v64a10 10 0 0 1-10 10H60a10 10 0 0 1-10-10V28a10 10 0 0 1 10-10Z" fill="url(#simG)" opacity="0.18" />
+								<path d="M70 32h40M70 48h56M70 64h56M70 80h40" stroke="rgba(255,255,255,0.75)" stroke-width="3" stroke-linecap="round" opacity="0.9" />
+								<circle cx="44" cy="60" r="20" fill="none" stroke="rgba(255,255,255,0.62)" stroke-width="3" />
+								<path d="M24 60h40M44 40v40" stroke="rgba(224,0,0,0.9)" stroke-width="3" stroke-linecap="round" />
+								<path d="M136 30c9 6 15 17 15 30s-6 24-15 30" fill="none" stroke="rgba(255,255,255,0.60)" stroke-width="3" stroke-linecap="round" />
+								<path d="M146 38c7 5 11 13 11 22s-4 17-11 22" fill="none" stroke="rgba(255,255,255,0.44)" stroke-width="3" stroke-linecap="round" />
+							</svg>
+						</div>
+					</div>
+
+					<div class="service-copy">
+						<div class="service-kicker reveal" data-reveal="left" data-delay>RAIZING SIM</div>
+						<h1 class="service-h1 reveal-words">Worldwide eSIM Connection</h1>
+						<p class="service-p reveal" data-reveal="up" data-delay>
+							At Raizing Sim, our vision is to redefine global connectivity for the modern traveller. We provide seamless,
+							cost-effective eSIM solutions that keep you connected whether you’re on a business trip or enjoying a vacation.
+							With instant cellular data access in over 145+ countries, we ensure that you stay online without the burden of
+							unexpected roaming charges or high international calling costs.
+						</p>
+						<p class="service-p reveal" data-reveal="up" data-delay>
+							Designed with simplicity and convenience in mind, our eSIM offers a flexible, easy-to-use module that adapts to
+							your travel needs. Many of our customers already enjoy the freedom of uninterrupted connectivity, and we are
+							excited to welcome you to our growing global community of travellers. With Raizing Sim, the world is always within
+							reach.
+						</p>
+
+						<p class="svc-subhead reveal" data-reveal="up" data-delay>Why travellers choose us:</p>
+						<ul class="svc-list" aria-label="Why travellers choose Raizing Sim">
+							<li class="reveal" data-reveal="up" data-delay>Easy to set up, no need to switch SIM cards while traveling.</li>
+							<li class="reveal" data-reveal="up" data-delay>Set your preferences for which SIM handles calls, data, or SMS abroad.</li>
+							<li class="reveal" data-reveal="up" data-delay>Raizing Sim’s eSIM stays ready, active, and connected on your phone.</li>
+						</ul>
+					</div>
+				</div>
+			</main>
+
+			<section class="entity" id="raizingsim" aria-label="Raizing Sim website">
+				<div class="entity-inner">
+					<div class="entity-card reveal" data-reveal="up" data-delay>
+						<div class="entity-left">
+							<div class="entity-logo" aria-hidden="true">
+								<img src="https://www.raizingsim.com/logo.png" alt="" loading="lazy" />
+							</div>
+							<div class="entity-meta">
+								<p class="entity-kicker">Service Entity</p>
+								<p class="entity-name">Raizing Sim</p>
+							</div>
+						</div>
+						<a class="entity-link" href="https://www.raizingsim.com/" target="_blank" rel="noopener noreferrer">
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M10 13a5 5 0 0 1 0-7l1.4-1.4a5 5 0 0 1 7 7L17 12.9a1 1 0 1 1-1.4-1.4l1.6-1.6a3 3 0 1 0-4.2-4.2L11.6 7a3 3 0 0 0 0 4.2 1 1 0 1 1-1.6 1.2ZM14 11a5 5 0 0 1 0 7L12.6 19.4a5 5 0 0 1-7-7L7 11.1a1 1 0 0 1 1.4 1.4l-1.6 1.6a3 3 0 1 0 4.2 4.2L12.4 17a3 3 0 0 0 0-4.2A1 1 0 0 1 14 11Z" />
+							</svg>
+							www.raizingsim.com
+						</a>
+					</div>
+				</div>
+			</section>
+
+			<section class="section" id="offers" aria-label="Explore latest offers">
+				<div class="section-inner">
+					<h2 class="section-title reveal-words">Explore our latest offers</h2>
+					<div class="offers-grid" role="list" aria-label="Latest offers">
+						<article class="offer reveal" data-reveal="clip" data-delay role="listitem" aria-label="Belgium offer">
+							<div class="offer-media" aria-hidden="true"></div>
+							<div class="offer-body">
+								<h3 class="offer-name">Belgium</h3>
+								<div class="offer-rule" aria-hidden="true"></div>
+								<a class="offer-btn" href="https://www.raizingsim.com/" target="_blank" rel="noopener noreferrer">
+									Explore our deals
+								</a>
+							</div>
+						</article>
+
+						<article class="offer reveal" data-reveal="clip" data-delay role="listitem" aria-label="Brazil offer">
+							<div class="offer-media" aria-hidden="true"></div>
+							<div class="offer-body">
+								<h3 class="offer-name">Brazil</h3>
+								<div class="offer-rule" aria-hidden="true"></div>
+								<a class="offer-btn" href="https://www.raizingsim.com/" target="_blank" rel="noopener noreferrer">
+									Explore our deals
+								</a>
+							</div>
+						</article>
+
+						<article class="offer reveal" data-reveal="clip" data-delay role="listitem" aria-label="Costa Rica offer">
+							<div class="offer-media" aria-hidden="true"></div>
+							<div class="offer-body">
+								<h3 class="offer-name">Costa Rica</h3>
+								<div class="offer-rule" aria-hidden="true"></div>
+								<a class="offer-btn" href="https://www.raizingsim.com/" target="_blank" rel="noopener noreferrer">
+									Explore our deals
+								</a>
+							</div>
+						</article>
+
+						<article class="offer reveal" data-reveal="clip" data-delay role="listitem" aria-label="Guinea offer">
+							<div class="offer-media" aria-hidden="true"></div>
+							<div class="offer-body">
+								<h3 class="offer-name">Guinea</h3>
+								<div class="offer-rule" aria-hidden="true"></div>
+								<a class="offer-btn" href="https://www.raizingsim.com/" target="_blank" rel="noopener noreferrer">
+									Explore our deals
+								</a>
+							</div>
+						</article>
+					</div>
+				</div>
+			</section>
+
+			<section class="section" id="destinations" aria-label="Top destinations">
+				<div class="section-inner">
+					<h2 class="section-title reveal-words">Top destinations around the world</h2>
+					<div class="dest-grid" role="list" aria-label="Top destinations">
+						<article class="dest reveal" data-reveal="clip" data-delay role="listitem" aria-label="Australia">
+							<div class="dest-media" aria-hidden="true"></div>
+							<div class="dest-body">
+								<div class="dest-top">
+									<h3 class="dest-name">Australia</h3>
+									<a class="dest-pill" href="https://www.raizingsim.com/" target="_blank" rel="noopener noreferrer">View all</a>
+								</div>
+								<p class="dest-meta">4 Plans</p>
+							</div>
+							<div class="pricebar" aria-label="Price range">
+								<div class="price"><label>From</label><strong>$ 12</strong></div>
+								<div class="plane" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9L2 14v2l8-2.5V19l-2 1.5V22l3-1 3 1v-1.5L13 19v-5.5L21 16Z"/></svg></div>
+								<div class="price" style="text-align:right"><label>To</label><strong>$ 68</strong></div>
+							</div>
+						</article>
+
+						<article class="dest reveal" data-reveal="clip" data-delay role="listitem" aria-label="France">
+							<div class="dest-media" aria-hidden="true"></div>
+							<div class="dest-body">
+								<div class="dest-top">
+									<h3 class="dest-name">France</h3>
+									<a class="dest-pill" href="https://www.raizingsim.com/" target="_blank" rel="noopener noreferrer">View all</a>
+								</div>
+								<p class="dest-meta">4 Plans</p>
+							</div>
+							<div class="pricebar" aria-label="Price range">
+								<div class="price"><label>From</label><strong>$ 10</strong></div>
+								<div class="plane" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9L2 14v2l8-2.5V19l-2 1.5V22l3-1 3 1v-1.5L13 19v-5.5L21 16Z"/></svg></div>
+								<div class="price" style="text-align:right"><label>To</label><strong>$ 57</strong></div>
+							</div>
+						</article>
+
+						<article class="dest reveal" data-reveal="clip" data-delay role="listitem" aria-label="Europe">
+							<div class="dest-media" aria-hidden="true"></div>
+							<div class="dest-body">
+								<div class="dest-top">
+									<h3 class="dest-name">Europe</h3>
+									<a class="dest-pill" href="https://www.raizingsim.com/" target="_blank" rel="noopener noreferrer">View all</a>
+								</div>
+								<p class="dest-meta">5 Plans</p>
+							</div>
+							<div class="pricebar" aria-label="Price range">
+								<div class="price"><label>From</label><strong>$ 17</strong></div>
+								<div class="plane" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9L2 14v2l8-2.5V19l-2 1.5V22l3-1 3 1v-1.5L13 19v-5.5L21 16Z"/></svg></div>
+								<div class="price" style="text-align:right"><label>To</label><strong>$ 124</strong></div>
+							</div>
+						</article>
+
+						<article class="dest reveal" data-reveal="clip" data-delay role="listitem" aria-label="United Kingdom">
+							<div class="dest-media" aria-hidden="true"></div>
+							<div class="dest-body">
+								<div class="dest-top">
+									<h3 class="dest-name">United Kingdom</h3>
+									<a class="dest-pill" href="https://www.raizingsim.com/" target="_blank" rel="noopener noreferrer">View all</a>
+								</div>
+								<p class="dest-meta">4 Plans</p>
+							</div>
+							<div class="pricebar" aria-label="Price range">
+								<div class="price"><label>From</label><strong>$ 9</strong></div>
+								<div class="plane" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9L2 14v2l8-2.5V19l-2 1.5V22l3-1 3 1v-1.5L13 19v-5.5L21 16Z"/></svg></div>
+								<div class="price" style="text-align:right"><label>To</label><strong>$ 52</strong></div>
+							</div>
+						</article>
+
+						<article class="dest reveal" data-reveal="clip" data-delay role="listitem" aria-label="United States">
+							<div class="dest-media" aria-hidden="true"></div>
+							<div class="dest-body">
+								<div class="dest-top">
+									<h3 class="dest-name">United States</h3>
+									<a class="dest-pill" href="https://www.raizingsim.com/" target="_blank" rel="noopener noreferrer">View all</a>
+								</div>
+								<p class="dest-meta">4 Plans</p>
+							</div>
+							<div class="pricebar" aria-label="Price range">
+								<div class="price"><label>From</label><strong>$ 10</strong></div>
+								<div class="plane" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9L2 14v2l8-2.5V19l-2 1.5V22l3-1 3 1v-1.5L13 19v-5.5L21 16Z"/></svg></div>
+								<div class="price" style="text-align:right"><label>To</label><strong>$ 66</strong></div>
+							</div>
+						</article>
+
+						<article class="dest reveal" data-reveal="clip" data-delay role="listitem" aria-label="Canada">
+							<div class="dest-media" aria-hidden="true"></div>
+							<div class="dest-body">
+								<div class="dest-top">
+									<h3 class="dest-name">Canada</h3>
+									<a class="dest-pill" href="https://www.raizingsim.com/" target="_blank" rel="noopener noreferrer">View all</a>
+								</div>
+								<p class="dest-meta">4 Plans</p>
+							</div>
+							<div class="pricebar" aria-label="Price range">
+								<div class="price"><label>From</label><strong>$ 14</strong></div>
+								<div class="plane" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9L2 14v2l8-2.5V19l-2 1.5V22l3-1 3 1v-1.5L13 19v-5.5L21 16Z"/></svg></div>
+								<div class="price" style="text-align:right"><label>To</label><strong>$ 95</strong></div>
+							</div>
+						</article>
+
+						<article class="dest reveal" data-reveal="clip" data-delay role="listitem" aria-label="Malaysia">
+							<div class="dest-media" aria-hidden="true"></div>
+							<div class="dest-body">
+								<div class="dest-top">
+									<h3 class="dest-name">Malaysia</h3>
+									<a class="dest-pill" href="https://www.raizingsim.com/" target="_blank" rel="noopener noreferrer">View all</a>
+								</div>
+								<p class="dest-meta">4 Plans</p>
+							</div>
+							<div class="pricebar" aria-label="Price range">
+								<div class="price"><label>From</label><strong>$ 9</strong></div>
+								<div class="plane" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9L2 14v2l8-2.5V19l-2 1.5V22l3-1 3 1v-1.5L13 19v-5.5L21 16Z"/></svg></div>
+								<div class="price" style="text-align:right"><label>To</label><strong>$ 51</strong></div>
+							</div>
+						</article>
+					</div>
+				</div>
+			</section>
+
+			<section class="section" id="faq" aria-label="FAQ">
+				<div class="section-inner">
+					<h2 class="section-title reveal-words">FAQ</h2>
+					<div class="faq" aria-label="Frequently asked questions">
+						<details class="reveal" data-reveal="up" data-delay>
+							<summary>What is an eSIM?</summary>
+							<div class="ans">
+								An eSIM is a digital SIM that lets you activate a mobile data plan without using a physical SIM card. It’s built
+								into supported devices and can be enabled in your phone settings.
+							</div>
+						</details>
+
+						<details class="reveal" data-reveal="up" data-delay>
+							<summary>How do I activate an eSIM?</summary>
+							<div class="ans">
+								Activation typically happens by scanning a QR code or installing an eSIM profile from an app/portal, then turning
+								on the plan in your device’s cellular settings.
+							</div>
+						</details>
+
+						<details class="reveal" data-reveal="up" data-delay>
+							<summary>Do I need to remove my physical SIM?</summary>
+							<div class="ans">
+								In most cases, no. You can keep your physical SIM active and use the eSIM for data while traveling, depending on
+								your device and plan settings.
+							</div>
+						</details>
+
+						<details class="reveal" data-reveal="up" data-delay>
+							<summary>Will my eSIM work immediately when I land?</summary>
+							<div class="ans">
+								Once the eSIM profile is installed and the plan is enabled, your device can connect to supported networks in the
+								destination — usually within a few moments.
+							</div>
+						</details>
+
+						<details class="reveal" data-reveal="up" data-delay>
+							<summary>Can I use the same eSIM on multiple devices?</summary>
+							<div class="ans">
+								Most eSIM profiles are intended for one device at a time. If you change devices, you may need to reinstall the
+								profile or purchase a new plan, depending on the provider’s rules.
+							</div>
+						</details>
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<div class="cursor" aria-hidden="true"></div>
+
+		<script>
+			(function () {
+				var prefersReduced = false;
+				try {
+					prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+				} catch (e) {}
+
+				function escapeHTML(s) {
+					return String(s)
+						.replace(/&/g, "&amp;")
+						.replace(/</g, "&lt;")
+						.replace(/>/g, "&gt;")
+						.replace(/\"/g, "&quot;")
+						.replace(/'/g, "&#39;");
+				}
+
+				function splitWords(el) {
+					var nodes = Array.prototype.slice.call(el.childNodes || []);
+					if (!nodes.length) return;
+
+					var out = [];
+					var i = 0;
+
+					function pushWord(w) {
+						out.push(
+							'<span class="w" style="transition-delay:' + String(i * 55) + 'ms">' + escapeHTML(w) + "</span>"
+						);
+						i += 1;
+					}
+
+					function pushText(text) {
+						var parts = String(text || "").split(/(\s+)/);
+						for (var p = 0; p < parts.length; p++) {
+							var part = parts[p];
+							if (!part) continue;
+							if (/^\s+$/.test(part)) {
+								out.push(" ");
+							} else {
+								pushWord(part);
+							}
+						}
+					}
+
+					nodes.forEach(function (node) {
+						if (!node) return;
+						if (node.nodeType === 3) {
+							pushText(node.textContent);
+							return;
+						}
+						if (node.nodeType === 1) {
+							var tag = String(node.tagName || "").toUpperCase();
+							if (tag === "BR") {
+								out.push("<br />");
+								return;
+							}
+							pushText(node.textContent);
+						}
+					});
+
+					var html = out.join("")
+						.replace(/ +/g, " ")
+						.replace(/ <br \/>/g, "<br />")
+						.replace(/<br \/> /g, "<br />");
+					el.innerHTML = html.trim();
+				}
+
+				var wordEls = Array.prototype.slice.call(document.querySelectorAll(".reveal-words"));
+				wordEls.forEach(function (el) {
+					splitWords(el);
+				});
+
+				var items = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+				if (!items.length && !wordEls.length) return;
+
+				function applyStagger(root) {
+					var revealables = root.querySelectorAll(".reveal[data-delay]");
+					var i = 0;
+					revealables.forEach(function (el) {
+						var delay = Math.min(340, i * 70);
+						el.style.setProperty("--reveal-delay", delay + "ms");
+						i += 1;
+					});
+				}
+
+				["sim", "raizingsim", "offers", "destinations", "faq"].forEach(function (id) {
+					var sec = document.getElementById(id);
+					if (sec) applyStagger(sec);
+				});
+				
+				// Stagger sidebar navigation items
+				var sidebar = document.querySelector(".sidebar");
+				if (sidebar) applyStagger(sidebar);
+
+				function initRevealAnimations() {
+					if (prefersReduced || !("IntersectionObserver" in window)) {
+						items.forEach(function (el) {
+							el.classList.add("is-revealed");
+							var wordsInside = el.querySelectorAll ? el.querySelectorAll(".reveal-words") : [];
+							wordsInside.forEach(function (w) {
+								w.classList.add("is-revealed");
+							});
+						});
+						wordEls.forEach(function (el) {
+							el.classList.add("is-revealed");
+						});
+						return;
+					}
+
+					var io = new IntersectionObserver(
+						function (entries) {
+							entries.forEach(function (entry) {
+								if (!entry.isIntersecting) return;
+								entry.target.classList.add("is-revealed");
+								var words = entry.target.querySelectorAll ? entry.target.querySelectorAll(".reveal-words") : [];
+								words.forEach(function (w) {
+									w.classList.add("is-revealed");
+								});
+								io.unobserve(entry.target);
+							});
+						},
+						{ threshold: 0.16 }
+					);
+
+					items.forEach(function (el) {
+						io.observe(el);
+					});
+
+					wordEls.forEach(function (el) {
+						io.observe(el);
+					});
+				}
+
+				// Wait for preloader to complete before starting reveal animations
+				var preloaderComplete = false;
+				window.addEventListener("rg-preloader-complete", function () {
+					preloaderComplete = true;
+					initRevealAnimations();
+				});
+
+				// Fallback: if no preloader exists, init immediately
+				window.setTimeout(function () {
+					if (!preloaderComplete && !document.getElementById("rg-preloader")) {
+						initRevealAnimations();
+					}
+				}, 100);
+
+				// Cursor
+				var cursor = document.querySelector(".cursor");
+				if (!cursor) return;
+				var canHover = false;
+				try {
+					canHover = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+				} catch (e) {}
+				if (!canHover) return;
+
+				var mouseX = 0;
+				var mouseY = 0;
+				var posX = 0;
+				var posY = 0;
+				var raf = 0;
+
+				function onMove(e) {
+					mouseX = e.clientX;
+					mouseY = e.clientY;
+					if (!cursor.classList.contains("is-visible")) cursor.classList.add("is-visible");
+					if (!raf) raf = requestAnimationFrame(tick);
+				}
+
+				function tick() {
+					raf = 0;
+					posX += (mouseX - posX) * 0.18;
+					posY += (mouseY - posY) * 0.18;
+					cursor.style.transform = "translate3d(" + posX + "px, " + posY + "px, 0) translate3d(-50%, -50%, 0)";
+					if (Math.abs(mouseX - posX) + Math.abs(mouseY - posY) > 0.1) raf = requestAnimationFrame(tick);
+				}
+
+				function onDown() {
+					cursor.classList.add("is-down");
+				}
+
+				function onUp() {
+					cursor.classList.remove("is-down");
+				}
+
+				function onEnterHover() {
+					cursor.classList.add("is-hover");
+				}
+
+				function onLeaveHover() {
+					cursor.classList.remove("is-hover");
+				}
+
+				window.addEventListener("mousemove", onMove, { passive: true });
+				window.addEventListener("mousedown", onDown, { passive: true });
+				window.addEventListener("mouseup", onUp, { passive: true });
+
+				var hoverables = document.querySelectorAll("a, button, summary");
+				hoverables.forEach(function (el) {
+					el.addEventListener("mouseenter", onEnterHover, { passive: true });
+					el.addEventListener("mouseleave", onLeaveHover, { passive: true });
+				});
+			})();
+		</script>
+	</body>
+</html>

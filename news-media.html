@@ -1,0 +1,867 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>News &amp; Media — Raizing Group</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			:root {
+				--brand-red: #b40000;
+				--brand-red-2: #e00000;
+				--bg: #070a0f;
+				--text: #ffffff;
+				--muted: rgba(255, 255, 255, 0.78);
+				--muted-2: rgba(255, 255, 255, 0.62);
+				--sidebar-w: 280px;
+				--border: rgba(255, 255, 255, 0.16);
+				--focus: rgba(224, 0, 0, 0.35);
+				--font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+				--reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+				--reveal-opacity: 820ms;
+				--reveal-transform: 1200ms;
+				--reveal-clip: 1350ms;
+				--reveal-delay: 0ms;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			html,
+			body {
+				height: 100%;
+			}
+
+			body {
+				margin: 0;
+				font-family: var(--font-sans);
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				text-rendering: geometricPrecision;
+				background-color: var(--bg);
+				background-image:
+					radial-gradient(1000px 560px at 22% 34%, rgba(224, 0, 0, 0.24), transparent 60%),
+					radial-gradient(800px 520px at 86% 70%, rgba(255, 255, 255, 0.08), transparent 55%),
+					linear-gradient(110deg, rgba(10, 14, 22, 0.86), rgba(10, 14, 22, 0.62)),
+					repeating-linear-gradient(105deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 240px),
+					repeating-linear-gradient(160deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 320px);
+				background-size: cover;
+				background-position: center;
+				color: var(--text);
+				overflow-x: hidden;
+				cursor: none;
+			}
+
+			/* Themed scrollbar */
+			html,
+			body,
+			.sidebar,
+			* {
+				scrollbar-width: thin;
+				scrollbar-color: rgba(224, 0, 0, 0.78) rgba(255, 255, 255, 0.08);
+			}
+
+			html::-webkit-scrollbar,
+			body::-webkit-scrollbar,
+			.sidebar::-webkit-scrollbar,
+			*::-webkit-scrollbar {
+				width: 12px;
+				height: 12px;
+			}
+
+			html::-webkit-scrollbar-track,
+			body::-webkit-scrollbar-track,
+			.sidebar::-webkit-scrollbar-track,
+			*::-webkit-scrollbar-track {
+				background: rgba(0, 0, 0, 0.28);
+			}
+
+			html::-webkit-scrollbar-thumb,
+			body::-webkit-scrollbar-thumb,
+			.sidebar::-webkit-scrollbar-thumb,
+			*::-webkit-scrollbar-thumb {
+				background: linear-gradient(180deg, var(--brand-red-2), var(--brand-red));
+				border-radius: 999px;
+				border: 3px solid rgba(0, 0, 0, 0.36);
+				min-height: 44px;
+			}
+
+			/* Custom cursor (desktop only) */
+			.cursor {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 54px;
+				height: 54px;
+				border-radius: 999px;
+				border: 1.6px solid rgba(224, 0, 0, 0.62);
+				background: rgba(224, 0, 0, 0.08);
+				transform: translate3d(-50%, -50%, 0);
+				pointer-events: none;
+				z-index: 9999;
+				backdrop-filter: blur(6px);
+				-webkit-backdrop-filter: blur(6px);
+				opacity: 0;
+				transition: opacity 180ms ease, width 180ms ease, height 180ms ease, background 180ms ease, border-color 180ms ease;
+				will-change: transform;
+			}
+
+			.cursor.is-visible {
+				opacity: 1;
+			}
+
+			.cursor.is-hover {
+				width: 64px;
+				height: 64px;
+				background: rgba(224, 0, 0, 0.14);
+				border-color: rgba(224, 0, 0, 0.92);
+			}
+
+			.cursor.is-down {
+				width: 48px;
+				height: 48px;
+			}
+
+			@media (hover: none), (pointer: coarse) {
+				body {
+					cursor: auto;
+				}
+				.cursor {
+					display: none;
+				}
+			}
+
+			a {
+				color: inherit;
+				text-decoration: none;
+			}
+
+			a:focus-visible,
+			button:focus-visible {
+				outline: 3px solid var(--focus);
+				outline-offset: 3px;
+			}
+
+			.page {
+				min-height: 100vh;
+				display: grid;
+				grid-template-columns: var(--sidebar-w) 1fr;
+				grid-auto-rows: min-content;
+			}
+
+			/* Sidebar */
+			.sidebar {
+				position: sticky;
+				top: 0;
+				padding: 36px 28px 28px;
+				background: transparent;
+				grid-column: 1;
+				grid-row: 1 / -1;
+				height: 100vh;
+				overflow: auto;
+			}
+
+			.brand {
+				display: flex;
+				align-items: flex-start;
+				gap: 12px;
+			}
+
+			.brand img {
+				width: 150px;
+				height: auto;
+				display: block;
+				max-width: 100%;
+			}
+
+			.nav {
+				margin-top: 54px;
+				display: grid;
+				gap: 22px;
+				padding-left: 18px;
+			}
+
+			.nav a {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				font-size: 17px;
+				font-weight: 700;
+				line-height: 1.2;
+				padding: 4px 0;
+				color: rgba(255, 255, 255, 0.86);
+				text-decoration: underline;
+				text-decoration-thickness: 2px;
+				text-underline-offset: 6px;
+				text-decoration-color: rgba(255, 255, 255, 0.22);
+				transition: color 160ms ease, text-decoration-color 160ms ease;
+			}
+
+			.nav a:hover {
+				color: #ffffff;
+				text-decoration-color: rgba(224, 0, 0, 0.65);
+			}
+
+			.nav a[aria-current="page"] {
+				color: #ffffff;
+				text-decoration-color: rgba(224, 0, 0, 0.85);
+			}
+
+			.nav a[data-caret]::after {
+				content: "";
+				width: 7px;
+				height: 7px;
+				border-right: 2px solid rgba(255, 255, 255, 0.72);
+				border-bottom: 2px solid rgba(255, 255, 255, 0.72);
+				transform: rotate(45deg);
+				margin-top: 2px;
+			}
+
+			.nav-item {
+				display: grid;
+				gap: 10px;
+			}
+
+			.nav-dropdown {
+				display: grid;
+				gap: 10px;
+				padding-left: 14px;
+				margin-left: 8px;
+				border-left: 2px solid rgba(255, 255, 255, 0.12);
+				max-height: 0;
+				opacity: 0;
+				overflow: hidden;
+				transform: translate3d(0, -6px, 0);
+				visibility: hidden;
+				pointer-events: none;
+				transition:
+					max-height 260ms var(--reveal-ease),
+					opacity 200ms ease,
+					transform 260ms var(--reveal-ease),
+					visibility 0ms linear 260ms;
+			}
+
+			.nav-services:hover .nav-dropdown,
+			.nav-services:focus-within .nav-dropdown {
+				max-height: 600px;
+				opacity: 1;
+				transform: translate3d(0, 0, 0);
+				visibility: visible;
+				pointer-events: auto;
+				transition-delay: 0ms;
+			}
+
+			.nav-dropdown a {
+				font-size: 14px;
+				font-weight: 700;
+				color: rgba(255, 255, 255, 0.78);
+				text-decoration: none;
+				padding: 2px 0;
+			}
+
+			.nav-dropdown a:hover {
+				color: #ffffff;
+			}
+
+			.cta {
+				margin-top: 50px;
+				padding-left: 18px;
+			}
+
+			.cta a {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 14px 18px;
+				border-radius: 999px;
+				background: linear-gradient(180deg, var(--brand-red-2), var(--brand-red));
+				color: #ffffff;
+				font-weight: 900;
+				letter-spacing: 0.03em;
+				text-transform: uppercase;
+				font-size: 12px;
+				box-shadow: 0 18px 48px rgba(224, 0, 0, 0.22);
+				transition: transform 180ms ease, filter 180ms ease;
+			}
+
+			.cta a:hover {
+				transform: translate3d(0, -1px, 0);
+				filter: brightness(1.05);
+			}
+
+			.social {
+				position: sticky;
+				bottom: 18px;
+				margin-top: 36px;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 14px;
+				padding-left: 18px;
+			}
+
+			.social a {
+				font-weight: 800;
+				font-size: 13px;
+				letter-spacing: 0.02em;
+				color: rgba(255, 255, 255, 0.62);
+				text-decoration: underline;
+				text-decoration-color: rgba(255, 255, 255, 0.18);
+				text-underline-offset: 5px;
+			}
+
+			.social a:hover {
+				color: rgba(255, 255, 255, 0.9);
+				text-decoration-color: rgba(224, 0, 0, 0.6);
+			}
+
+			/* Reveal system */
+			.reveal {
+				opacity: 0;
+				transform: translate3d(0, 14px, 0);
+				transition:
+					opacity var(--reveal-opacity) var(--reveal-ease) var(--reveal-delay),
+					transform var(--reveal-transform) var(--reveal-ease) var(--reveal-delay);
+				will-change: transform, opacity;
+			}
+
+			.reveal[data-reveal="up"] {
+				transform: translate3d(0, 16px, 0);
+			}
+
+			.reveal[data-reveal="zoom"] {
+				transform: translate3d(0, 0, 0) scale(0.98);
+			}
+
+			.reveal[data-reveal="clip"] {
+				transform: translate3d(0, 0, 0);
+				clip-path: inset(12% 0 0 0 round 22px);
+				transition:
+					opacity var(--reveal-opacity) var(--reveal-ease) var(--reveal-delay),
+					clip-path var(--reveal-clip) var(--reveal-ease) var(--reveal-delay);
+			}
+
+			.reveal.is-revealed {
+				opacity: 1;
+				transform: translate3d(0, 0, 0) scale(1);
+				clip-path: inset(0 0 0 0 round 22px);
+			}
+
+			.reveal-words .w {
+				display: inline-block;
+				opacity: 0;
+				transform: translate3d(0, 18px, 0);
+				transition:
+					opacity 900ms var(--reveal-ease),
+					transform 1200ms var(--reveal-ease);
+				will-change: transform, opacity;
+			}
+
+			.reveal-words.is-revealed .w {
+				opacity: 1;
+				transform: translate3d(0, 0, 0);
+			}
+
+			/* Main */
+			.main {
+				grid-column: 2;
+				padding: 70px 60px 96px;
+				min-height: 100vh;
+				display: grid;
+				place-items: center;
+			}
+
+			.center {
+				width: 100%;
+				max-width: 920px;
+				display: grid;
+				gap: 18px;
+				justify-items: center;
+				text-align: center;
+			}
+
+			.kicker {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				width: max-content;
+				padding: 8px 12px;
+				border-radius: 999px;
+				font-weight: 900;
+				font-size: 12px;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				background: rgba(224, 0, 0, 0.18);
+				border: 1px solid rgba(224, 0, 0, 0.26);
+				color: rgba(255, 255, 255, 0.94);
+			}
+
+			h1 {
+				margin: 0;
+				font-size: clamp(42px, 4.6vw, 72px);
+				line-height: 1.06;
+				letter-spacing: -0.04em;
+				font-weight: 950;
+				color: rgba(224, 0, 0, 0.96);
+			}
+
+			.sub {
+				margin: 0;
+				max-width: 70ch;
+				color: rgba(255, 255, 255, 0.78);
+				font-weight: 600;
+				line-height: 1.85;
+				font-size: 14px;
+			}
+
+			.card {
+				width: 100%;
+				border-radius: 22px;
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				background: rgba(255, 255, 255, 0.05);
+				box-shadow: 0 22px 70px rgba(0, 0, 0, 0.20);
+				padding: 22px;
+				display: grid;
+				gap: 12px;
+			}
+
+			.form {
+				display: grid;
+				grid-template-columns: 1fr auto;
+				gap: 12px;
+				align-items: center;
+			}
+
+			.input {
+				width: 100%;
+				padding: 14px 16px;
+				border-radius: 999px;
+				border: 1px solid rgba(255, 255, 255, 0.14);
+				background: rgba(0, 0, 0, 0.28);
+				color: rgba(255, 255, 255, 0.92);
+				font-weight: 650;
+				letter-spacing: 0.01em;
+				font-size: 14px;
+				outline: none;
+			}
+
+			.input::placeholder {
+				color: rgba(255, 255, 255, 0.48);
+			}
+
+			.btn {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 14px 18px;
+				border-radius: 999px;
+				background: linear-gradient(180deg, var(--brand-red-2), var(--brand-red));
+				border: 1px solid rgba(255, 255, 255, 0.16);
+				color: #ffffff;
+				font-weight: 900;
+				letter-spacing: 0.03em;
+				text-transform: uppercase;
+				font-size: 12px;
+				box-shadow: 0 14px 34px rgba(224, 0, 0, 0.16);
+				cursor: pointer;
+				transition: transform 180ms ease, filter 180ms ease;
+			}
+
+			.btn:hover {
+				transform: translate3d(0, -1px, 0);
+				filter: brightness(1.05);
+			}
+
+			.note {
+				margin: 0;
+				color: rgba(255, 255, 255, 0.62);
+				font-weight: 650;
+				font-size: 12px;
+				line-height: 1.6;
+			}
+
+			.status {
+				min-height: 18px;
+				color: rgba(255, 255, 255, 0.72);
+				font-weight: 750;
+				font-size: 12px;
+				letter-spacing: 0.01em;
+			}
+
+			@media (max-width: 980px) {
+				.page {
+					grid-template-columns: 1fr;
+				}
+
+				.sidebar {
+					position: relative;
+					height: auto;
+					grid-row: auto;
+					grid-column: auto;
+					padding: 24px 20px;
+				}
+
+				.social {
+					position: static;
+					margin-top: 22px;
+				}
+
+				.main {
+					grid-column: auto;
+					padding: 44px 20px 64px;
+					min-height: auto;
+				}
+
+				.form {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+		<link rel="stylesheet" href="responsive.css" />
+		<link rel="stylesheet" href="preloader.css" />
+		<script src="preloader.js" defer></script>
+		<script src="responsive.js" defer></script>
+	</head>
+	<body>
+		<div id="rg-preloader" role="status" aria-live="polite" aria-label="Loading">
+			<div class="rg-preloader__inner">
+				<div class="rg-preloader__stage">
+					<div class="rg-preloader__accent" aria-hidden="true"></div>
+					<div class="rg-preloader__logoWrap">
+						<div class="rg-preloader__logoGlow" aria-hidden="true"></div>
+						<div class="rg-preloader__logoFrame">
+							<img class="rg-preloader__logo is-sharp" src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png" alt="Raizing Group" />
+							<img class="rg-preloader__logo is-blur" src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png" alt="" aria-hidden="true" />
+						</div>
+					</div>
+				</div>
+				<div class="rg-preloader__tagline">RISE TO EXCELLENCE</div>
+				<div class="rg-preloader__bar" aria-hidden="true">
+					<div class="rg-preloader__barFill"></div>
+					<div class="rg-preloader__barShine"></div>
+				</div>
+				<button class="rg-preloader__skip" type="button" data-rg-skip>Skip</button>
+				<span class="rg-preloader__sr">Loading…</span>
+			</div>
+		</div>
+		<header class="mobile-topbar" aria-label="Mobile top bar">
+			<a class="mobile-brand" href="index.html#home" aria-label="Raizing Group Home">
+				<img
+					src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png"
+					alt="Raizing Group"
+					loading="eager"
+				/>
+			</a>
+			<button class="menu-btn" type="button" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false" data-menu-button>
+				<span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+			</button>
+		</header>
+		<div class="mobile-overlay" data-menu-overlay aria-hidden="true"></div>
+		<div class="page">
+			<aside class="sidebar" id="mobile-drawer" aria-label="Primary">
+				<div class="brand reveal" data-reveal="left">
+					<a href="index.html#home" aria-label="Raizing Group Home">
+						<img
+							src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png"
+							alt="Raizing Group"
+							loading="eager"
+						/>
+					</a>
+				</div>
+
+				<nav class="nav" aria-label="Site">
+					<a href="index.html#home" class="reveal" data-reveal="left" data-delay>Home</a>
+					<a href="about.html" class="reveal" data-reveal="left" data-delay>About Us</a>
+					<div class="nav-item nav-services reveal" data-reveal="left" data-delay>
+						<a href="index.html#services" data-caret aria-haspopup="true">Our Services</a>
+						<div class="nav-dropdown" aria-label="Service pages">
+							<a href="visas.html">Raizing Visas</a>
+							<a href="immigration.html">Immigration (Raizing Sovereign)</a>
+							<a href="insurance.html">Raizing Insurance</a>
+							<a href="company-formation.html">Company Formation</a>
+							<a href="manpower-recruitment.html">Manpower Recruitment (Cavec Global)</a>
+							<a href="verify.html">Raizing Verify</a>
+							<a href="sim.html">Raizing Sim</a>
+							<a href="edu.html">Raizing Edu</a>
+						</div>
+					</div>
+					<a href="news-media.html" aria-current="page" class="reveal" data-reveal="left" data-delay>News &amp; Media</a>
+					<a href="contact.html" class="reveal" data-reveal="left" data-delay>Contact Us</a>
+				</nav>
+
+				<div class="cta reveal" data-reveal="left" data-delay>
+					<a href="index.html#partner">Partner With Us</a>
+				</div>
+
+				<div class="social reveal" data-reveal="left" data-delay aria-label="Social links">
+					<a href="#" rel="nofollow">LinkedIn</a>
+					<a href="#" rel="nofollow">Facebook</a>
+					<a href="#" rel="nofollow">Instagram</a>
+				</div>
+			</aside>
+
+			<main class="main" aria-label="News and Media">
+				<div class="center">
+					<div class="kicker reveal" data-reveal="left" data-delay>NEWS &amp; MEDIA</div>
+					<h1 class="reveal-words">Subscribe for updates</h1>
+					<p class="sub reveal" data-reveal="up" data-delay>
+						Get the latest announcements, partnerships, and service updates from Raizing Group.
+					</p>
+
+					<div class="card reveal" data-reveal="clip" data-delay>
+						<form class="form" id="subscribeForm" autocomplete="on" novalidate>
+							<label class="sr-only" for="email">Email</label>
+							<input
+								class="input"
+								type="email"
+								id="email"
+								name="email"
+								placeholder="Enter your email address"
+								required
+								inputmode="email"
+								autocapitalize="none"
+								autocomplete="email"
+							/>
+							<button class="btn" type="submit">Subscribe</button>
+						</form>
+						<p class="note">No spam. Unsubscribe anytime.</p>
+						<div class="status" id="status" aria-live="polite"></div>
+					</div>
+				</div>
+			</main>
+		</div>
+
+		<div class="cursor" aria-hidden="true"></div>
+
+		<script>
+			(function () {
+				var prefersReduced = false;
+				try {
+					prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+				} catch (e) {}
+
+				function escapeHTML(s) {
+					return String(s)
+						.replace(/&/g, "&amp;")
+						.replace(/</g, "&lt;")
+						.replace(/>/g, "&gt;")
+						.replace(/\"/g, "&quot;")
+						.replace(/'/g, "&#39;");
+				}
+
+				function splitWords(el) {
+					var nodes = Array.prototype.slice.call(el.childNodes || []);
+					if (!nodes.length) return;
+
+					var out = [];
+					var i = 0;
+
+					function pushWord(w) {
+						out.push(
+							'<span class="w" style="transition-delay:' + String(i * 55) + 'ms">' + escapeHTML(w) + "</span>"
+						);
+						i += 1;
+					}
+
+					function pushText(text) {
+						var parts = String(text || "").split(/(\s+)/);
+						for (var p = 0; p < parts.length; p++) {
+							var part = parts[p];
+							if (!part) continue;
+							if (/^\s+$/.test(part)) {
+								out.push(" ");
+							} else {
+								pushWord(part);
+							}
+						}
+					}
+
+					nodes.forEach(function (node) {
+						if (!node) return;
+						if (node.nodeType === 3) {
+							pushText(node.textContent);
+							return;
+						}
+						if (node.nodeType === 1) {
+							var tag = String(node.tagName || "").toUpperCase();
+							if (tag === "BR") {
+								out.push("<br />");
+								return;
+							}
+							pushText(node.textContent);
+						}
+					});
+
+					var html = out.join("")
+						.replace(/ +/g, " ")
+						.replace(/ <br \/>/g, "<br />")
+						.replace(/<br \/> /g, "<br />");
+					el.innerHTML = html.trim();
+				}
+
+				var wordEls = Array.prototype.slice.call(document.querySelectorAll(".reveal-words"));
+				wordEls.forEach(function (el) {
+					splitWords(el);
+				});
+
+				var items = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+				if (!items.length && !wordEls.length) return;
+
+				function applyStagger(root) {
+					var revealables = root.querySelectorAll(".reveal[data-delay]");
+					var i = 0;
+					revealables.forEach(function (el) {
+						var delay = Math.min(260, i * 70);
+						el.style.setProperty("--reveal-delay", delay + "ms");
+						i += 1;
+					});
+				}
+
+				applyStagger(document.body);
+
+				function initRevealAnimations() {
+					if (prefersReduced || !("IntersectionObserver" in window)) {
+						items.forEach(function (el) {
+							el.classList.add("is-revealed");
+							var wordsInside = el.querySelectorAll ? el.querySelectorAll(".reveal-words") : [];
+							wordsInside.forEach(function (w) {
+								w.classList.add("is-revealed");
+							});
+						});
+						wordEls.forEach(function (el) {
+							el.classList.add("is-revealed");
+						});
+						return;
+					}
+
+					var io = new IntersectionObserver(
+						function (entries) {
+							entries.forEach(function (entry) {
+								if (!entry.isIntersecting) return;
+								entry.target.classList.add("is-revealed");
+								var words = entry.target.querySelectorAll ? entry.target.querySelectorAll(".reveal-words") : [];
+								words.forEach(function (w) {
+									w.classList.add("is-revealed");
+								});
+								io.unobserve(entry.target);
+							});
+						},
+						{ threshold: 0.16 }
+					);
+
+					items.forEach(function (el) {
+						io.observe(el);
+					});
+					wordEls.forEach(function (el) {
+						io.observe(el);
+					});
+				}
+
+				// Wait for preloader to complete before starting reveal animations
+				var preloaderComplete = false;
+				window.addEventListener("rg-preloader-complete", function () {
+					preloaderComplete = true;
+					initRevealAnimations();
+				});
+
+				// Fallback: if no preloader exists, init immediately
+				window.setTimeout(function () {
+					if (!preloaderComplete && !document.getElementById("rg-preloader")) {
+						initRevealAnimations();
+					}
+				}, 100);
+
+				// Subscribe (no backend, simple acknowledgement)
+				var form = document.getElementById("subscribeForm");
+				var email = document.getElementById("email");
+				var status = document.getElementById("status");
+				if (form && email && status) {
+					form.addEventListener("submit", function (e) {
+						e.preventDefault();
+						if (!email.value || !email.checkValidity()) {
+							status.textContent = "Please enter a valid email address.";
+							return;
+						}
+						status.textContent = "Thanks — you’re subscribed.";
+						email.value = "";
+					});
+				}
+
+				// Cursor
+				var cursor = document.querySelector(".cursor");
+				if (!cursor) return;
+				var canHover = false;
+				try {
+					canHover = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+				} catch (e) {}
+				if (!canHover) return;
+
+				var mouseX = 0;
+				var mouseY = 0;
+				var posX = 0;
+				var posY = 0;
+				var raf = 0;
+
+				function onMove(e) {
+					mouseX = e.clientX;
+					mouseY = e.clientY;
+					if (!cursor.classList.contains("is-visible")) cursor.classList.add("is-visible");
+					if (!raf) raf = requestAnimationFrame(tick);
+				}
+
+				function tick() {
+					raf = 0;
+					posX += (mouseX - posX) * 0.18;
+					posY += (mouseY - posY) * 0.18;
+					cursor.style.transform = "translate3d(" + posX + "px, " + posY + "px, 0) translate3d(-50%, -50%, 0)";
+					if (Math.abs(mouseX - posX) + Math.abs(mouseY - posY) > 0.1) raf = requestAnimationFrame(tick);
+				}
+
+				function onDown() {
+					cursor.classList.add("is-down");
+				}
+
+				function onUp() {
+					cursor.classList.remove("is-down");
+				}
+
+				function onEnterHover() {
+					cursor.classList.add("is-hover");
+				}
+
+				function onLeaveHover() {
+					cursor.classList.remove("is-hover");
+				}
+
+				window.addEventListener("mousemove", onMove, { passive: true });
+				window.addEventListener("mousedown", onDown, { passive: true });
+				window.addEventListener("mouseup", onUp, { passive: true });
+
+				var hoverables = document.querySelectorAll("a, button, input, summary");
+				hoverables.forEach(function (el) {
+					el.addEventListener("mouseenter", onEnterHover, { passive: true });
+					el.addEventListener("mouseleave", onLeaveHover, { passive: true });
+				});
+			})();
+		</script>
+		<style>
+			.sr-only {
+				position: absolute;
+				width: 1px;
+				height: 1px;
+				padding: 0;
+				margin: -1px;
+				overflow: hidden;
+				clip: rect(0, 0, 0, 0);
+				white-space: nowrap;
+				border: 0;
+			}
+		</style>
+	</body>
+</html>
