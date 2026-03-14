@@ -47,11 +47,11 @@ netlify deploy --prod
 ├── index.html              # Homepage
 ├── about.html              # About Us page
 ├── contact.html            # Contact page
-├── visas.html              # Raizing Visas service
-├── immigration.html        # Immigration service (Raizing Sovereign)
+├── visas.html              # Raizing Global service
+├── immigration.html        # Raizing Sovereign service
 ├── insurance.html          # Raizing Insurance service
 ├── company-formation.html  # Company Formation service
-├── manpower-recruitment.html # Manpower Recruitment (Cavec Global)
+├── manpower-recruitment.html # CAVEC Global
 ├── verify.html             # Raizing Verify service
 ├── sim.html                # Raizing Sim service
 ├── edu.html                # Raizing Edu service
@@ -115,11 +115,11 @@ netlify deploy --prod
 1. **Home** (`index.html`) - Main landing page with services overview
 2. **About Us** (`about.html`) - Company information
 3. **Services**:
-   - Raizing Visas
-   - Immigration (Raizing Sovereign)
+   - Raizing Global
+   - Raizing Sovereign
    - Raizing Insurance
    - Company Formation
-   - Manpower Recruitment (Cavec Global)
+   - CAVEC Global
    - Raizing Verify
    - Raizing Sim
    - Raizing Edu

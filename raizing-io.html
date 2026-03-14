@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>CAVEC Global — Raizing Group</title>
+		<title>Raizing IO — Raizing Group</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -259,151 +259,150 @@
 			}
 
 			.nav-dropdown a {
-				font-size: 15px;
-				font-weight: 750;
+				font-size: 14px;
+				font-weight: 700;
 				color: rgba(255, 255, 255, 0.78);
 				text-decoration: none;
-				text-underline-offset: 5px;
-				text-decoration-thickness: 2px;
-				text-decoration-color: rgba(255, 255, 255, 0.18);
 				padding: 2px 0;
-				transition: color 160ms ease, text-decoration-color 160ms ease;
 			}
 
 			.nav-dropdown a:hover {
 				color: #ffffff;
-				text-decoration: underline;
-				text-decoration-color: rgba(224, 0, 0, 0.65);
 			}
 
 			.cta {
-				margin-top: 22px;
+				margin-top: 50px;
+				padding-left: 18px;
 			}
 
 			.cta a {
 				display: inline-flex;
 				align-items: center;
 				justify-content: center;
-				width: 100%;
-				padding: 14px 14px;
-				font-weight: 700;
-				border-radius: 14px;
+				padding: 14px 18px;
+				border-radius: 999px;
 				background: linear-gradient(180deg, var(--brand-red-2), var(--brand-red));
-				border: 1px solid rgba(255, 255, 255, 0.18);
-				box-shadow: 0 10px 28px rgba(224, 0,  0, 0.18);
+				color: #ffffff;
+				font-weight: 900;
+				letter-spacing: 0.03em;
+				text-transform: uppercase;
+				font-size: 12px;
+				box-shadow: 0 18px 48px rgba(224, 0, 0, 0.22);
+				transition: transform 180ms ease, filter 180ms ease;
+			}
+
+			.cta a:hover {
+				transform: translate3d(0, -1px, 0);
+				filter: brightness(1.05);
 			}
 
 			.social {
-				position: absolute;
-				left: 28px;
-				bottom: 26px;
-				display: grid;
-				gap: 8px;
-				font-weight: 650;
-				color: rgba(255, 255, 255, 0.82);
+				position: sticky;
+				bottom: 18px;
+				margin-top: 36px;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 14px;
+				padding-left: 18px;
 			}
 
-			/* Premium reveal animations */
+			.social a {
+				font-weight: 800;
+				font-size: 13px;
+				letter-spacing: 0.02em;
+				color: rgba(255, 255, 255, 0.62);
+				text-decoration: underline;
+				text-decoration-color: rgba(255, 255, 255, 0.18);
+				text-underline-offset: 5px;
+			}
+
+			.social a:hover {
+				color: rgba(255, 255, 255, 0.9);
+				text-decoration-color: rgba(224, 0, 0, 0.6);
+			}
+
+			/* Reveal system */
 			.reveal {
-				--reveal-delay: 0ms;
 				opacity: 0;
-				transform: translate3d(0, 16px, 0) scale(0.995);
-				transition-property: opacity, transform;
-				transition-duration: var(--reveal-opacity), var(--reveal-transform);
-				transition-timing-function: var(--reveal-ease);
-				transition-delay: var(--reveal-delay);
+				transform: translate3d(0, 14px, 0);
+				transition:
+					opacity var(--reveal-opacity) var(--reveal-ease) var(--reveal-delay),
+					transform var(--reveal-transform) var(--reveal-ease) var(--reveal-delay);
 				will-change: transform, opacity;
-				backface-visibility: hidden;
+			}
+
+			.reveal[data-reveal="up"] {
+				transform: translate3d(0, 16px, 0);
+			}
+
+			.reveal[data-reveal="left"] {
+				transform: translate3d(-16px, 0, 0);
 			}
 
 			.reveal[data-reveal="clip"] {
-				transform: translate3d(14px, 10px, 0) scale(0.996);
-				clip-path: inset(12% 10% 12% 10% round 26px);
-				transition-property: opacity, transform, clip-path;
-				transition-duration: var(--reveal-opacity), var(--reveal-transform), var(--reveal-clip);
+				transform: translate3d(0, 0, 0);
+				clip-path: inset(12% 0 0 0 round 22px);
+				transition:
+					opacity var(--reveal-opacity) var(--reveal-ease) var(--reveal-delay),
+					clip-path var(--reveal-clip) var(--reveal-ease) var(--reveal-delay);
 			}
 
 			.reveal.is-revealed {
 				opacity: 1;
-				transform: translate3d(0, 0, 0) scale(1);
-				will-change: auto;
-			}
-
-			.reveal[data-reveal="clip"].is-revealed {
-				clip-path: inset(0% 0% 0% 0% round 18px);
-			}
-
-			.reveal-words {
-				opacity: 1;
-				transform: none;
+				transform: translate3d(0, 0, 0);
+				clip-path: inset(0 0 0 0 round 22px);
 			}
 
 			.reveal-words .w {
 				display: inline-block;
 				opacity: 0;
-				transform: translate3d(0, 12px, 0) scale(0.998);
-				transition-property: opacity, transform;
-				transition-duration: 700ms, 1100ms;
-				transition-timing-function: var(--reveal-ease);
+				transform: translate3d(0, 18px, 0);
+				transition:
+					opacity 900ms var(--reveal-ease),
+					transform 1200ms var(--reveal-ease);
 				will-change: transform, opacity;
-				backface-visibility: hidden;
 			}
 
 			.reveal-words.is-revealed .w {
 				opacity: 1;
-				transform: translate3d(0, 0, 0) scale(1);
+				transform: translate3d(0, 0, 0);
 			}
 
-			@media (prefers-reduced-motion: reduce) {
-				.reveal {
-					opacity: 1;
-					transform: none;
-					transition: none;
-				}
-				.reveal-words .w {
-					opacity: 1;
-					transform: none;
-					transition: none;
-				}
-			}
-
-			/* Hero */
+			/* Service hero */
 			.service-hero {
 				grid-column: 2;
-				padding: 84px 60px 36px;
+				padding: 70px 60px 26px;
 			}
 
 			.service-hero-inner {
 				max-width: 1220px;
 				margin: 0 auto;
 				display: grid;
-				grid-template-columns: 1fr 1fr;
-				gap: 42px;
-				align-items: start;
+				grid-template-columns: 1.05fr 0.95fr;
+				gap: 34px;
+				align-items: center;
 			}
 
 			.hero-media {
-				position: relative;
-				border-radius: 22px;
-				overflow: hidden;
+				border-radius: 26px;
 				border: 1px solid rgba(255, 255, 255, 0.12);
 				background:
-					radial-gradient(900px 520px at 30% 26%, rgba(224, 0, 0, 0.18), transparent 60%),
-					radial-gradient(900px 520px at 86% 70%, rgba(255, 255, 255, 0.08), transparent 55%),
-					linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
-				box-shadow: 0 22px 70px rgba(0, 0, 0, 0.22);
-				min-height: 380px;
+					radial-gradient(900px 360px at 18% 20%, rgba(224, 0, 0, 0.22), transparent 55%),
+					radial-gradient(700px 320px at 82% 78%, rgba(255, 255, 255, 0.12), transparent 60%),
+					linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
+				box-shadow: 0 30px 90px rgba(0, 0, 0, 0.32);
+				min-height: 360px;
+				position: relative;
+				overflow: hidden;
 			}
 
 			.hero-media::after {
 				content: "";
 				position: absolute;
 				inset: 0;
-				background:
-					repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 240px);
-				opacity: 0.35;
+				opacity: 0.34;
+				background: repeating-linear-gradient(120deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 250px);
 				mix-blend-mode: overlay;
-				pointer-events: none;
 			}
 
 			.entity-mark {
@@ -411,11 +410,11 @@
 				inset: 0;
 				display: grid;
 				place-items: center;
-				padding: 26px;
+				padding: 30px;
 			}
 
 			.entity-logo-large {
-				width: min(360px, 88%);
+				width: min(420px, 70%);
 				height: auto;
 				display: block;
 				filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.35));
@@ -454,7 +453,7 @@
 
 			.service-p {
 				margin: 0;
-				max-width: 72ch;
+				max-width: 78ch;
 				color: rgba(255, 255, 255, 0.78);
 				font-weight: 550;
 				line-height: 1.95;
@@ -707,12 +706,12 @@
 							<a href="immigration.html">Raizing Sovereign</a>
 							<a href="insurance.html">Raizing Insurance</a>
 							<a href="company-formation.html">Company Formation</a>
-							<a href="manpower-recruitment.html" aria-current="page">CAVEC Global</a>
+							<a href="manpower-recruitment.html">CAVEC Global</a>
 							<a href="verify.html">Raizing Verify</a>
 							<a href="sim.html">Raizing Sim</a>
 							<a href="edu.html">Raizing Edu</a>
 							<a href="raizing-panda.html">Raizing Panda</a>
-							<a href="raizing-io.html">Raizing IO</a>
+							<a href="raizing-io.html" aria-current="page">Raizing IO</a>
 						</div>
 					</div>
 					<a href="news-media.html" class="reveal" data-reveal="left" data-delay>News &amp; Media</a>
@@ -730,70 +729,105 @@
 				</div>
 			</aside>
 
-			<main class="service-hero" id="manpower" aria-label="CAVEC Global - Training and Recruitment">
+			<main class="service-hero" id="io" aria-label="Raizing IO">
 				<div class="service-hero-inner">
-					<div class="hero-media reveal" data-reveal="clip" data-delay role="img" aria-label="CAVEC Global">
+					<div class="hero-media reveal" data-reveal="clip" data-delay role="img" aria-label="Raizing IO">
 						<div class="entity-mark" aria-hidden="true">
-							<img
-								class="entity-logo-large"
-								src="https://res.cloudinary.com/dsbdcex1d/image/upload/v1764652709/HR_-_Cavec_global_tgdhwa.png"
-								alt=""
-								loading="eager"
-							/>
+							<img class="entity-logo-large" src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png" alt="" loading="eager" />
 						</div>
 					</div>
 
 					<div class="service-copy">
-						<div class="service-kicker reveal" data-reveal="left" data-delay>CAVEC GLOBAL</div>
-						<h1 class="service-h1 reveal-words">Training &amp; Manpower Recruitment</h1>
+						<div class="service-kicker reveal" data-reveal="left" data-delay>RAIZING IO</div>
+						<h1 class="service-h1 reveal-words">Online Skill Development</h1>
 						<p class="service-p reveal" data-reveal="up" data-delay>
-							Cavec Global is a training centre for extensive learning and teaching where our main motto is to teach
-							students in our online and offline classes with a personal touch — building skills across caregivers, nurses,
-							hospitality staff, languages, and more.
+							Raizing IO is an Artificial Intelligence based Skill Development Training platform that helps professionals share their personal skill sets with individuals, thereby enhancing their abilities.
 						</p>
 						<p class="service-p reveal" data-reveal="up" data-delay>
-							We support career readiness so learners can attain employment in various countries and in India.
+							It is an online training platform offering a wide variety of courses that combine modern educational approaches with AI-driven learning.
 						</p>
 					</div>
 				</div>
 			</main>
 
-			<section class="entity" id="cavec" aria-label="Cavec Global website">
+			<section class="entity" id="raizingio" aria-label="Raizing IO website">
 				<div class="entity-inner">
 					<div class="entity-card reveal" data-reveal="up" data-delay>
 						<div class="entity-left">
 							<div class="entity-logo" aria-hidden="true">
-								<img
-									src="https://res.cloudinary.com/dsbdcex1d/image/upload/v1764652709/HR_-_Cavec_global_tgdhwa.png"
-									alt=""
-									loading="lazy"
-								/>
+								<img src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png" alt="" loading="lazy" />
 							</div>
 							<div class="entity-meta">
 								<p class="entity-kicker">Service Entity</p>
-								<p class="entity-name">Cavec Global</p>
+								<p class="entity-name">Raizing IO</p>
 							</div>
 						</div>
-						<a class="entity-link" href="https://cavecglobal.com/" target="_blank" rel="noopener noreferrer">
+						<a class="entity-link" href="https://raizing.io/" target="_blank" rel="noopener noreferrer">
 							<svg viewBox="0 0 24 24" aria-hidden="true">
 								<path d="M10 13a5 5 0 0 1 0-7l1.4-1.4a5 5 0 0 1 7 7L17 12.9a1 1 0 1 1-1.4-1.4l1.6-1.6a3 3 0 1 0-4.2-4.2L11.6 7a3 3 0 0 0 0 4.2 1 1 0 1 1-1.6 1.2ZM14 11a5 5 0 0 1 0 7L12.6 19.4a5 5 0 0 1-7-7L7 11.1a1 1 0 0 1 1.4 1.4l-1.6 1.6a3 3 0 1 0 4.2 4.2L12.4 17a3 3 0 0 0 0-4.2A1 1 0 0 1 14 11Z" />
 							</svg>
-							cavecglobal.com
+							raizing.io
 						</a>
 					</div>
 				</div>
 			</section>
 
-			<section class="svc-section" id="services" aria-label="Cavec Global services">
+			<section class="svc-section" id="about" aria-label="About Raizing IO">
 				<div class="svc-inner">
 					<div class="svc-card reveal" data-reveal="clip" data-delay>
-						<h2 class="svc-title reveal-words">Our Services</h2>
-						<ul class="svc-list" aria-label="Cavec services">
-							<li class="reveal" data-reveal="up" data-delay>Training Centres Online &amp; Offline</li>
-							<li class="reveal" data-reveal="up" data-delay>Manpower Recruitment</li>
-							<li class="reveal" data-reveal="up" data-delay>Student Counselling</li>
-							<li class="reveal" data-reveal="up" data-delay>Student Admission for Universities and Colleges</li>
-							<li class="reveal" data-reveal="up" data-delay>My Career Expert</li>
+						<h2 class="svc-title reveal-words">About the Platform</h2>
+						<p class="service-p reveal" data-reveal="up" data-delay>
+							This unique combination makes the learning experience more effective, efficient, and focused on improving the skill sets of students. Our platform leverages cutting-edge AI technology to personalize the learning journey for each individual.
+						</p>
+						<p class="service-p reveal" data-reveal="up" data-delay>
+							Whether you're looking to enhance your technical skills, develop new competencies, or advance your career, Raizing IO provides the tools and resources you need to succeed.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="svc-section" id="features" aria-label="Platform features">
+				<div class="svc-inner">
+					<div class="svc-card reveal" data-reveal="clip" data-delay>
+						<h2 class="svc-title reveal-words">Platform Features</h2>
+						<ul class="svc-list" aria-label="Raizing IO features">
+							<li class="reveal" data-reveal="up" data-delay>AI-powered personalized learning paths</li>
+							<li class="reveal" data-reveal="up" data-delay>Expert-led courses across various domains</li>
+							<li class="reveal" data-reveal="up" data-delay>Interactive skill assessments and progress tracking</li>
+							<li class="reveal" data-reveal="up" data-delay>Real-time feedback and adaptive content delivery</li>
+							<li class="reveal" data-reveal="up" data-delay>Professional certification upon course completion</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section class="svc-section" id="certification" aria-label="Certification programs">
+				<div class="svc-inner">
+					<div class="svc-card reveal" data-reveal="clip" data-delay>
+						<h2 class="svc-title reveal-words">Certification Programs</h2>
+						<p class="service-p reveal" data-reveal="up" data-delay>
+							Upon completion of the courses, our certification programs help learners strengthen their professional profiles and boost their careers. Our certifications are designed to validate your skills and demonstrate your expertise to employers.
+						</p>
+						<ul class="svc-list" aria-label="Certification benefits">
+							<li class="reveal" data-reveal="up" data-delay>Industry-recognized certifications</li>
+							<li class="reveal" data-reveal="up" data-delay>Digital badges for professional profiles</li>
+							<li class="reveal" data-reveal="up" data-delay>Verified credentials for career advancement</li>
+							<li class="reveal" data-reveal="up" data-delay>Continuous learning pathways</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section class="svc-section" id="benefits" aria-label="Why choose Raizing IO">
+				<div class="svc-inner">
+					<div class="svc-card reveal" data-reveal="clip" data-delay>
+						<h2 class="svc-title reveal-words">Why Choose Raizing IO</h2>
+						<ul class="svc-list" aria-label="Benefits">
+							<li class="reveal" data-reveal="up" data-delay>Learn at your own pace with flexible scheduling</li>
+							<li class="reveal" data-reveal="up" data-delay>Access courses from anywhere, anytime</li>
+							<li class="reveal" data-reveal="up" data-delay>Connect with industry professionals and mentors</li>
+							<li class="reveal" data-reveal="up" data-delay>Practical, hands-on learning experiences</li>
+							<li class="reveal" data-reveal="up" data-delay>Affordable course options for all budgets</li>
 						</ul>
 					</div>
 				</div>
@@ -886,7 +920,7 @@
 					});
 				}
 
-				["manpower", "cavec", "services"].forEach(function (id) {
+				["io", "raizingio", "about", "features", "certification", "benefits"].forEach(function (id) {
 					var sec = document.getElementById(id);
 					if (sec) applyStagger(sec);
 				});
@@ -998,7 +1032,7 @@
 				window.addEventListener("mousedown", onDown, { passive: true });
 				window.addEventListener("mouseup", onUp, { passive: true });
 
-				var hoverables = document.querySelectorAll("a, button");
+				var hoverables = document.querySelectorAll("a, button, summary");
 				hoverables.forEach(function (el) {
 					el.addEventListener("mouseenter", onEnterHover, { passive: true });
 					el.addEventListener("mouseleave", onLeaveHover, { passive: true });

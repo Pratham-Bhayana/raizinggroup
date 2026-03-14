@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Raizing Visas — Raizing Group</title>
+		<title>Raizing Global and Immigration — Raizing Group</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -404,7 +404,7 @@
 				}
 			}
 
-			/* Raizing Visas hero */
+			/* Raizing Global and Immigration hero */
 			.service-hero {
 				grid-column: 2;
 				padding: 84px 60px;
@@ -530,6 +530,101 @@
 				font-size: 16px;
 			}
 
+			/* Entity block (immediately after hero) */
+			.entity {
+				grid-column: 2;
+				padding: 0 60px 76px;
+			}
+
+			.entity-inner {
+				max-width: 1220px;
+				margin: 0 auto;
+			}
+
+			.entity-card {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 22px;
+				padding: 18px 18px;
+				border-radius: 20px;
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				background: rgba(255, 255, 255, 0.05);
+				box-shadow: 0 22px 70px rgba(0, 0, 0, 0.20);
+			}
+
+			.entity-left {
+				display: flex;
+				align-items: center;
+				gap: 14px;
+			}
+
+			.entity-logo {
+				width: 46px;
+				height: 46px;
+				border-radius: 14px;
+				overflow: hidden;
+				border: 1px solid rgba(255, 255, 255, 0.14);
+				background: rgba(0, 0, 0, 0.28);
+				display: grid;
+				place-items: center;
+				flex: 0 0 auto;
+			}
+
+			.entity-logo img {
+				width: 34px;
+				height: auto;
+				display: block;
+			}
+
+			.entity-meta {
+				display: grid;
+				gap: 4px;
+			}
+
+			.entity-kicker {
+				margin: 0;
+				font-weight: 900;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				font-size: 12px;
+				color: rgba(255, 255, 255, 0.72);
+			}
+
+			.entity-name {
+				margin: 0;
+				font-weight: 950;
+				letter-spacing: -0.02em;
+				font-size: 16px;
+			}
+
+			.entity-link {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				padding: 12px 14px;
+				border-radius: 999px;
+				background: linear-gradient(180deg, var(--brand-red-2), var(--brand-red));
+				border: 1px solid rgba(255, 255, 255, 0.16);
+				color: #ffffff;
+				font-weight: 900;
+				font-size: 13px;
+				box-shadow: 0 14px 34px rgba(224, 0, 0, 0.16);
+				transition: transform 180ms ease, filter 180ms ease;
+			}
+
+			.entity-link:hover {
+				transform: translate3d(0, -1px, 0);
+				filter: brightness(1.05);
+			}
+
+			.entity-link svg {
+				width: 16px;
+				height: 16px;
+				fill: #ffffff;
+				display: block;
+			}
+
 			@media (max-width: 980px) {
 				.page {
 					grid-template-columns: 1fr;
@@ -556,6 +651,16 @@
 				.svc-why {
 					grid-column: auto;
 					padding: 0 20px 64px;
+				}
+
+				.entity {
+					grid-column: auto;
+					padding: 0 20px 56px;
+				}
+
+				.entity-card {
+					flex-direction: column;
+					align-items: flex-start;
 				}
 
 				.service-hero-inner {
@@ -626,14 +731,16 @@
 					<div class="nav-item nav-services reveal" data-reveal="left" data-delay>
 						<a href="index.html#services" data-caret aria-haspopup="true" aria-current="page">Our Services</a>
 						<div class="nav-dropdown" aria-label="Service pages">
-							<a href="visas.html" aria-current="page">Raizing Visas</a>
-							<a href="immigration.html">Immigration (Raizing Sovereign)</a>
+							<a href="visas.html" aria-current="page">Raizing Global </a>
+							<a href="immigration.html">Raizing Sovereign</a>
 							<a href="insurance.html">Raizing Insurance</a>
 							<a href="company-formation.html">Company Formation</a>
-							<a href="manpower-recruitment.html">Manpower Recruitment (Cavec Global)</a>
+							<a href="manpower-recruitment.html">CAVEC Global</a>
 							<a href="verify.html">Raizing Verify</a>
 							<a href="sim.html">Raizing Sim</a>
 							<a href="edu.html">Raizing Edu</a>
+							<a href="raizing-panda.html">Raizing Panda</a>
+							<a href="raizing-io.html">Raizing IO</a>
 						</div>
 					</div>
 					<a href="news-media.html" class="reveal" data-reveal="left" data-delay>News &amp; Media</a>
@@ -651,12 +758,12 @@
 				</div>
 			</aside>
 
-			<main class="service-hero" id="visas" aria-label="Raizing Visas">
+			<main class="service-hero" id="visas" aria-label="Raizing Global and Immigration">
 				<div class="service-hero-inner">
-					<div class="service-media reveal" data-reveal="clip" data-delay role="img" aria-label="Raizing Visas service image"></div>
+					<div class="service-media reveal" data-reveal="clip" data-delay role="img" aria-label="Raizing Global and Immigration service image"></div>
 
 					<div class="service-copy">
-						<div class="service-kicker reveal" data-reveal="left" data-delay>RAIZING VISAS</div>
+						<div class="service-kicker reveal" data-reveal="left" data-delay>RAIZING GLOBAL AND IMMIGRATION</div>
 						<h1 class="service-h1 reveal-words">End-to-end visa solutions across the globe</h1>
 
 						<p class="service-p reveal" data-reveal="up" data-delay>
@@ -676,11 +783,37 @@
 				</div>
 			</main>
 
+			<section class="entity" id="raizing-global" aria-label="Raizing Global website">
+				<div class="entity-inner">
+					<div class="entity-card reveal" data-reveal="up" data-delay>
+						<div class="entity-left">
+							<div class="entity-logo" aria-hidden="true">
+								<img
+									src="https://res.cloudinary.com/duk1hpybl/image/upload/v1773051351/RG_FINALLOGORED_qnm95l.png"
+									alt=""
+									loading="lazy"
+								/>
+							</div>
+							<div class="entity-meta">
+								<p class="entity-kicker">Service Entity</p>
+								<p class="entity-name">Raizing Global</p>
+							</div>
+						</div>
+						<a class="entity-link" href="https://www.raizingglobal.com/" target="_blank" rel="noopener noreferrer">
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M10 13a5 5 0 0 1 0-7l1.4-1.4a5 5 0 0 1 7 7L17 12.9a1 1 0 1 1-1.4-1.4l1.6-1.6a3 3 0 1 0-4.2-4.2L11.6 7a3 3 0 0 0 0 4.2 1 1 0 1 1-1.6 1.2ZM14 11a5 5 0 0 1 0 7L12.6 19.4a5 5 0 0 1-7-7L7 11.1a1 1 0 0 1 1.4 1.4l-1.6 1.6a3 3 0 1 0 4.2 4.2L12.4 17a3 3 0 0 0 0-4.2A1 1 0 0 1 14 11Z" />
+							</svg>
+							www.raizingglobal.com
+						</a>
+					</div>
+				</div>
+			</section>
+
 			<section class="svc-why" id="visas-why" aria-label="Why Choose Us">
 				<div class="svc-why-inner">
 					<div class="svc-why-card">
 						<h2 class="svc-why-title reveal-words">Why Choose Us</h2>
-						<ul class="svc-why-list" aria-label="Why choose Raizing Visas">
+						<ul class="svc-why-list" aria-label="Why choose Raizing Global and Immigration">
 							<li class="reveal" data-reveal="up" data-delay>Exclusive VAC mandates for multiple countries</li>
 							<li class="reveal" data-reveal="up" data-delay>20+ years of experience in visa processing</li>
 							<li class="reveal" data-reveal="up" data-delay>50+ centres worldwide</li>
@@ -779,7 +912,7 @@
 					});
 				}
 
-				["visas", "visas-why"].forEach(function (id) {
+				["visas", "raizing-global", "visas-why"].forEach(function (id) {
 					var sec = document.getElementById(id);
 					if (sec) applyStagger(sec);
 				});
