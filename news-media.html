@@ -14,24 +14,41 @@
 			:root {
 				--brand-red: #b40000;
 				--brand-red-2: #e00000;
-				--bg: #070a0f;
-				--text: #ffffff;
-				--muted: rgba(255, 255, 255, 0.78);
-				--muted-2: rgba(255, 255, 255, 0.62);
-				--sidebar-w: 280px;
-				--border: rgba(255, 255, 255, 0.16);
-				--focus: rgba(224, 0, 0, 0.35);
-				--font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-
-				--reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
-				--reveal-opacity: 820ms;
-				--reveal-transform: 1200ms;
-				--reveal-clip: 1350ms;
-				--reveal-delay: 0ms;
+				display: grid;
+				gap: 10px;
+				color: rgba(255, 255, 255, 0.82);
 			}
 
-			* {
-				box-sizing: border-box;
+			.social a {
+				width: 40px;
+				height: 40px;
+				display: grid;
+				place-items: center;
+				grid-auto-flow: column;
+				align-items: center;
+				justify-content: start;
+				border-radius: 999px;
+				background: rgba(255, 255, 255, 0.06);
+				border: 1px solid rgba(255, 255, 255, 0.16);
+				transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, color 160ms ease;
+			}
+
+			.social a:hover {
+				color: #ffffff;
+				background: rgba(224, 0, 0, 0.14);
+				border-color: rgba(224, 0, 0, 0.55);
+				transform: translate3d(0, -1px, 0);
+			}
+
+			.social a:active {
+				transform: translate3d(0, 0, 0);
+			}
+
+			.social svg {
+				width: 18px;
+				height: 18px;
+				display: block;
+			}
 			}
 
 			html,
@@ -115,13 +132,6 @@
 
 			.cursor.is-visible {
 				opacity: 1;
-			}
-
-			.cursor.is-hover {
-				width: 64px;
-				height: 64px;
-				background: rgba(224, 0, 0, 0.14);
-				border-color: rgba(224, 0, 0, 0.92);
 			}
 
 			.cursor.is-down {
@@ -510,6 +520,9 @@
 				.social {
 					position: static;
 					margin-top: 22px;
+					grid-auto-flow: column;
+					justify-content: start;
+					gap: 14px;
 				}
 
 				.main {
@@ -600,9 +613,29 @@
 				</div>
 
 				<div class="social reveal" data-reveal="left" data-delay aria-label="Social links">
-					<a href="#" rel="nofollow">LinkedIn</a>
-					<a href="#" rel="nofollow">Facebook</a>
-					<a href="#" rel="nofollow">Instagram</a>
+					<a href="https://www.linkedin.com/company/raizinggroup/" target="_blank" rel="noopener noreferrer nofollow" aria-label="LinkedIn" title="LinkedIn">
+						<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+							<path d="M6.94 6.5A1.94 1.94 0 1 1 7 2.62a1.94 1.94 0 0 1-.06 3.88ZM5.5 21.5h2.9V8.7H5.5v12.8ZM10.2 8.7h2.78v1.75h.04c.39-.74 1.35-1.52 2.78-1.52 2.97 0 3.52 1.95 3.52 4.49v8.08h-2.9v-7.16c0-1.71-.03-3.91-2.38-3.91-2.38 0-2.74 1.86-2.74 3.79v7.28h-2.9V8.7Z" fill="currentColor"></path>
+						</svg>
+					</a>
+					<a href="https://www.facebook.com/people/Raizing-Group/100064074940108/#" target="_blank" rel="noopener noreferrer nofollow" aria-label="Facebook" title="Facebook">
+						<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+							<path d="M14 8h-2a2 2 0 0 0-2 2v2H8v3h2v7h3v-7h2.2L16 13h-3v-2a1 1 0 0 1 1-1h2V8z" fill="currentColor"></path>
+						</svg>
+					</a>
+					<a href="https://www.instagram.com/raizinggroup/?utm_medium=copy_link" target="_blank" rel="noopener noreferrer nofollow" aria-label="Instagram" title="Instagram">
+						<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<rect x="4" y="4" width="16" height="16" rx="4"></rect>
+							<circle cx="12" cy="12" r="3.2"></circle>
+							<circle cx="17.2" cy="6.8" r="0.8" fill="currentColor" stroke="none"></circle>
+						</svg>
+					</a>
+					<a href="https://www.youtube.com/channel/UC3AZc4H7CLNE8oQ6pM1gACA" target="_blank" rel="noopener noreferrer nofollow" aria-label="YouTube" title="YouTube">
+						<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<rect x="4" y="7" width="16" height="10" rx="3"></rect>
+							<path d="M11 10l4 2-4 2z" fill="currentColor" stroke="none"></path>
+						</svg>
+					</a>
 				</div>
 			</aside>
 
@@ -831,23 +864,9 @@
 					cursor.classList.remove("is-down");
 				}
 
-				function onEnterHover() {
-					cursor.classList.add("is-hover");
-				}
-
-				function onLeaveHover() {
-					cursor.classList.remove("is-hover");
-				}
-
 				window.addEventListener("mousemove", onMove, { passive: true });
 				window.addEventListener("mousedown", onDown, { passive: true });
 				window.addEventListener("mouseup", onUp, { passive: true });
-
-				var hoverables = document.querySelectorAll("a, button, input, summary");
-				hoverables.forEach(function (el) {
-					el.addEventListener("mouseenter", onEnterHover, { passive: true });
-					el.addEventListener("mouseleave", onLeaveHover, { passive: true });
-				});
 			})();
 		</script>
 		<style>
